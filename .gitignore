@@ -39,3 +39,4 @@ docs/_build/
 **/WorkingChangelog.md
 
 /shared/coverage.xml
+/docker/

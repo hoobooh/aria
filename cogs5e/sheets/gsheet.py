@@ -341,6 +341,10 @@ class GoogleSheet(SheetLoaderABC):
                     self.inventory = TempCharacter(doc.worksheet("Inventory"))
                 except WorksheetNotFound:
                     self.inventory = None
+                try:
+                    self.attributes = TempCharacter(doc.worksheet("Attributes"))
+                except WorksheetNotFound:
+                    self.attributes = None
 
     # main loading methods
     async def load_character(self, ctx, args):
