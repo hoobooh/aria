@@ -76,13 +76,21 @@ def run_check(skill_key, caster, args, embed):
         )
         if skill_key in cadv_effects or base_ability_key in cadv_effects:
             combat_context["adv"] = ["True"]
+            if skill_key == "initiative":
+                combat_context["dis"] = ["True"]
         if skill_key in cdis_effects or base_ability_key in cdis_effects:
             combat_context["dis"] = ["True"]
+            if skill_key == "initiative":
+                combat_context["adv"] = ["True"]
 
         args.add_context("combat", combat_context)
         args.set_context("combat")
 
-    result = _run_common(skill, args, embed, mod_override=mod)
+    if skill_key == "initiative":
+        result = _run_init(skill, args, embed, mod_override=mod)
+    else:
+        result = _run_common(skill, args, embed, mod_override=mod)
+
     return CheckResult(rolls=result.rolls, skill=skill, skill_name=skill_name, skill_roll_result=result)
 
 
@@ -180,6 +188,75 @@ def _run_common(skill, args, embed, mod_override=None, rr_format="Check {}"):
 
         # set up dice
         roll_str = skill.d20(base_adv=adv, reroll=ro, min_val=mc, mod_override=mod_override)
+        if b is not None:
+            roll_str = f"{roll_str}+{b}"
+
+        # roll
+        result = roll(roll_str)
+        if dc and result.total >= dc:
+            num_successes += 1
+
+        results.append(result)
+
+        # output
+        if iterations > 1:
+            embed.add_field(name=rr_format.format(str(i + 1)), value=result.result)
+        else:
+            desc_out.append(result.result)
+
+    # phrase
+    if phrase:
+        # blockquote phrase to match actions
+        desc_out.append(f">>> *{phrase}*")
+
+    # DC footer
+    if iterations > 1 and dc:
+        embed.set_footer(text=f"{num_successes} Successes | {iterations - num_successes} Failures")
+    elif dc:
+        embed.set_footer(text="Success!" if num_successes else "Failure!")
+
+    # build embed
+    embed.description = "\n".join(desc_out)
+    embeds.add_fields_from_args(embed, args.get("f"))
+    if "thumb" in args:
+        embed.set_thumbnail(url=maybe_http_url(args.last("thumb", "")))
+
+    return SkillRollResult(rolls=results, iterations=iterations, dc=dc, successes=num_successes)
+
+def _run_init(skill, args, embed, mod_override=None, rr_format="Check {}"):
+    """
+    Runs a roll for a given Skill.
+
+    :rtype: SkillRollResult
+    """
+    # ephemeral support: adv, b
+    # phrase
+    phrase = args.join("phrase", "\n")
+    # num rolls
+    iterations = max(min(args.last("rr", 1, int), 25), 1)
+    # dc
+    dc = args.last("dc", type_=int)
+    # ro
+    ro = args.last("ro", type_=int)
+    # mc
+    mc = args.last("mc", type_=int)
+
+    desc_out = []
+    num_successes = 0
+    results = []
+
+    # add DC text
+    if dc:
+        desc_out.append(f"**DC {dc}**")
+
+    for i in range(iterations):
+        # advantage
+        adv = args.adv(boolwise=True, ephem=True)
+        # roll bonus
+        b = args.join("b", "+", ephem=True)
+
+        # set up dice
+        roll_str = skill.double_d20(base_adv=adv, reroll=ro, min_val=mc, mod_override=mod_override)
         if b is not None:
             roll_str = f"{roll_str}+{b}"
 

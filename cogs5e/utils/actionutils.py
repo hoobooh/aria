@@ -4,9 +4,12 @@ from typing import Iterable, List, Optional, TYPE_CHECKING, Union
 
 import disnake
 
-from cogs5e.initiative import InitiativeEffect
+from cogs5e.initiative import InitiativeEffect, PlayerCombatant
 from cogs5e.initiative.types import BaseCombatant
 from cogs5e.models import embeds
+from cogs5e.models.automation.effects import EFFECT_MAP
+from cogs5e.models.automation.effects.target import Target
+from cogs5e.models.automation.effects.text import Text
 from cogs5e.models.errors import InvalidArgument, InvalidSpellLevel, RequiresLicense
 from cogs5e.models.sheet.action import Action, Actions
 from cogs5e.models.sheet.attack import Attack, AttackList
@@ -27,13 +30,13 @@ if TYPE_CHECKING:
 
 
 async def run_attack(
-    ctx: "AvraeContext",
-    embed: disnake.Embed,
-    args: "ParsedArguments",
-    caster: "StatBlock",
-    attack: "Attack",
-    targets: List[Union[str, "StatBlock"]],
-    combat: Optional["Combat"],
+        ctx: "AvraeContext",
+        embed: disnake.Embed,
+        args: "ParsedArguments",
+        caster: "StatBlock",
+        attack: "Attack",
+        targets: List[Union[str, "StatBlock"]],
+        combat: Optional["Combat"],
 ) -> "AutomationResult":
     """
     Runs an attack: adds title, handles -f and -thumb args, commits combat, runs automation, edits embed.
@@ -47,6 +50,17 @@ async def run_attack(
         attack_name = a_or_an(attack.name)
     else:
         attack_name = attack.name
+
+    for e in attack.automation.effects:
+        if isinstance(e, Text):
+            if "Action Delay" in str(e.text):
+                line = str(e.text)
+                line = line[line.index("Action Delay"):]
+                lines = line.replace("Action Delay", "").replace(",", "").replace("(","").replace(")","").split(" ")
+                try:
+                    caster.init += int(lines[1])
+                except Exception:
+                    pass
 
     verb = attack.verb or "attacks with"
 
@@ -77,13 +91,13 @@ async def run_attack(
 
 
 async def run_action(
-    ctx: "AvraeContext",
-    embed: disnake.Embed,
-    args: "ParsedArguments",
-    caster: "Character",
-    action: "Action",
-    targets: List[Union[str, "StatBlock"]],
-    combat: Optional["Combat"],
+        ctx: "AvraeContext",
+        embed: disnake.Embed,
+        args: "ParsedArguments",
+        caster: "Character",
+        action: "Action",
+        targets: List[Union[str, "StatBlock"]],
+        combat: Optional["Combat"],
 ) -> Optional["AutomationResult"]:
     """
     Runs an action: adds title, handles -f and -thumb args, commits combat, runs automation, edits embed.
@@ -130,12 +144,12 @@ async def run_action(
 
 
 async def cast_spell(
-    spell: "Spell",
-    ctx: "AvraeContext",
-    caster: "StatBlock",
-    targets: List[Union[str, "StatBlock"]],
-    args: "ParsedArguments",
-    combat: Optional["Combat"] = None,
+        spell: "Spell",
+        ctx: "AvraeContext",
+        caster: "StatBlock",
+        targets: List[Union[str, "StatBlock"]],
+        args: "ParsedArguments",
+        combat: Optional["Combat"] = None,
 ) -> "CastResult":
     """
     Casts this spell.
@@ -174,10 +188,10 @@ async def cast_spell(
         # if I'm a warlock, and I didn't have any slots of this level anyway (#655)
         # automatically scale up to our pact slot level (or the next available level s.t. max > 0)
         if (
-            cast_level > 0
-            and cast_level == spell.level
-            and not caster.spellbook.get_max_slots(cast_level)
-            and not caster.spellbook.can_cast(spell, cast_level)
+                cast_level > 0
+                and cast_level == spell.level
+                and not caster.spellbook.get_max_slots(cast_level)
+                and not caster.spellbook.can_cast(spell, cast_level)
         ):
             if caster.spellbook.pact_slot_level is not None:
                 cast_level = caster.spellbook.pact_slot_level
@@ -347,15 +361,15 @@ CastResult = namedtuple("CastResult", "embed success automation_result")
 
 
 async def run_automation(
-    ctx: Union["AvraeContext", disnake.Interaction],
-    embed: disnake.Embed,
-    args: "ParsedArguments",
-    caster: "StatBlock",
-    automation: "Automation",
-    targets: List[Union[str, "StatBlock"]],
-    combat: Optional["Combat"],
-    always_commit_caster: bool = False,
-    **kwargs,
+        ctx: Union["AvraeContext", disnake.Interaction],
+        embed: disnake.Embed,
+        args: "ParsedArguments",
+        caster: "StatBlock",
+        automation: "Automation",
+        targets: List[Union[str, "StatBlock"]],
+        combat: Optional["Combat"],
+        always_commit_caster: bool = False,
+        **kwargs,
 ) -> "AutomationResult":
     """
     Common automation runner
@@ -385,9 +399,9 @@ async def run_automation(
         await combat.final(ctx)
     # commit character only if we have not already committed it via combat final
     if (
-        (result.caster_needs_commit or always_commit_caster)
-        and hasattr(caster, "commit")
-        and not (combat and caster in combat.get_combatants())
+            (result.caster_needs_commit or always_commit_caster)
+            and hasattr(caster, "commit")
+            and not (combat and caster in combat.get_combatants())
     ):
         await caster.commit(ctx)
 
@@ -395,12 +409,12 @@ async def run_automation(
 
 
 async def select_action(
-    ctx: "AvraeContext",
-    name: str,
-    attacks: "AttackList",
-    actions: "Actions" = None,
-    allow_no_automation: bool = False,
-    **kwargs,
+        ctx: "AvraeContext",
+        name: str,
+        attacks: "AttackList",
+        actions: "Actions" = None,
+        allow_no_automation: bool = False,
+        **kwargs,
 ) -> Union["Attack", "Action"]:
     """
     Prompts the user to select an action from the caster's valid list of runnable actions, or returns a single
@@ -422,13 +436,13 @@ async def select_action(
 
 # ==== action display ====
 async def send_action_list(
-    ctx: "AvraeContext",
-    caster: "StatBlock",
-    destination: disnake.abc.Messageable = None,
-    attacks: "AttackList" = None,
-    actions: "Actions" = None,
-    embed: disnake.Embed = None,
-    args: Iterable[str] = None,
+        ctx: "AvraeContext",
+        caster: "StatBlock",
+        destination: disnake.abc.Messageable = None,
+        attacks: "AttackList" = None,
+        actions: "Actions" = None,
+        embed: disnake.Embed = None,
+        args: Iterable[str] = None,
 ):
     """
     Sends the list of actions and attacks given to the given destination.

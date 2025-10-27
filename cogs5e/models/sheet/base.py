@@ -157,6 +157,37 @@ class Skill:
             out = f"{base}{mod_override:+}"
         return out
 
+    def double_d20(self, base_adv=None, reroll: int = None, min_val: int = None, mod_override=None):
+        if base_adv is None:
+            adv = self.adv
+        elif self.adv is None:
+            adv = base_adv
+        elif base_adv is self.adv:
+            adv = self.adv
+        else:
+            adv = None
+
+        # reroll string (#1199)
+        reroll_str = ""
+        if reroll:
+            reroll_str = f"ro{reroll}"
+
+        if adv is False:
+            base = f"4d20{reroll_str}kl2"
+        elif adv is True:
+            base = f"4d20{reroll_str}kh2"
+        else:
+            base = f"2d20{reroll_str}"
+
+        if min_val:
+            base = f"{base}mi{min_val}"
+
+        if mod_override is None:
+            out = f"{base}{self.value:+}"
+        else:
+            out = f"{base}{mod_override:+}"
+        return out
+
     def __int__(self):
         return self.value
 

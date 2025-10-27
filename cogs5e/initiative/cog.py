@@ -3,6 +3,7 @@ import functools
 import logging
 from contextlib import suppress
 
+import d20
 import disnake
 from d20 import roll
 from disnake.ext import commands
@@ -372,7 +373,7 @@ class InitTracker(commands.Cog):
             args.ignore("dc")
             checkutils.update_csetting_args(char, args, char.skills.initiative)
             check_result = checkutils.run_check("initiative", char, args, embed)
-            init = check_result.rolls[-1].total
+            init = max(0, check_result.rolls[-1].total)
         else:
             init = p
             embed.title = "{} already rolled initiative!".format(char.name)

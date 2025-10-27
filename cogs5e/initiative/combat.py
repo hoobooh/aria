@@ -57,6 +57,7 @@ class Combat:
             combatants = []
         if metadata is None:
             metadata = {}
+        self.last_at_change:int = 0
         self._channel = str(channel_id)  # readonly
         self.summary_message_id = int(message_id)  # readonly
         self.dm_id = int(dm_id)
@@ -285,7 +286,7 @@ class Combat:
         if self._current_index is not None:
             current = next((c for c in self._combatants if c.index == self._current_index), None)
 
-        self._combatants = sorted(self._combatants, key=lambda k: (k.init, int(k.init_skill)), reverse=True)
+        self._combatants = sorted(self._combatants, key=lambda k: (k.init, int(k.init_skill)), reverse=False)
         for n, c in enumerate(self._combatants):
             c.index = n
 
@@ -428,6 +429,9 @@ class Combat:
         messages = []
 
         changed_round = False
+
+        com = self.current_combatant
+
         if self.index is None:  # new round, no dynamic reroll
             self._current_index = 0
             self.round_num += 1
@@ -437,8 +441,26 @@ class Combat:
             self._current_index = 0
             self.round_num += 1
             changed_round = True
-        else:
-            self._current_index += 1
+
+        com.init += 35
+        if len(self._combatants) > 1:
+            self._current_index = 1
+        i = int(self.current_combatant.init)
+        self.last_at_change = i
+        for combatant in self._combatants:
+            combatant.init = max(0, combatant.init - i)
+
+        com.init += 99999
+
+        self._current_index=0
+        self.sort_combatants()
+        self._current_index=0
+
+        com.init -= 99999
+
+        self._current_index=0
+        self.sort_combatants()
+        self._current_index=0
 
         self._turn = self.current_combatant.init
         for combatant in self._combatants:
@@ -451,6 +473,7 @@ class Combat:
 
         for combatant in self._combatants:
             combatant.on_turn(num_turns=-1)
+            combatant.init = max(0, combatant.init - self.last_at_change)
 
         if self.index is None:  # start of combat
             self._current_index = len(self._combatants) - 1
