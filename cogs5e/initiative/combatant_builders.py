@@ -10,6 +10,7 @@ from utils.argparser import ParsedArguments
 from utils.constants import SAVE_NAMES, STAT_ABBREVIATIONS
 from .combatant import Combatant
 from .utils import create_combatant_id
+from ..models.sheet.attributes import Attributes
 
 
 # ==== helpers ====
@@ -110,6 +111,8 @@ async def basic_combatant(
         args.last("charisma", type_=int, default=10),
     )
 
+    attributes = Attributes({})
+
     # skills
     exps = resolve_check_advs(args.get("exp"))
     profs = resolve_check_advs(args.get("prof")) - exps
@@ -190,6 +193,7 @@ async def basic_combatant(
         skills=skills,
         saves=saves,
         resistances=resistances,
+        attributes=attributes,
         ac=ac,
         max_hp=hp,
         temp_hp=thp,

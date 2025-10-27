@@ -286,6 +286,9 @@ class AutomationTarget:
             return self.combatant.base_resistances
         return self.target.resistances
 
+    def get_attributes(self):
+        return self.target.attributes
+
     def get_save_dice(self, save_skill: str, adv: AdvantageType = None, sb: list[str] = None) -> str:
         """Gets the save roll's dice string for the current target in the automation context."""
         if self.is_simple:

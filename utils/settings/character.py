@@ -18,7 +18,7 @@ class CharacterSettings(SettingsBaseModel):
     compact_coins: bool = False
 
     # gameplay
-    crit_on: conint(ge=1, le=20) = 20
+    crit_on: conint(ge=1, le=40) = 39
     extra_crit_dice: int = 0
     ignore_crit: bool = False
     reroll: Optional[conint(ge=1, le=20)] = None
@@ -39,7 +39,7 @@ class CharacterSettings(SettingsBaseModel):
         return cls(
             color=old_settings.get("color", None),
             embed_image=old_settings.get("embedimage") or True,
-            crit_on=old_settings.get("criton") or 20,
+            crit_on=old_settings.get("criton") or 39,
             extra_crit_dice=old_settings.get("critdice") or 0,
             ignore_crit=old_settings.get("ignorecrit") or False,
             reroll=old_settings.get("reroll", None),
@@ -138,10 +138,10 @@ class CSetting:  # character settings
             )
         return f"\u2705 {self.description.capitalize()} set to {self.display_func(val)}.\n"
 
-
+    
 CHARACTER_SETTINGS = {
     "color": CSetting("color", "color", default="random", display_func=lambda val: f"#{val:06X}"),
-    "criton": CSetting("crit_on", "number", description="crit range", default=20, display_func=lambda val: f"{val}-20"),
+    "criton": CSetting("crit_on", "number", description="crit range", default=39, display_func=lambda val: f"{val}-40"),
     "reroll": CSetting("reroll", "number"),
     "srslots": CSetting(
         "srslots",

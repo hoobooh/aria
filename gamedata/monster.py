@@ -3,6 +3,7 @@ import logging
 
 from cogs5e.models.errors import CounterOutOfBounds
 from cogs5e.models.sheet.attack import AttackList
+from cogs5e.models.sheet.attributes import Attributes
 from cogs5e.models.sheet.base import BaseStats, Levels, Saves, Skills
 from cogs5e.models.sheet.resistance import Resistances
 from cogs5e.models.sheet.spellcasting import Spellbook
@@ -60,6 +61,7 @@ class Monster(StatBlock, Sourced):
         hide_cr: bool = None,
         # augmented
         resistances: Resistances = None,
+        attributes: Attributes = None,
         attacks: AttackList = None,
         proper: bool = False,
         image_url: str = None,
@@ -96,6 +98,8 @@ class Monster(StatBlock, Sourced):
             resist = kwargs.get("resist", [])
             immune = kwargs.get("immune", [])
             resistances = Resistances.from_dict(dict(vuln=vuln, resist=resist, immune=immune))
+        if attributes is None:
+            attributes = Attributes([])
 
         try:
             levels = Levels({"Monster": floatify_cr(cr)})
@@ -120,6 +124,7 @@ class Monster(StatBlock, Sourced):
             skills=skills,
             saves=saves,
             resistances=resistances,
+            attributes=attributes,
             spellbook=spellcasting,
             ac=ac,
             max_hp=hp,
@@ -165,6 +170,7 @@ class Monster(StatBlock, Sourced):
         bonus_actions = [Trait(**t) for t in d.get("bonus_actions", [])]
         mythic_actions = [Trait(**t) for t in d.get("mythic_actions", [])]
         resistances = Resistances.from_dict(d["resistances"])
+        attributes = Attributes.from_dict(d["attributes"])
         attacks = AttackList.from_dict(d["attacks"])
         if d["spellbook"] is not None:
             spellcasting = MonsterSpellbook.from_dict(d["spellbook"])
@@ -200,6 +206,7 @@ class Monster(StatBlock, Sourced):
             hide_cr=d.get("hide_cr"),
             # augmented
             resistances=resistances,
+            attributes=attributes,
             attacks=attacks,
             proper=d["proper"],
             image_url=d["image_url"],
@@ -226,6 +233,8 @@ class Monster(StatBlock, Sourced):
         data["attacks"] = AttackList.from_dict(data["attacks"])
         if "resistances" in data:
             data["resistances"] = Resistances.from_dict(data["resistances"])
+        if "attributes" in data:
+            data["attributes"] = Attributes.from_dict(data["attributes"])
         if "display_resists" in data:
             data["display_resists"] = Resistances.from_dict(data["display_resists"], smart=False)
         else:
@@ -251,6 +260,7 @@ class Monster(StatBlock, Sourced):
             "passiveperc": self.passive,
             "senses": self.senses,
             "resistances": self.resistances.to_dict(),
+            "attributes": self.attributes.to_dict(),
             "condition_immune": self.condition_immune,
             "saves": self.saves.to_dict(),
             "skills": self.skills.to_dict(),

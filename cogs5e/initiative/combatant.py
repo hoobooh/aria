@@ -19,6 +19,7 @@ from .errors import RequiresContext
 from .types import BaseCombatant, CombatantType
 from .utils import create_combatant_id
 from ..models.errors import InvalidArgument
+from ..models.sheet.attributes import Attributes
 
 if TYPE_CHECKING:
     from .group import CombatantGroup
@@ -52,6 +53,7 @@ class Combatant(BaseCombatant, StatBlock):
         skills: Skills = None,
         saves: Saves = None,
         resistances: Resistances = None,
+        attributes: Attributes = None,
         spellbook: Spellbook = None,
         ac: int = None,
         max_hp: int = None,
@@ -68,19 +70,19 @@ class Combatant(BaseCombatant, StatBlock):
             skills=skills,
             saves=saves,
             resistances=resistances,
+            attributes=attributes,
             spellbook=spellbook,
             ac=ac,
             max_hp=max_hp,
             hp=hp,
             temp_hp=temp_hp,
-            creature_type=creature_type,
+            creature_type=creature_type
         )
         if effects is None:
             effects = []
         self.ctx = ctx
         self.combat = combat
         self.id = id
-
         self.controller_id = int(controller_id)
         self.init = init
         self.is_private = private
@@ -196,6 +198,7 @@ class Combatant(BaseCombatant, StatBlock):
     def base_ac(self) -> Optional[int]:
         """The base AC, unaffected by any passive effects."""
         return self._ac
+
 
     @property
     def resistances(self) -> Resistances:
@@ -544,6 +547,7 @@ class MonsterCombatant(Combatant):
         skills: Skills = None,
         saves: Saves = None,
         resistances: Resistances = None,
+        attributes: Attributes = None,
         spellbook: Spellbook = None,
         ac: int = None,
         max_hp: int = None,
@@ -573,6 +577,7 @@ class MonsterCombatant(Combatant):
             skills,
             saves,
             resistances,
+            attributes,
             spellbook,
             ac,
             max_hp,
@@ -582,7 +587,6 @@ class MonsterCombatant(Combatant):
         )
         self._monster_name = monster_name
         self._monster_id = monster_id
-
     @classmethod
     def from_monster(cls, monster, ctx, combat, name, controller_id, init, private, hp=None, ac=None):
         monster_name = monster.name
@@ -598,6 +602,7 @@ class MonsterCombatant(Combatant):
 
         # copy resistances (#1134)
         resistances = monster.resistances.copy()
+        attributes = monster.attributes.copy()
 
         return cls(
             ctx,
@@ -614,6 +619,7 @@ class MonsterCombatant(Combatant):
             skills=monster.skills,
             saves=monster.saves,
             resistances=resistances,
+            attributes=attributes,
             spellbook=spellbook,
             ac=ac,
             max_hp=hp,
@@ -666,6 +672,7 @@ class PlayerCombatant(Combatant):
         # statblock info
         attacks: AttackList = None,
         resistances: Resistances = None,
+        attributes: Attributes = None,
         ac: int = None,
         max_hp: int = None,
         # character specific
@@ -689,6 +696,25 @@ class PlayerCombatant(Combatant):
             group_id,
             attacks=attacks,
             resistances=resistances,
+            attributes=None,
+            ac=ac,
+            max_hp=max_hp,
+        )
+        super().__init__(
+            ctx,
+            combat,
+            id,
+            name,
+            controller_id,
+            private,
+            init,
+            index,
+            notes,
+            effects,
+            group_id,
+            attacks=attacks,
+            resistances=resistances,
+            attributes=attributes,
             ac=ac,
             max_hp=max_hp,
         )
@@ -710,6 +736,7 @@ class PlayerCombatant(Combatant):
             init,
             # statblock copies
             resistances=character.resistances.copy(),
+            attributes=character.attributes.copy(),
             # character specific
             character_id=character.upstream,
             character_owner=character.owner,

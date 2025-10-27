@@ -4,23 +4,25 @@ import d20
 import draconic
 
 from cogs5e.models.sheet.resistance import Resistances, do_resistances
+from utils.constants import TOUGHNESS_MAP
 from utils.enums import CritDamageType
 from . import Effect
 from .roll import RollEffectMetaVar
 from .. import utils
 from ..errors import TargetException
 from ..results import DamageResult
+from ...sheet.attributes import Attributes
 
 
 class Damage(Effect):
     def __init__(
-        self,
-        damage: str,
-        overheal: bool = False,
-        higher: dict = None,
-        cantripScale: bool = None,
-        fixedValue: bool = None,
-        **kwargs,
+            self,
+            damage: str,
+            overheal: bool = False,
+            higher: dict = None,
+            cantripScale: bool = None,
+            fixedValue: bool = None,
+            **kwargs,
     ):
         super().__init__("damage", **kwargs)
         self.damage = damage
@@ -51,6 +53,7 @@ class Damage(Effect):
         args = autoctx.args
         damage = self.damage
         resistances = Resistances()
+        attributes = Attributes()
         c_args = args.get("c", [], ephem=True)
         crit_arg = args.last("crit", None, bool, ephem=True)
         nocrit = args.last("nocrit", default=False, type_=bool, ephem=True)
@@ -72,6 +75,7 @@ class Damage(Effect):
         # combat-specific arguments
         if not autoctx.target.is_simple:
             resistances = autoctx.target.get_resists().copy()
+            attributes = autoctx.target.get_attributes().copy()
         resistances.update(Resistances.from_args(args, ephem=True))
 
         # check if we actually need to run this damage roll (not in combat and roll is redundant)
@@ -86,6 +90,7 @@ class Damage(Effect):
             d_args.extend(autoctx.caster_active_effects(mapper=lambda effect: effect.effects.damage_bonus, default=[]))
 
         # set up damage AST
+
         damage = autoctx.parse_annostr(damage)
         dice_ast = copy.copy(d20.parse(damage))
         dice_ast = utils.upcast_scaled_dice(self, autoctx, dice_ast)
@@ -103,6 +108,11 @@ class Damage(Effect):
         for d_arg in d_args:
             d_ast = d20.parse(d_arg)
             dice_ast.roll = d20.ast.BinOp(dice_ast.roll, "+", d_ast.roll)
+
+        # apply s.attribute bonuses here to damage
+        d_ast = d20.parse(autoctx.caster.attributes.get_damage_with_bonus(damage))
+        dice_ast.roll = d20.ast.BinOp(dice_ast.roll, "+", d_ast.roll)
+        #dice_ast += autoctx.caster.attributes.get_damage_with_bonus(damage)
 
         # crit
         # nocrit (#1216)
@@ -134,6 +144,11 @@ class Damage(Effect):
         # max
         if max_arg:
             dice_ast = d20.utils.tree_map(utils.max_mapper, dice_ast)
+
+        # apply defenses here to damage
+        d_ast = d20.parse(attributes.get_damage_with_defense(str(dice_ast)))
+        dice_ast.roll = d20.ast.BinOp(dice_ast.roll, "+", d_ast.roll)
+        #dice_ast += attributes.get_damage_with_defense(damage)
 
         # evaluate damage
         dmgroll = d20.roll(dice_ast)
@@ -170,7 +185,7 @@ class Damage(Effect):
 
         # determine healing/damage, stringify expr
         result = d20.MarkdownStringifier().stringify(dmgroll.expr)
-        if dmgroll.total < 0:
+        if dmgroll.total < 0 and "heal" in result:
             roll_for = "Healing"
         else:
             roll_for = "Damage"
@@ -184,7 +199,10 @@ class Damage(Effect):
             autoctx.queue(f"**{roll_for}**: {d20.MarkdownStringifier().stringify(dmgroll.expr)}")
             autoctx.add_pm(str(autoctx.ctx.author.id), f"**{roll_for}**: {result}")
 
-        autoctx.target.damage(autoctx, dmgroll.total, allow_overheal=self.overheal)
+        if dmgroll.total < 0 and "heal" not in result:
+            autoctx.target.damage(autoctx, 0, allow_overheal=self.overheal)
+        else:
+            autoctx.target.damage(autoctx, dmgroll.total, allow_overheal=self.overheal)
 
         # #1335
         autoctx.metavars["lastDamage"] = dmgroll.total

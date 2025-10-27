@@ -12,6 +12,7 @@ from cogs5e.models.embeds import EmbedWithCharacter
 from cogs5e.models.errors import ExternalImportError, InvalidArgument, NoCharacter, NoReset
 from cogs5e.models.sheet.action import Actions
 from cogs5e.models.sheet.attack import AttackList
+from cogs5e.models.sheet.attributes import Attributes
 from cogs5e.models.sheet.base import BaseStats, Levels, Saves, Skills
 from cogs5e.models.sheet.mixins import HasIntegrationMixin
 from cogs5e.models.sheet.player import CustomCounter, DeathSaves, ManualOverrides
@@ -59,6 +60,7 @@ class Character(StatBlock):
         attacks: AttackList,
         skills: Skills,
         resistances: Resistances,
+        attributes: Attributes,
         saves: Saves,
         ac: int,
         max_hp: int,
@@ -116,6 +118,25 @@ class Character(StatBlock):
             skills=skills,
             saves=saves,
             resistances=resistances,
+            attributes=None,
+            spellbook=spellbook,
+            ac=ac,
+            max_hp=max_hp,
+            hp=hp,
+            temp_hp=temp_hp,
+            creature_type=creature_type,
+        )
+
+        # StatBlock super call
+        super().__init__(
+            name=name,
+            stats=stats,
+            levels=levels,
+            attacks=attacks,
+            skills=skills,
+            saves=saves,
+            resistances=resistances,
+            attributes=attributes,
             spellbook=spellbook,
             ac=ac,
             max_hp=max_hp,
@@ -166,6 +187,8 @@ class Character(StatBlock):
         for key, klass in DESERIALIZE_MAP.items():
             if key in d:
                 d[key] = klass.from_dict(d[key])
+
+        print(d)
         return cls(**d)
 
     @classmethod
@@ -879,6 +902,7 @@ SetActiveResult = namedtuple("SetActiveResult", ["did_unset_active_location", "m
 INTEGRATION_MAP = {"dicecloud": DicecloudIntegration, "beyond": DDBSheetSync}
 DESERIALIZE_MAP = {
     **_DESER,
+    "attributes": Attributes,
     "spellbook": CharacterSpellbook,
     "actions": Actions,
     "options_v2": CharacterSettings,

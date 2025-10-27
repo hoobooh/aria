@@ -50,7 +50,7 @@ class Attack(Effect):
         hide = args.last("h", type_=bool)
 
         reroll = args.last("reroll", 0, int)
-        criton = args.last("criton", 20, int)
+        criton = args.last("criton", 39, int)
         ac = args.last("ac", None, int)
         force_roll = args.last("attackroll", None, int, ephem=True)
         min_attack_roll = args.last("attackmin", 0, int)
@@ -142,13 +142,13 @@ class Attack(Effect):
             if force_roll:
                 formatted_d20 = f"{force_roll}"
             elif adv == AdvantageType.ADV:
-                formatted_d20 = f"2d20{reroll_str}kh1"
+                formatted_d20 = f"2d40{reroll_str}kh1"
             elif adv == AdvantageType.ELVEN:
-                formatted_d20 = f"3d20{reroll_str}kh1"
+                formatted_d20 = f"3d40{reroll_str}kh1"
             elif adv == AdvantageType.DIS:
-                formatted_d20 = f"2d20{reroll_str}kl1"
+                formatted_d20 = f"2d40{reroll_str}kl1"
             else:
-                formatted_d20 = f"1d20{reroll_str}"
+                formatted_d20 = f"1d40{reroll_str}"
 
             to_hit_message = "**To Hit**:"
             if ac:
@@ -172,12 +172,15 @@ class Attack(Effect):
                 ac = ac or target_ac
 
             # assign hit values
+
+            if ac and to_hit_roll.total < ac:  # miss, crits no longer auto-hit
+                did_hit = False
+
             if d20_value >= criton or to_hit_roll.crit == d20.CritType.CRIT:  # natural crit
                 did_crit = True if not nocrit else False
-            elif d20_value == 1 or to_hit_roll.crit == d20.CritType.FAIL:  # crit fail
-                did_hit = False
-            elif ac and to_hit_roll.total < ac:  # miss
-                did_hit = False
+            # elif d20_value == 1 or to_hit_roll.crit == d20.CritType.FAIL:  # crit fail
+            #    did_hit = False # removing crit fails :smoking:
+
             elif crit and not nocrit:  # if we did hit (#1485), set crit flag if arg passed (#1461)
                 did_crit = True
             # else: normal hit

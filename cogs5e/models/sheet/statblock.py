@@ -1,6 +1,7 @@
 import random
 
 from cogs5e.models.sheet.attack import AttackList
+from cogs5e.models.sheet.attributes import Attributes
 from cogs5e.models.sheet.base import BaseStats, Levels, Saves, Skills
 from cogs5e.models.sheet.resistance import Resistances
 from cogs5e.models.sheet.spellcasting import Spellbook
@@ -13,6 +14,7 @@ DESERIALIZE_MAP = {
     "skills": Skills,
     "saves": Saves,
     "resistances": Resistances,
+    "attributes": Attributes,
     "spellbook": Spellbook,
 }
 
@@ -35,6 +37,7 @@ class StatBlock:
         skills: Skills = None,
         saves: Saves = None,
         resistances: Resistances = None,
+        attributes: Attributes = None,
         spellbook: Spellbook = None,
         ac: int = None,
         max_hp: int = None,
@@ -54,11 +57,12 @@ class StatBlock:
             saves = Saves.default(stats)
         if resistances is None:
             resistances = Resistances()
+        if attributes is None:
+            attributes = Attributes([])
         if spellbook is None:
             spellbook = Spellbook()
         if hp is None:
             hp = max_hp
-
         # ===== static =====
         # all actors have a name
         self._name = name
@@ -73,6 +77,8 @@ class StatBlock:
         self._saves = saves
         # defensive resistances
         self._resistances = resistances
+        # special attributes
+        self._attributes = attributes
         # assigned by combatant type
         self._creature_type = creature_type
 
@@ -85,7 +91,6 @@ class StatBlock:
 
         # spellbook
         self._spellbook = spellbook
-
     # guaranteed properties
     @property
     def name(self):
@@ -114,6 +119,10 @@ class StatBlock:
     @property
     def resistances(self):
         return self._resistances
+
+    @property
+    def attributes(self):
+        return self._attributes
 
     @property
     def ac(self):
@@ -227,6 +236,7 @@ class StatBlock:
             "attacks": self._attacks.to_dict(),
             "skills": self._skills.to_dict(),
             "resistances": self._resistances.to_dict(),
+            "attributes": self._attributes.to_dict(),
             "saves": self._saves.to_dict(),
             "ac": self._ac,
             "max_hp": self._max_hp,

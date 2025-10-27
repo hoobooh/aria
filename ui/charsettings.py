@@ -234,8 +234,11 @@ class _CosmeticSettingsUI(CharacterSettingsMenuBase):
 
 
 _CRIT_RANGE_SELECT_OPTIONS = [
-    disnake.SelectOption(label="20"),
-    *[disnake.SelectOption(label=f"{i}-20", value=str(i)) for i in range(19, 0, -1)],
+    disnake.SelectOption(label="40"),
+    *[disnake.SelectOption(label=f"{i}-40", value=str(i)) for i in range(39, 20, -1)]
+]
+_CRIT_RANGE_SELECT_OPTIONS_2 = [
+    *[disnake.SelectOption(label=f"{i}-40", value=str(i)) for i in range(20, 0, -1)],
 ]
 _CRIT_DICE_SELECT_OPTIONS = [disnake.SelectOption(label=str(i)) for i in range(0, 21)]
 _REROLL_SELECT_OPTIONS = [
@@ -245,19 +248,25 @@ _REROLL_SELECT_OPTIONS = [
 
 
 class _GameplaySettingsUI(CharacterSettingsMenuBase):
-    @disnake.ui.select(placeholder="Select New Crit Range", options=_CRIT_RANGE_SELECT_OPTIONS)
+    @disnake.ui.select(placeholder="Select New Crit Range (21~40)", options=_CRIT_RANGE_SELECT_OPTIONS, row=0)
     async def crit_range_select(self, select: disnake.ui.Select, interaction: disnake.Interaction):
         self.settings.crit_on = int(select.values[0])
         await self.commit_settings()
         await self.refresh_content(interaction)
 
-    @disnake.ui.select(placeholder="Select Extra Crit Dice", options=_CRIT_DICE_SELECT_OPTIONS, row=1)
+    @disnake.ui.select(placeholder="Select New Crit Range (1~20)", options=_CRIT_RANGE_SELECT_OPTIONS_2, row=1)
+    async def crit_range_select_2(self, select: disnake.ui.Select, interaction: disnake.Interaction):
+        self.settings.crit_on = int(select.values[0])
+        await self.commit_settings()
+        await self.refresh_content(interaction)
+
+    @disnake.ui.select(placeholder="Select Extra Crit Dice", options=_CRIT_DICE_SELECT_OPTIONS, row=2)
     async def crit_dice_select(self, select: disnake.ui.Select, interaction: disnake.Interaction):
         self.settings.extra_crit_dice = int(select.values[0])
         await self.commit_settings()
         await self.refresh_content(interaction)
 
-    @disnake.ui.select(placeholder="Select Reroll", options=_REROLL_SELECT_OPTIONS, row=2)
+    @disnake.ui.select(placeholder="Select Reroll", options=_REROLL_SELECT_OPTIONS, row=3)
     async def reroll_select(self, select: disnake.ui.Select, interaction: disnake.Interaction):
         value = select.values[0]
         if value == "null":
@@ -267,30 +276,26 @@ class _GameplaySettingsUI(CharacterSettingsMenuBase):
         await self.commit_settings()
         await self.refresh_content(interaction)
 
-    @disnake.ui.button(label="Toggle Ignore Crits", style=disnake.ButtonStyle.primary, row=3)
+    @disnake.ui.button(label="Toggle Ignore Crits", style=disnake.ButtonStyle.primary, row=4)
     async def toggle_ignore_crits(self, _: disnake.ui.Button, interaction: disnake.Interaction):
         self.settings.ignore_crit = not self.settings.ignore_crit
         await self.commit_settings()
         await self.refresh_content(interaction)
 
-    @disnake.ui.button(label="Toggle Reliable Talent", style=disnake.ButtonStyle.primary, row=3)
+    @disnake.ui.button(label="Toggle Reliable Talent", style=disnake.ButtonStyle.primary, row=4)
     async def toggle_reliable_talent(self, _: disnake.ui.Button, interaction: disnake.Interaction):
         self.settings.talent = not self.settings.talent
         await self.commit_settings()
         await self.refresh_content(interaction)
 
-    @disnake.ui.button(label="Toggle Short Rest Slots", style=disnake.ButtonStyle.primary, row=3)
+    @disnake.ui.button(label="Toggle Short Rest Slots", style=disnake.ButtonStyle.primary, row=4)
     async def toggle_srslots(self, _: disnake.ui.Button, interaction: disnake.Interaction):
         self.settings.srslots = not self.settings.srslots
         await self.commit_settings()
         await self.refresh_content(interaction)
 
-    @disnake.ui.button(label="Back", style=disnake.ButtonStyle.grey, row=4)
-    async def back(self, _: disnake.ui.Button, interaction: disnake.Interaction):
-        await self.defer_to(CharacterSettingsUI, interaction)
-
     # Switch between 2014 and 2024 version from character.py Gameplay Settings
-    @disnake.ui.button(label="Switch Version", style=disnake.ButtonStyle.primary, row=3)
+    @disnake.ui.button(label="Switch Version", style=disnake.ButtonStyle.primary, row=4)
     async def switch_version(self, _: disnake.ui.Button, interaction: disnake.Interaction):
         if self.settings.version == "2024":
             self.settings.version = "2014"
@@ -298,6 +303,10 @@ class _GameplaySettingsUI(CharacterSettingsMenuBase):
             self.settings.version = "2024"
         await self.commit_settings()
         await self.refresh_content(interaction)
+
+    @disnake.ui.button(label="Return", style=disnake.ButtonStyle.grey, row=4)
+    async def back(self, _: disnake.ui.Button, interaction: disnake.Interaction):
+        await self.defer_to(CharacterSettingsUI, interaction)
 
     async def get_content(self):
         embed = embeds.EmbedWithCharacter(
@@ -434,7 +443,7 @@ def color_setting_desc(color):
 
 
 def crit_range_desc(crit_on):
-    return "20" if crit_on == 20 else f"{crit_on}-20"
+    return "40" if crit_on == 40 else f"{crit_on}-40"
 
 
 def autoconvert_coins_desc(mode):

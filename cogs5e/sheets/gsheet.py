@@ -19,6 +19,8 @@ from google.oauth2.service_account import Credentials
 from gspread import SpreadsheetNotFound
 from gspread.exceptions import APIError, WorksheetNotFound
 from gspread.utils import a1_to_rowcol, fill_gaps
+
+from cogs5e.models.sheet.attributes import Attributes, Attribute
 from cogs5e.models.sheet.coinpurse import Coinpurse
 
 from cogs5e.models.character import Character
@@ -268,6 +270,7 @@ class GoogleSheet(SheetLoaderABC):
         super(GoogleSheet, self).__init__(url)
         self.args = None
         self.additional = None
+        self.attributes = None
         self.version = (1, 0)  # major, minor
 
         self.total_level = 0
@@ -341,9 +344,11 @@ class GoogleSheet(SheetLoaderABC):
                     self.inventory = TempCharacter(doc.worksheet("Inventory"))
                 except WorksheetNotFound:
                     self.inventory = None
+                    log.info("ATTRIBUTES FOUND")
                 try:
                     self.attributes = TempCharacter(doc.worksheet("Attributes"))
                 except WorksheetNotFound:
+                    log.info("NO ATTRIBUTES FOUND")
                     self.attributes = None
 
     # main loading methods
@@ -384,6 +389,8 @@ class GoogleSheet(SheetLoaderABC):
         skills, saves = self.get_skills_and_saves()
 
         resistances = self.get_resistances()
+        attributes = self.get_attributes()
+
         ac = self.get_ac()
         max_hp = self.get_hp()
         hp = max_hp
@@ -414,6 +421,7 @@ class GoogleSheet(SheetLoaderABC):
             attacks,
             skills,
             resistances,
+            attributes,
             saves,
             ac,
             max_hp,
@@ -655,6 +663,23 @@ class GoogleSheet(SheetLoaderABC):
                 if dtype:
                     out[resist_type].append(dtype.lower())
         return Resistances.from_dict(out)
+
+    def get_attributes(self):
+        attlist = []
+
+        if not Attributes:
+            return Attributes([])
+        for rownum in range(7, len(self.attributes.values)+1):
+            # raise Exception(len(self.attributes.values))
+            attlist.append(Attribute(self.attributes.value(f"B{rownum}"),
+                                     self.attributes.value(f"H{rownum}"),
+                                     self.attributes.value(f"J{rownum}"),
+                                     self.attributes.value(f"Y{rownum}"),
+                                     self.attributes.value(f"AC{rownum}"),
+                                     self.attributes.value(f"AF{rownum}").split(", "),
+                                     self.attributes.value(f"AH{rownum}").split(", "),
+                                     self.attributes.value(f"AJ{rownum}").split(", ")))
+        return Attributes(attlist)
 
     def get_ac(self):
         try:

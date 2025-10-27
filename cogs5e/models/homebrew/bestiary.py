@@ -13,6 +13,7 @@ from markdownify import markdownify
 import gamedata as gd
 from cogs5e.models.errors import ExternalImportError, NoActiveBrew
 from cogs5e.models.sheet.attack import Attack, AttackList
+from cogs5e.models.sheet.attributes import Attributes, Attribute
 from cogs5e.models.sheet.base import BaseStats, Saves, Skills
 from cogs5e.models.sheet.resistance import Resistances
 from cogs5e.models.sheet.spellcasting import SpellbookSpell
@@ -30,16 +31,16 @@ BESTIARY_SCHEMA_VERSION = b"2"
 class Bestiary(CommonHomebrewMixin):
     # site_type = CRITTER_DB or BESTIARY_BUILDER
     def __init__(
-        self,
-        _id,
-        sha256: str,
-        upstream: str,
-        published: bool,
-        site_type: str,
-        name: str,
-        monsters: list = None,
-        desc: str = None,
-        **_,
+            self,
+            _id,
+            sha256: str,
+            upstream: str,
+            published: bool,
+            site_type: str,
+            name: str,
+            monsters: list = None,
+            desc: str = None,
+            **_,
     ):
         # metadata - should never change
         super().__init__(_id)
@@ -384,6 +385,23 @@ def _monster_factory_bestiary_builder(data, bestiary_name):
         else:
             name_duplications[atk.name] = 1
 
+    attributes = Attributes([])
+
+    for t in traits:
+        if "(ATTRIBUTE)" in t.desc:
+            atts = t.desc.split("\n")
+            atts.pop(0)
+            name = t.name
+            category = atts[0].replace("Category: ", "")
+            power = atts[1].replace("Power: ", "")
+            dice_factor = atts[2].replace("Dice Factor: ", "")
+            dice_advantage = atts[3].replace("Dice Advantage: ", "")
+            damage_types = atts[4].replace("Power: ", "").split(", ")
+            damage_aversions = atts[5].replace("Damage Aversions: ", "").split(", ")
+            damage_incompats = atts[6].replace("Damage Incompatibilities: ", "").split(", ")
+            attributes.attributes.append(
+                Attribute(name, category, power, dice_factor, dice_advantage, damage_types, damage_aversions,
+                          damage_incompats))
     spellcasting = parse_bestiary_builder_spellcasting(data["spellcasting"])
     return Monster(
         name=data["name"],
@@ -401,6 +419,7 @@ def _monster_factory_bestiary_builder(data, bestiary_name):
         passiveperc=data["passiveperc"],
         senses=data["senses"],
         resistances=resistances,
+        attributes=attributes,
         display_resists=resistances,
         condition_immune=data["condition_immune"],
         languages=data["languages"],
@@ -567,7 +586,7 @@ def _monster_factory_critterdb(data, bestiary_name):
         raise ExternalImportError(f"Monster is missing hit die or hit die size ({data['name']}).")
     con_by_level = num_hit_die * ability_scores.get_mod("con")
     hp = floor(((hit_die_size + 1) / 2) * num_hit_die) + con_by_level
-    hitdice = f"{num_hit_die}d{hit_die_size} {'+-'[con_by_level<0]} {abs(con_by_level)}"
+    hitdice = f"{num_hit_die}d{hit_die_size} {'+-'[con_by_level < 0]} {abs(con_by_level)}"
 
     proficiency = data["stats"]["proficiencyBonus"]
     if proficiency is None:
@@ -711,13 +730,13 @@ def parse_critterdb_traits(data, key):
                 # Bonus damage
                 bonus = ""
                 if (bonus_damage_type := atk.group("damageTypeBonus")) and (
-                    bonus_damage := atk.group("damageBonusInt") or atk.group("damageBonusDice")
+                        bonus_damage := atk.group("damageBonusInt") or atk.group("damageBonusDice")
                 ):
                     bonus = f" + {bonus_damage} [{bonus_damage_type}]"
 
                 # Versatile Attacks
                 if (vers_damage_type := atk.group("damageTypeVers")) and (
-                    verse_damage := atk.group("damageIntVers") or atk.group("damageDiceVers")
+                        verse_damage := atk.group("damageIntVers") or atk.group("damageDiceVers")
                 ):
                     damage = f"{verse_damage} [{vers_damage_type}]" + bonus
                     attacks.append(
@@ -728,7 +747,7 @@ def parse_critterdb_traits(data, key):
 
                 # Ranged Attacks
                 if (ranged_damage_type := atk.group("damageTypeRanged")) and (
-                    ranged_damage := atk.group("damageRangedInt") or atk.group("damageRangedDice")
+                        ranged_damage := atk.group("damageRangedInt") or atk.group("damageRangedDice")
                 ):  # ranged
                     damage = f"{ranged_damage}[{ranged_damage_type}]" + bonus
                     attacks.append(
@@ -800,12 +819,12 @@ def parse_critterdb_spellcasting(traits, base_stats):
             return extracted
 
         for type_leveled_spells in re.finditer(
-            r"(?:"
-            r"(?P<level>\d)[stndrh]{2}\slevel \((?P<slots>\d+) slots?\)"
-            r"|Cantrip(?:s)? \(at will\)): "
-            r"(?P<spells>.+)$",
-            desc,
-            re.MULTILINE,
+                r"(?:"
+                r"(?P<level>\d)[stndrh]{2}\slevel \((?P<slots>\d+) slots?\)"
+                r"|Cantrip(?:s)? \(at will\)): "
+                r"(?P<spells>.+)$",
+                desc,
+                re.MULTILINE,
         ):
             extract_spells(type_leveled_spells.group("spells"))
             if type_leveled_spells.group("level") and type_leveled_spells.group("slots"):
