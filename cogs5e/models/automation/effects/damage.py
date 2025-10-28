@@ -110,8 +110,12 @@ class Damage(Effect):
             dice_ast.roll = d20.ast.BinOp(dice_ast.roll, "+", d_ast.roll)
 
         # apply s.attribute bonuses here to damage
-        d_ast = d20.parse(autoctx.caster.attributes.get_damage_with_bonus(damage))
-        dice_ast.roll = d20.ast.BinOp(dice_ast.roll, "+", d_ast.roll)
+        tempdmg = autoctx.caster.attributes.get_damage_with_bonus(str(dice_ast.roll))
+        if tempdmg!="":
+            d_ast = d20.parse(tempdmg)
+            dice_ast.roll = d20.ast.BinOp(dice_ast.roll, "+", d_ast.roll)
+
+
         #dice_ast += autoctx.caster.attributes.get_damage_with_bonus(damage)
 
         # crit
@@ -146,9 +150,14 @@ class Damage(Effect):
             dice_ast = d20.utils.tree_map(utils.max_mapper, dice_ast)
 
         # apply defenses here to damage
-        d_ast = d20.parse(attributes.get_damage_with_defense(str(dice_ast)))
-        dice_ast.roll = d20.ast.BinOp(dice_ast.roll, "+", d_ast.roll)
+        tempdmg = attributes.get_damage_with_defense(str(dice_ast.roll))
+        if tempdmg != "":
+            d_ast = d20.parse(tempdmg)
+            dice_ast.roll = d20.ast.BinOp(dice_ast.roll, "+", d_ast.roll)
         #dice_ast += attributes.get_damage_with_defense(damage)
+
+        #clean up damage string
+        dice_ast.roll = d20.parse(str(dice_ast.roll).replace("+ +","+ ").replace("+ -","- ").replace("- +","- "))
 
         # evaluate damage
         dmgroll = d20.roll(dice_ast)

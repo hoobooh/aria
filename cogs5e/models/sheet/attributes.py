@@ -124,7 +124,7 @@ class Attributes(HasIntegrationMixin):
         for bon in self.attributes:
             if bon.category == "Bonus":
                 temp_damage += bon.get_damage_mods(damage)
-        return damage + temp_damage
+        return str(temp_damage)
 
     def get_damage_with_defense(self, damage):
         temp_damage = ""
@@ -132,7 +132,7 @@ class Attributes(HasIntegrationMixin):
             if bon.category == "Defense":
                 temp_damage += bon.get_damage_mods(damage)
 
-        return damage + temp_damage
+        return temp_damage
 
     @classmethod
     def from_dict(cls, d):
