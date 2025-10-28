@@ -76,8 +76,8 @@ class CombatantGroup(Combatant):
     def init_skill(self):
         # groups: if all combatants are the same type, return the first one's skill, otherwise +0
         if (
-            all(c.type == CombatantType.MONSTER for c in self._combatants)
-            and len(set(c.monster_name for c in self._combatants)) == 1
+                all(c.type == CombatantType.MONSTER for c in self._combatants)
+                and len(set(c.monster_name for c in self._combatants)) == 1
         ):
             return self._combatants[0].init_skill
         return Skill(0)
@@ -141,9 +141,9 @@ class CombatantGroup(Combatant):
         """
         return "\n".join(c.get_status(private) for c in self.get_combatants())
 
-    def on_turn(self, num_turns=1):
+    def on_turn(self, num_turns=1, start=True):
         for c in self.get_combatants():
-            c.on_turn(num_turns)
+            c.on_turn(num_turns, start)
 
     def on_remove(self):
         for c in self.get_combatants():

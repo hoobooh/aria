@@ -33,22 +33,22 @@ class InitEffectReference:
 
 class InitiativeEffect:
     def __init__(
-        self,
-        combat: Optional["Combat"],
-        combatant: Optional["Combatant"],
-        id: str,
-        name: str,
-        effects: InitPassiveEffect = None,
-        attacks: List[AttackInteraction] = None,
-        buttons: List[ButtonInteraction] = None,
-        duration: Optional[int] = None,
-        end_round: Optional[int] = None,
-        end_on_turn_end: bool = False,
-        concentration: bool = False,
-        children: List[InitEffectReference] = None,
-        parent: Optional[InitEffectReference] = None,
-        desc: str = None,
-        tick_on_combatant_id: Optional[str] = None,
+            self,
+            combat: Optional["Combat"],
+            combatant: Optional["Combatant"],
+            id: str,
+            name: str,
+            effects: InitPassiveEffect = None,
+            attacks: List[AttackInteraction] = None,
+            buttons: List[ButtonInteraction] = None,
+            duration: Optional[int] = -1,
+            end_round: Optional[int] = None,
+            end_on_turn_end: bool = False,
+            concentration: bool = False,
+            children: List[InitEffectReference] = None,
+            parent: Optional[InitEffectReference] = None,
+            desc: str = None,
+            tick_on_combatant_id: Optional[str] = None,
     ):
         if effects is None:
             effects = InitPassiveEffect()
@@ -83,20 +83,20 @@ class InitiativeEffect:
 
     @classmethod
     def new(
-        cls,
-        combat: Optional["Combat"],
-        combatant: Optional["Combatant"],
-        name: str,
-        effect_args: Union[str, ParsedArguments] = None,
-        duration: Optional[int] = None,
-        end_on_turn_end: bool = False,
-        concentration: bool = False,
-        character: Optional["Character"] = None,
-        desc: Optional[str] = None,
-        passive_effects: InitPassiveEffect = None,
-        attacks: list[AttackInteraction] = None,
-        buttons: list[ButtonInteraction] = None,
-        tick_on_combatant_id: Optional[str] = None,
+            cls,
+            combat: Optional["Combat"],
+            combatant: Optional["Combatant"],
+            name: str,
+            effect_args: Union[str, ParsedArguments] = None,
+            duration: Optional[int] = None,
+            end_on_turn_end: bool = False,
+            concentration: bool = False,
+            character: Optional["Character"] = None,
+            desc: Optional[str] = None,
+            passive_effects: InitPassiveEffect = None,
+            attacks: list[AttackInteraction] = None,
+            buttons: list[ButtonInteraction] = None,
+            tick_on_combatant_id: Optional[str] = None,
     ):
         # either parse effect_args or passive_effects/attacks
         if effect_args is not None and (passive_effects is not None or attacks is not None):
@@ -132,14 +132,14 @@ class InitiativeEffect:
             tick_on_combatant = combat.combatant_by_id(tick_on_combatant_id) if tick_on_combatant_id else combatant
             # if we are going to tick this effect once this round, subtract 1 from the end round
             will_tick_this_round = (
-                combat is not None
-                and tick_on_combatant is not None
-                and combat.index is not None
-                and (
-                    combat.index <= tick_on_combatant.index
-                    if end_on_turn_end
-                    else combat.index < tick_on_combatant.index
-                )
+                    combat is not None
+                    and tick_on_combatant is not None
+                    and combat.index is not None
+                    and (
+                        combat.index <= tick_on_combatant.index
+                        if end_on_turn_end
+                        else combat.index < tick_on_combatant.index
+                    )
             )
             if will_tick_this_round:
                 end_round -= 1
@@ -359,35 +359,24 @@ class InitiativeEffect:
         return ""
 
     # --- hooks ---
-    def on_turn(self, num_turns=1):
+    def on_turn(self, num_turns=1, start = True):
         """
         Called on the start of each combatant's turn in combat.
         Removes itself if the effect is no longer applicable.
         """
-        if self.combat is None or self.end_round is None:
+        if self.combat is None:
             return
-
+        if self.duration==-1:
+            return
         # conditions to remove effect:
-        # time must be going forward
-        if num_turns <= 0:
-            return
-        # must be at least the round it ends on
-        if self.combat.round_num < self.end_round:
-            return
-        # though if we're past the end round remove it anyway
-        if self.combat.round_num > self.end_round:
-            self.remove()
-            return
-        # here, it is the round it ends, so check the turn
-        # must be at least the index of the ticking combatant
-        if self.combat.index is None or self.tick_on_combatant is None:
-            return
         # start/end of turn
-        if self.end_on_turn_end:
-            if self.combat.index > self.tick_on_combatant.index:
+        if self.end_on_turn_end and not start:
+            self.duration -= num_turns
+            if self.duration <= 0:
                 self.remove()
-        else:
-            if self.combat.index >= self.tick_on_combatant.index:
+        elif not self.end_on_turn_end and start:
+            self.duration -= num_turns
+            if self.duration <= 0:
                 self.remove()
 
     # --- parenting ---

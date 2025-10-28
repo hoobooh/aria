@@ -40,24 +40,25 @@ class Combat:
     _cache: cachetools.TTLCache[str, "Combat"] = cachetools.TTLCache(maxsize=500, ttl=10)
 
     def __init__(
-        self,
-        channel_id: str,
-        message_id: int,
-        dm_id: int,
-        options: CombatOptions,
-        ctx: Union["AvraeContext", "disnake.Interaction"],
-        combatants: List[Combatant] = None,
-        round_num: int = 0,
-        turn_num: int = 0,
-        current_index: Optional[int] = None,
-        metadata: dict = None,
-        nlp_record_session_id: str = None,
+            self,
+            channel_id: str,
+            message_id: int,
+            dm_id: int,
+            options: CombatOptions,
+            ctx: Union["AvraeContext", "disnake.Interaction"],
+            combatants: List[Combatant] = None,
+            round_num: int = 0,
+            turn_num: int = 0,
+            current_index: Optional[int] = None,
+            metadata: dict = None,
+            nlp_record_session_id: str = None,
+            last_at_change: int = 0
     ):
         if combatants is None:
             combatants = []
         if metadata is None:
             metadata = {}
-        self.last_at_change:int = 0
+        self.last_at_change = last_at_change
         self._channel = str(channel_id)  # readonly
         self.summary_message_id = int(message_id)  # readonly
         self.dm_id = int(dm_id)
@@ -72,12 +73,12 @@ class Combat:
 
     @classmethod
     def new(
-        cls,
-        channel_id: str,
-        message_id: int,
-        dm_id: int,
-        options: CombatOptions,
-        ctx: Union["AvraeContext", "disnake.Interaction"],
+            cls,
+            channel_id: str,
+            message_id: int,
+            dm_id: int,
+            options: CombatOptions,
+            ctx: Union["AvraeContext", "disnake.Interaction"],
     ):
         return cls(channel_id, message_id, dm_id, options, ctx)
 
@@ -101,6 +102,31 @@ class Combat:
 
     @classmethod
     async def from_dict(cls, raw, ctx):
+
+        val = None
+        try:
+            val = raw["last_at_change"]
+        except Exception:
+            pass
+        if val:
+            # noinspection DuplicatedCode
+            inst = cls(
+                channel_id=raw["channel"],
+                message_id=raw["summary"],
+                dm_id=raw["dm"],
+                options=CombatOptions.parse_obj(raw["options"]),
+                ctx=ctx,
+                combatants=[],
+                round_num=raw["round"],
+                turn_num=raw["turn"],
+                current_index=raw["current"],
+                metadata=raw.get("metadata"),
+                nlp_record_session_id=raw.get("nlp_record_session_id"),
+                last_at_change=raw["last_at_change"]
+            )
+            for c in raw["combatants"]:
+                inst._combatants.append(await deserialize_combatant(c, ctx, inst))
+            return inst
         # noinspection DuplicatedCode
         inst = cls(
             channel_id=raw["channel"],
@@ -113,8 +139,9 @@ class Combat:
             turn_num=raw["turn"],
             current_index=raw["current"],
             metadata=raw.get("metadata"),
-            nlp_record_session_id=raw.get("nlp_record_session_id"),
+            nlp_record_session_id=raw.get("nlp_record_session_id")
         )
+
         for c in raw["combatants"]:
             inst._combatants.append(await deserialize_combatant(c, ctx, inst))
         return inst
@@ -136,6 +163,32 @@ class Combat:
 
     @classmethod
     def from_dict_sync(cls, raw, ctx):
+        val = None
+        try:
+            val = raw["last_at_change"]
+        except Exception:
+            pass
+        if val:
+
+            # noinspection DuplicatedCode
+            inst = cls(
+                channel_id=raw["channel"],
+                message_id=raw["summary"],
+                dm_id=raw["dm"],
+                options=CombatOptions.parse_obj(raw["options"]),
+                ctx=ctx,
+                combatants=[],
+                round_num=raw["round"],
+                turn_num=raw["turn"],
+                current_index=raw["current"],
+                metadata=raw.get("metadata"),
+                nlp_record_session_id=raw.get("nlp_record_session_id"),
+                last_at_change=raw["last_at_change"]
+            )
+            for c in raw["combatants"]:
+                inst._combatants.append(deserialize_combatant_sync(c, ctx, inst))
+            return inst
+
         # noinspection DuplicatedCode
         inst = cls(
             channel_id=raw["channel"],
@@ -166,6 +219,7 @@ class Combat:
             "current": self._current_index,
             "metadata": self.metadata,
             "nlp_record_session_id": self.nlp_record_session_id,
+            "last_at_change": self.last_at_change
         }
 
     # members
@@ -296,6 +350,34 @@ class Combat:
         else:
             self._current_index = None
 
+    def sort_combatants_exclude_first(self):
+        """
+        Sorts the combatant list by place in init and updates combatants' indices.
+        """
+        if not self._combatants:
+            self._current_index = None
+            self._turn = 0
+            return
+
+        current = None
+        if self._current_index is not None:
+            current = next((c for c in self._combatants if c.index == self._current_index), None)
+
+        temp_comp_right = self._combatants[1:]
+        temp_comp_pivot = self._combatants[:1]
+
+        temp_comp_right = sorted(temp_comp_right, key=lambda k: (k.init, int(k.init_skill)), reverse=False)
+        self._combatants = temp_comp_pivot
+        self._combatants.extend(temp_comp_right)
+        for n, c in enumerate(self._combatants):
+            c.index = n
+
+        if current is not None:
+            self._current_index = current.index
+            self._turn = current.init
+        else:
+            self._current_index = None
+
     def combatant_by_id(self, combatant_id: str) -> Optional[Combatant]:
         """Gets a combatant by their ID."""
         return self._combatant_id_map.get(combatant_id)
@@ -321,7 +403,7 @@ class Combat:
         return combatant
 
     def get_group(
-        self, name: str, create: Optional[int] = None, strict: Optional[bool] = None
+            self, name: str, create: Optional[int] = None, strict: Optional[bool] = None
     ) -> Optional[CombatantGroup]:
         """
         Gets a combatant group by its name or ID.
@@ -376,7 +458,7 @@ class Combat:
 
         order = []
         for combatant, init_roll in sorted(
-            rolls.items(), key=lambda r: (r[1].total, int(r[0].init_skill)), reverse=True
+                rolls.items(), key=lambda r: (r[1].total, int(r[0].init_skill)), reverse=True
         ):
             order.append(f"{init_roll.result}: {combatant.name}")
 
@@ -393,11 +475,12 @@ class Combat:
 
     @overload
     async def select_combatant(
-        self, ctx, name: str, choice_message: Optional[str] = None, select_group: Literal[True] = False
-    ) -> Optional[Combatant | CombatantGroup]: ...
+            self, ctx, name: str, choice_message: Optional[str] = None, select_group: Literal[True] = False
+    ) -> Optional[Combatant | CombatantGroup]:
+        ...
 
     async def select_combatant(
-        self, ctx, name: str, choice_message: Optional[str] = None, select_group: Literal[False] = False
+            self, ctx, name: str, choice_message: Optional[str] = None, select_group: Literal[False] = False
     ) -> Optional[Combatant]:
         """
         Opens a prompt for a user to select the combatant they were searching for.
@@ -452,29 +535,31 @@ class Combat:
 
         com.init += 99999
 
-        self._current_index=0
+        self._current_index = 0
         self.sort_combatants()
-        self._current_index=0
+        self._current_index = 0
 
         com.init -= 99999
 
-        self._current_index=0
+        self._current_index = 0
         self.sort_combatants()
-        self._current_index=0
+        self._current_index = 0
 
         self._turn = self.current_combatant.init
-        for combatant in self._combatants:
-            combatant.on_turn()
+        self.current_combatant.on_turn(1, True)
+        com.on_turn(1, False)
         return changed_round, messages
+
+    # do NOT use these. they don't work with AT too well; initiative states are too complex to easily rewind. rewind can be used ONCE per state.
 
     def rewind_turn(self):
         if len(self._combatants) == 0:
             raise NoCombatants
 
-        for combatant in self._combatants:
-            combatant.on_turn(num_turns=-1)
-            combatant.init = max(0, combatant.init - self.last_at_change)
+        self.current_combatant.on_turn(-1, True)
 
+        for combatant in self._combatants:
+            combatant.init = max(0, combatant.init - self.last_at_change)
         if self.index is None:  # start of combat
             self._current_index = len(self._combatants) - 1
         elif self.index == 0:  # new round
@@ -484,13 +569,14 @@ class Combat:
             self._current_index -= 1
 
         self._turn = self.current_combatant.init
+        self.current_combatant.on_turn(-1, False)
 
     def goto_turn(self, init_num: int | Combatant, is_combatant=False):
         if len(self._combatants) == 0:
             raise NoCombatants
 
         for combatant in self._combatants:
-            combatant.on_turn(num_turns=0)
+            combatant.on_turn(num_turns=0) # DON'T USE
 
         if is_combatant:
             if init_num.group:
@@ -510,7 +596,7 @@ class Combat:
 
         self.round_num += num_rounds
         for com in self.get_combatants():
-            com.on_turn(num_rounds)
+            com.on_turn(num_rounds) #DON'T USE
         if self.options.dynamic:
             messages.append(f"New initiatives:\n{self.reroll_dynamic()}")
 

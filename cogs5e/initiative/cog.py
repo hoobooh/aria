@@ -38,7 +38,7 @@ from . import (
     MonsterCombatant,
     PlayerCombatant,
     combatant_builders,
-    utils,
+    utils, Combatant,
 )
 from .buttons import ButtonHandler
 from .upenn_nlp import NLPRecorder
@@ -425,10 +425,10 @@ class InitTracker(commands.Cog):
         # check: is the user allowed to move combat on
         author_id = ctx.author.id
         allowed_to_pass = (
-            (combat.index is None)  # no one's turn
-            or author_id == combat.current_combatant.controller_id  # user's turn
-            or author_id == combat.dm_id  # user is combat starter
-            or servsettings.is_dm(ctx.author)  # user is DM
+                (combat.index is None)  # no one's turn
+                or author_id == combat.current_combatant.controller_id  # user's turn
+                or author_id == combat.dm_id  # user is combat starter
+                or servsettings.is_dm(ctx.author)  # user is DM
         )
         if not allowed_to_pass:
             await ctx.send("It is not your turn.")
@@ -1002,7 +1002,7 @@ class InitTracker(commands.Cog):
             target = await combat.select_combatant(
                 ctx,
                 t,
-                f"Pick your {ordinal(i+1)} target.",
+                f"Pick your {ordinal(i + 1)} target.",
                 select_group=True,
             )
             if isinstance(target, CombatantGroup):
@@ -1345,6 +1345,162 @@ class InitTracker(commands.Cog):
         await try_delete(ctx.message)
         if (gamelog := self.bot.get_cog("GameLog")) and isinstance(combatant, PlayerCombatant):
             await gamelog.send_save(ctx, combatant.character, result.skill_name, result.rolls)
+
+    async def do_generic_action(self, ctx, name: str = None, at: int = None, default_at: int = 0, phrase: str = None,
+                                econ: str = None, desc: str = None):
+        if at is None:
+            at = default_at
+        combat = await ctx.get_combat()
+        if name is None:
+            char = combat.current_combatant
+        else:
+            char = combat.get_combatant(name)
+
+        if not char:
+            await ctx.send("That character doesn't exist in the initiative.")
+            return
+
+        char.init += at
+        combat.sort_combatants_exclude_first()
+        await combat.final(ctx)
+
+        embed = disnake.Embed(color=char.get_color())
+        embed.title = char.name + phrase
+        factor = "Increased"
+        if at < 0:
+            factor = "Reduced"
+        embed.description = "***" + econ + "***\n*" + factor + " Action Time by " + str(at) + ".*\n" + desc
+        await ctx.send(embed=embed)
+
+    @init.command()
+    async def dash(self, ctx, name: str = None, at: int = None):
+        await self.do_generic_action(ctx, name, at, 17, " breaks into a dash!", "Action",
+                                     "You gain extra movement for the current turn. "
+                                     "The increase equals your speed, after applying any modifiers.")
+
+    @init.command()
+    async def consume(self, ctx, name: str = None, at: int = None):
+        await self.do_generic_action(ctx, name, at, 20, " consumes an item!", "Bonus Action",
+                                     "")
+
+    @init.command()
+    async def block(self, ctx, name: str = None, at: int = None):
+        await self.do_generic_action(ctx, name, at, 15, " blocks an attack!", "Reaction",
+                                     "If you are wielding a melee weapon or a shield, "
+                                     "you can attempt to block an attack as a reaction. "
+                                     "If you do, reduce your incoming damage roll by your PB.")
+
+    @init.command()
+    async def disengage(self, ctx, name: str = None, at: int = None):
+        await self.do_generic_action(ctx, name, at, 17, " disengages from the fight!", "Action",
+                                     "Opponents cannot perform Attacks of Opportunity on you until the end of your turn.")
+
+    @init.command()
+    async def search(self, ctx, name: str = None, at: int = None):
+        await self.do_generic_action(ctx, name, at, 30, " searches the area!", "Action",
+                                     "You search the area for something.")
+
+    @init.command()
+    async def prepare(self, ctx, name: str = None, at: int = None):
+        await self.do_generic_action(ctx, name, at, 5, " prepares an attack!", "Action",
+                                     "You prepare an attack of your choice. The next time you would use that attack, do so with advantage.")
+        combat = await ctx.get_combat()
+        if name is None:
+            char = combat.current_combatant
+        else:
+            char = combat.get_combatant(name)
+        if not char:
+            return
+        name=char.name
+        await self.effect(ctx, name, "Preparing Attack",
+                          args='-desc "This creature is currently preparing an attack, heightening its accuracy." -dur 1')
+
+    @init.command()
+    async def dodge(self, ctx, name: str = None, at: int = None):
+        await self.do_generic_action(ctx, name, at, 15, " gets into a defensive stance!", "Action",
+                                     "You impose disadvantage on all attacks against yourself until the start of your next turn.")
+        combat = await ctx.get_combat()
+        if name is None:
+            char = combat.current_combatant
+            name = char.name
+        else:
+            char = combat.get_combatant(name)
+            name = char.name
+        if not char:
+            return
+        await self.effect(ctx, name, 'Defensive Stance',
+                          args='-desc "This creature is currently in a defensive stance, imposing disadvantage on incoming attacks." -dur 1')
+
+    @init.command()
+    async def ready(self, ctx, name: str = None, at: int = None):
+        await self.do_generic_action(ctx, name, at, 5, " gets ready!", "Action",
+                                     "You ready an action to be used as a reaction. You can only use this reaction once until the start of your next turn.")
+        combat = await ctx.get_combat()
+        if name is None:
+            char = combat.current_combatant
+        else:
+            char = combat.get_combatant(name)
+        if not char:
+            return
+        name=char.name
+        await self.effect(ctx, name, "Readying Stance",
+                          args='-desc "This creature is currently readying something." -dur 1')
+
+    @init.command()
+    async def standby(self, ctx, *, args: str = ""):
+        if "-" in args:
+            name = None
+            if args[0] != '-':
+                ar = args.split(" -")
+                name = ar[0][:len(ar[0]) - 1]
+            else:
+                ar = args.split("-")
+
+            for a in ar:
+                if a == "full":
+                    await self.do_generic_action(ctx, name, None, -25, " stays on full standby!",
+                                                 "Action + Bonus Action",
+                                                 "Decrease your AT by 10 after your turn ends. "
+                                                 "If you do not move when you use this full action, "
+                                                 "decrease your AT by an additional 15.")
+                elif a == "half":
+                    await self.do_generic_action(ctx, name, None, -10, " stays on partial standby!",
+                                                 "Action + Bonus Action",
+                                                 "Decrease your AT by 10 after your turn ends. "
+                                                 "If you do not move when you use this full action, "
+                                                 "decrease your AT by an additional 15.")
+                elif "at" in a:
+                    s = a.replace("at ", "")
+                    await self.do_generic_action(ctx, name, None, -int(s), " stays on standby!",
+                                                 "Action + Bonus Action",
+                                                 "Decrease your AT by 10 after your turn ends. "
+                                                 "If you do not move when you use this full action, "
+                                                 "decrease your AT by an additional 15.")
+        else:
+            await self.do_generic_action(ctx, args, None, -10, " stays on partial standby!", "Action + Bonus Action",
+                                         "Decrease your AT by 10 after your turn ends. "
+                                         "If you do not move when you use this full action, "
+                                         "decrease your AT by an additional 15.")
+
+    @init.command(help="Advances Action Time by a given amount. Creatures "
+                       "that would normally take a turn in the middle of this advancement "
+                       "simply receive +35 AT before continuing simulation. If you use the -hold argument (or any arg at all), "
+                       "creatures that hit 0 AT will simply stay at 0 AT.")
+    async def advance(self, ctx, at: int = None, hold: str = None):
+        combat = await ctx.get_combat()
+        if at is None:
+            await ctx.send("You need to specify how much Action Time needs to pass.")
+            return
+        for c in combat.get_combatants():
+            remainder = max(0, at - c.init)
+            major = min(at, c.init)
+            c.init -= major
+            if not hold:
+                c.init = 35 - remainder % 35
+        combat.sort_combatants()
+        combat._current_index=0
+        await utils.send_turn_message(ctx, combat, before=[], after=[])
+        await combat.final(ctx)
 
     @init.command(
         help=f"""

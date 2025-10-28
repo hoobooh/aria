@@ -33,34 +33,34 @@ class Combatant(BaseCombatant, StatBlock):
     type = CombatantType.GENERIC
 
     def __init__(
-        self,
-        # init metadata
-        ctx,
-        combat,
-        id: str,
-        name: str,
-        controller_id: int,
-        private: bool,
-        init: int,
-        index: int = None,
-        notes: str = None,
-        effects: List[InitiativeEffect] = None,
-        group_id: str = None,
-        # statblock info
-        stats: BaseStats = None,
-        levels: Levels = None,
-        attacks: AttackList = None,
-        skills: Skills = None,
-        saves: Saves = None,
-        resistances: Resistances = None,
-        attributes: Attributes = None,
-        spellbook: Spellbook = None,
-        ac: int = None,
-        max_hp: int = None,
-        hp: int = None,
-        temp_hp: int = 0,
-        creature_type: str = None,
-        **_,
+            self,
+            # init metadata
+            ctx,
+            combat,
+            id: str,
+            name: str,
+            controller_id: int,
+            private: bool,
+            init: int,
+            index: int = None,
+            notes: str = None,
+            effects: List[InitiativeEffect] = None,
+            group_id: str = None,
+            # statblock info
+            stats: BaseStats = None,
+            levels: Levels = None,
+            attacks: AttackList = None,
+            skills: Skills = None,
+            saves: Saves = None,
+            resistances: Resistances = None,
+            attributes: Attributes = None,
+            spellbook: Spellbook = None,
+            ac: int = None,
+            max_hp: int = None,
+            hp: int = None,
+            temp_hp: int = 0,
+            creature_type: str = None,
+            **_,
     ):
         super().__init__(
             name=name,
@@ -199,7 +199,6 @@ class Combatant(BaseCombatant, StatBlock):
         """The base AC, unaffected by any passive effects."""
         return self._ac
 
-
     @property
     def resistances(self) -> Resistances:
         out = self._resistances.copy()
@@ -294,7 +293,7 @@ class Combatant(BaseCombatant, StatBlock):
     def set_group(self, group_name: Optional[str]) -> Optional["CombatantGroup"]:
         current = self.combat.current_combatant
         was_current = current is not None and (
-            self is current or (current.type == CombatantType.GROUP and self in current and len(current) == 1)
+                self is current or (current.type == CombatantType.GROUP and self in current and len(current) == 1)
         )
         self.combat.remove_combatant(self, ignore_remove_hook=True)
         if isinstance(group_name, str) and group_name.lower() == "none":
@@ -372,10 +371,10 @@ class Combatant(BaseCombatant, StatBlock):
         return to_remove
 
     def active_effects(
-        self,
-        mapper: Callable[[InitiativeEffect], _IntermediateT],
-        reducer: Callable[[List[_IntermediateT]], T] = lambda mapped: mapped,
-        default: T = None,
+            self,
+            mapper: Callable[[InitiativeEffect], _IntermediateT],
+            reducer: Callable[[List[_IntermediateT]], T] = lambda mapped: mapped,
+            default: T = None,
     ) -> T:
         """
         Map/Reduce operation over each effect on the combatant to reduce everything down to a single value.
@@ -415,14 +414,15 @@ class Combatant(BaseCombatant, StatBlock):
             pass
 
     # hooks
-    def on_turn(self, num_turns: int = 1):
+    def on_turn(self, num_turns: int = 1, start=True):
         """
         A method called at the start of each combatant's turns.
         :param num_turns: The number of turns that just passed.
+        :param start: Whether this is being called at the start of the combatant's turn.
         :return: None
         """
         for e in self.get_effects().copy():
-            e.on_turn(num_turns)
+            e.on_turn(num_turns, start)
 
     def on_remove(self):
         """
@@ -443,14 +443,14 @@ class Combatant(BaseCombatant, StatBlock):
             return f"{self.init:>2}: {self.name} {hp_str}"
 
     def get_status(
-        self,
-        private=False,
-        resistances=True,
-        notes=True,
-        duration=True,
-        parenthetical=True,
-        concentration=True,
-        description=True,
+            self,
+            private=False,
+            resistances=True,
+            notes=True,
+            duration=True,
+            parenthetical=True,
+            concentration=True,
+            description=True,
     ) -> str:
         """
         Gets the start-of-turn status of a combatant.
@@ -527,37 +527,37 @@ class MonsterCombatant(Combatant):
     type = CombatantType.MONSTER
 
     def __init__(
-        self,
-        # init metadata
-        ctx,
-        combat,
-        id: str,
-        name: str,
-        controller_id: int,
-        private: bool,
-        init: int,
-        index: int = None,
-        notes: str = None,
-        effects: List[InitiativeEffect] = None,
-        group_id: str = None,
-        # statblock info
-        stats: BaseStats = None,
-        levels: Levels = None,
-        attacks: AttackList = None,
-        skills: Skills = None,
-        saves: Saves = None,
-        resistances: Resistances = None,
-        attributes: Attributes = None,
-        spellbook: Spellbook = None,
-        ac: int = None,
-        max_hp: int = None,
-        hp: int = None,
-        temp_hp: int = 0,
-        # monster specific
-        monster_name: str = None,
-        monster_id: int = None,
-        creature_type: str = None,
-        **_,
+            self,
+            # init metadata
+            ctx,
+            combat,
+            id: str,
+            name: str,
+            controller_id: int,
+            private: bool,
+            init: int,
+            index: int = None,
+            notes: str = None,
+            effects: List[InitiativeEffect] = None,
+            group_id: str = None,
+            # statblock info
+            stats: BaseStats = None,
+            levels: Levels = None,
+            attacks: AttackList = None,
+            skills: Skills = None,
+            saves: Saves = None,
+            resistances: Resistances = None,
+            attributes: Attributes = None,
+            spellbook: Spellbook = None,
+            ac: int = None,
+            max_hp: int = None,
+            hp: int = None,
+            temp_hp: int = 0,
+            # monster specific
+            monster_name: str = None,
+            monster_id: int = None,
+            creature_type: str = None,
+            **_,
     ):
         super().__init__(
             ctx,
@@ -587,6 +587,7 @@ class MonsterCombatant(Combatant):
         )
         self._monster_name = monster_name
         self._monster_id = monster_id
+
     @classmethod
     def from_monster(cls, monster, ctx, combat, name, controller_id, init, private, hp=None, ac=None):
         monster_name = monster.name
@@ -656,29 +657,29 @@ class PlayerCombatant(Combatant):
     type = CombatantType.PLAYER
 
     def __init__(
-        self,
-        # init metadata
-        ctx,
-        combat,
-        id: str,
-        name: str,
-        controller_id: int,
-        private: bool,
-        init: int,
-        index: int = None,
-        notes: str = None,
-        effects: List[InitiativeEffect] = None,
-        group_id: str = None,
-        # statblock info
-        attacks: AttackList = None,
-        resistances: Resistances = None,
-        attributes: Attributes = None,
-        ac: int = None,
-        max_hp: int = None,
-        # character specific
-        character_id: str = None,
-        character_owner: str = None,
-        **_,
+            self,
+            # init metadata
+            ctx,
+            combat,
+            id: str,
+            name: str,
+            controller_id: int,
+            private: bool,
+            init: int,
+            index: int = None,
+            notes: str = None,
+            effects: List[InitiativeEffect] = None,
+            group_id: str = None,
+            # statblock info
+            attacks: AttackList = None,
+            resistances: Resistances = None,
+            attributes: Attributes = None,
+            ac: int = None,
+            max_hp: int = None,
+            # character specific
+            character_id: str = None,
+            character_owner: str = None,
+            **_,
     ):
         # note that the player combatant doesn't initialize the statblock
         # because we want the combatant statblock attrs to reference the character attrs
