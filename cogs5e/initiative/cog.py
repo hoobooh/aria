@@ -1499,6 +1499,7 @@ class InitTracker(commands.Cog):
                 c.init = 35 - remainder % 35
         combat.sort_combatants()
         combat._current_index=0
+        combat.total_at_passed += at
         await utils.send_turn_message(ctx, combat, before=[], after=[])
         await combat.final(ctx)
 

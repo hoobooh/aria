@@ -52,13 +52,15 @@ class Combat:
             current_index: Optional[int] = None,
             metadata: dict = None,
             nlp_record_session_id: str = None,
-            last_at_change: int = 0
+            last_at_change: int = 0,
+            total_at_passed: int = 0
     ):
         if combatants is None:
             combatants = []
         if metadata is None:
             metadata = {}
         self.last_at_change = last_at_change
+        self.total_at_passed = total_at_passed
         self._channel = str(channel_id)  # readonly
         self.summary_message_id = int(message_id)  # readonly
         self.dm_id = int(dm_id)
@@ -102,31 +104,6 @@ class Combat:
 
     @classmethod
     async def from_dict(cls, raw, ctx):
-
-        val = None
-        try:
-            val = raw["last_at_change"]
-        except Exception:
-            pass
-        if val:
-            # noinspection DuplicatedCode
-            inst = cls(
-                channel_id=raw["channel"],
-                message_id=raw["summary"],
-                dm_id=raw["dm"],
-                options=CombatOptions.parse_obj(raw["options"]),
-                ctx=ctx,
-                combatants=[],
-                round_num=raw["round"],
-                turn_num=raw["turn"],
-                current_index=raw["current"],
-                metadata=raw.get("metadata"),
-                nlp_record_session_id=raw.get("nlp_record_session_id"),
-                last_at_change=raw["last_at_change"]
-            )
-            for c in raw["combatants"]:
-                inst._combatants.append(await deserialize_combatant(c, ctx, inst))
-            return inst
         # noinspection DuplicatedCode
         inst = cls(
             channel_id=raw["channel"],
@@ -139,9 +116,10 @@ class Combat:
             turn_num=raw["turn"],
             current_index=raw["current"],
             metadata=raw.get("metadata"),
-            nlp_record_session_id=raw.get("nlp_record_session_id")
+            nlp_record_session_id=raw.get("nlp_record_session_id"),
+            last_at_change=raw["last_at_change"],
+            total_at_passed=raw["total_at_passed"]
         )
-
         for c in raw["combatants"]:
             inst._combatants.append(await deserialize_combatant(c, ctx, inst))
         return inst
@@ -163,32 +141,6 @@ class Combat:
 
     @classmethod
     def from_dict_sync(cls, raw, ctx):
-        val = None
-        try:
-            val = raw["last_at_change"]
-        except Exception:
-            pass
-        if val:
-
-            # noinspection DuplicatedCode
-            inst = cls(
-                channel_id=raw["channel"],
-                message_id=raw["summary"],
-                dm_id=raw["dm"],
-                options=CombatOptions.parse_obj(raw["options"]),
-                ctx=ctx,
-                combatants=[],
-                round_num=raw["round"],
-                turn_num=raw["turn"],
-                current_index=raw["current"],
-                metadata=raw.get("metadata"),
-                nlp_record_session_id=raw.get("nlp_record_session_id"),
-                last_at_change=raw["last_at_change"]
-            )
-            for c in raw["combatants"]:
-                inst._combatants.append(deserialize_combatant_sync(c, ctx, inst))
-            return inst
-
         # noinspection DuplicatedCode
         inst = cls(
             channel_id=raw["channel"],
@@ -202,6 +154,8 @@ class Combat:
             current_index=raw["current"],
             metadata=raw.get("metadata"),
             nlp_record_session_id=raw.get("nlp_record_session_id"),
+            last_at_change=raw["last_at_change"],
+            total_at_passed=raw["total_at_passed"]
         )
         for c in raw["combatants"]:
             inst._combatants.append(deserialize_combatant_sync(c, ctx, inst))
@@ -219,7 +173,8 @@ class Combat:
             "current": self._current_index,
             "metadata": self.metadata,
             "nlp_record_session_id": self.nlp_record_session_id,
-            "last_at_change": self.last_at_change
+            "last_at_change": self.last_at_change,
+            "total_at_passed": self.total_at_passed
         }
 
     # members
@@ -509,7 +464,21 @@ class Combat:
         if len(self._combatants) == 0:
             raise NoCombatants
 
+        # behavior if no current combatant aka init hasn't even started yet
+
+        if not self.current_combatant:
+            self.sort_combatants()
+            self._current_index=0
+            i = int(self.current_combatant.init)
+            self.last_at_change = i
+            self.total_at_passed += i
+            for combatant in self._combatants:
+                combatant.init = max(0, combatant.init - i)
+            self.current_combatant.on_turn(1, True)
+            return False, []
         messages = []
+
+        # most of this is legacy code but i kept it because who knows what might break?
 
         changed_round = False
 
@@ -525,13 +494,18 @@ class Combat:
             self.round_num += 1
             changed_round = True
 
+        #most of the actual code
+
         com.init += 35
         if len(self._combatants) > 1:
             self._current_index = 1
         i = int(self.current_combatant.init)
         self.last_at_change = i
+        self.total_at_passed += i
         for combatant in self._combatants:
             combatant.init = max(0, combatant.init - i)
+
+        # scuffed but working solution to fix an unintended action interaction where someone can theoretically have 400% the action economy of everyone else
 
         com.init += 99999
 
@@ -557,7 +531,7 @@ class Combat:
             raise NoCombatants
 
         self.current_combatant.on_turn(-1, True)
-
+        self.total_at_passed -= self.last_at_change
         for combatant in self._combatants:
             combatant.init = max(0, combatant.init - self.last_at_change)
         if self.index is None:  # start of combat
@@ -636,11 +610,11 @@ class Combat:
             combatants = combatant.get_combatants()
             combatant_statuses = "\n".join(co.get_status(**kwargs) for co in combatants)
             mentions = ", ".join({co.controller_mention() for co in combatants})
-            out = f"**Initiative {self.turn_num} (round {self.round_num})**: {combatant.name} ({mentions})\n"
+            out = f"**{self.total_at_passed} Action Time Elapsed -《Now Moving》**: {combatant.name} ({mentions})\n"
         else:
             combatant_statuses = combatant.get_status(**kwargs)
             out = (
-                f"**Initiative {self.turn_num} (round {self.round_num})**: {combatant.name} "
+                f"**{self.total_at_passed} Action Time Elapsed -《Now Moving》**: {combatant.name} "
                 f"({combatant.controller_mention()})\n"
             )
 
@@ -674,7 +648,7 @@ class Combat:
         combatants = self._combatants
         name = self.options.name or "Current initiative"
 
-        out = f"```md\n{name}: {self.turn_num} (round {self.round_num})\n"
+        out = f"```md\n{name}: {self.total_at_passed} Action Time Elapsed\n"
         out += f"{'=' * (len(out) - 7)}\n"
 
         combatant_strs = []
