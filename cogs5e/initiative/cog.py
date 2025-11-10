@@ -1391,6 +1391,15 @@ class InitTracker(commands.Cog):
                                      "If you do, reduce your incoming damage roll by your PB.")
 
     @init.command()
+    async def reload(self, ctx, name: str = None, at: int = None):
+        if not at:
+            await ctx.send("You must specify a loading cost!")
+            return
+        await self.do_generic_action(ctx, name, at, 15, " reloads!", "Action",
+                                     "If you are wielding a weapon with the loading property, "
+                                     "you can attempt to reload that weapon as an action. ")
+
+    @init.command()
     async def disengage(self, ctx, name: str = None, at: int = None):
         await self.do_generic_action(ctx, name, at, 17, " disengages from the fight!", "Action",
                                      "Opponents cannot perform Attacks of Opportunity on you until the end of your turn.")
@@ -1411,7 +1420,7 @@ class InitTracker(commands.Cog):
             char = combat.get_combatant(name)
         if not char:
             return
-        name=char.name
+        name = char.name
         await self.effect(ctx, name, "Preparing Attack",
                           args='-desc "This creature is currently preparing an attack, heightening its accuracy." -dur 1')
 
@@ -1432,6 +1441,22 @@ class InitTracker(commands.Cog):
                           args='-desc "This creature is currently in a defensive stance, imposing disadvantage on incoming attacks." -dur 1')
 
     @init.command()
+    async def defend(self, ctx, name: str = None, at: int = None):
+        await self.do_generic_action(ctx, name, at, 15, " gets into a defensive stance!", "Action",
+                                     "You impose disadvantage on all attacks against yourself until the start of your next turn.")
+        combat = await ctx.get_combat()
+        if name is None:
+            char = combat.current_combatant
+            name = char.name
+        else:
+            char = combat.get_combatant(name)
+            name = char.name
+        if not char:
+            return
+        await self.effect(ctx, name, 'Defensive Stance',
+                          args='-desc "This creature is currently in a defensive stance, imposing disadvantage on incoming attacks." -dur 1 -ac +5')
+
+    @init.command()
     async def ready(self, ctx, name: str = None, at: int = None):
         await self.do_generic_action(ctx, name, at, 5, " gets ready!", "Action",
                                      "You ready an action to be used as a reaction. You can only use this reaction once until the start of your next turn.")
@@ -1442,7 +1467,7 @@ class InitTracker(commands.Cog):
             char = combat.get_combatant(name)
         if not char:
             return
-        name=char.name
+        name = char.name
         await self.effect(ctx, name, "Readying Stance",
                           args='-desc "This creature is currently readying something." -dur 1')
 
@@ -1498,7 +1523,7 @@ class InitTracker(commands.Cog):
             if not hold:
                 c.init = 35 - remainder % 35
         combat.sort_combatants()
-        combat._current_index=0
+        combat._current_index = 0
         combat.total_at_passed += at
         await utils.send_turn_message(ctx, combat, before=[], after=[])
         await combat.final(ctx)
