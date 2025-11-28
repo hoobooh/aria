@@ -76,6 +76,7 @@ class Attribute:
                     net_power = net_power + "/" + str(base_penalty)
                 net_power += " [" + t + "] "
                 dmgstring += modifier + net_power
+
         return self.clean_damage_string(dmgstring)
 
     @classmethod

@@ -111,12 +111,11 @@ class Damage(Effect):
 
         # apply s.attribute bonuses here to damage
         tempdmg = autoctx.caster.attributes.get_damage_with_bonus(str(dice_ast.roll))
-        if tempdmg!="":
+        if tempdmg != "":
             d_ast = d20.parse(tempdmg)
             dice_ast.roll = d20.ast.BinOp(dice_ast.roll, "+", d_ast.roll)
 
-
-        #dice_ast += autoctx.caster.attributes.get_damage_with_bonus(damage)
+        # dice_ast += autoctx.caster.attributes.get_damage_with_bonus(damage)
 
         # crit
         # nocrit (#1216)
@@ -154,13 +153,113 @@ class Damage(Effect):
         if tempdmg != "":
             d_ast = d20.parse(tempdmg)
             dice_ast.roll = d20.ast.BinOp(dice_ast.roll, "+", d_ast.roll)
-        #dice_ast += attributes.get_damage_with_defense(damage)
 
-        #clean up damage string
-        dice_ast.roll = d20.parse(str(dice_ast.roll).replace("+ +","+ ").replace("+ -","- ").replace("- +","- "))
+        # clean up damage string
+        dice_ast.roll = d20.parse(str(dice_ast.roll).replace("+ +", "+ ").replace("+ -", "- ").replace("- +", "- "))
 
         # evaluate damage
+
+        # we have to fix the parsing system because the original one is garbage and misidentifies damage type
+        manip = str(dice_ast.roll)
+        new_roll = "+("
+        for iterator in range(manip.__len__()):
+            if manip[iterator] == '[':
+                new_roll += ")"
+            new_roll += manip[iterator]
+            if manip[iterator] == ']' and iterator != manip.__len__() - 1:
+                new_roll += "+("
+        dice_ast.roll = d20.parse(new_roll)
+
+        # back to actual evaluation
         dmgroll = d20.roll(dice_ast)
+        p_str = d20.SimpleStringifier().stringify(dmgroll.expr)
+
+        # collapse the damage tree to make sure that defense doesn't overflow
+        class DNode:
+            def __init__(self, d_type: str, val: int):
+                if val < 0 and "heal" not in d_type:
+                    val = 0
+                self.d_type = d_type
+                self.val = val
+
+            def add_val(self, v):
+                if "heal" not in self.d_type:
+                    self.val = max(0, self.val + v)
+                else:
+                    self.val += v
+
+        dn_list = []
+        current_val = ""
+        current_type = ""
+        reading_type = False
+        roll_max = 0
+        roll_actual = 0
+        for c in p_str:
+            if c == '=':
+                break
+            if c == '[':
+                reading_type = True
+            elif c == ']':
+
+                # parse value string to find total
+
+                current_val = current_val.replace("(", " ( ")
+                current_val = current_val.replace(")", " ) ")
+                current_val = current_val.replace("+", " + ")
+
+                nodes = current_val.split(" ")
+                new_val = ""
+                prev_node = None
+                prevprev_node = None
+                for n in nodes:
+                    if n:
+                        if prevprev_node:
+                            if prevprev_node[0] != '[' and 'd' in prevprev_node:
+                                roll_actual += int(n)
+                        prevprev_node = prev_node
+                        prev_node = n
+
+                        if n[0] == '[' or 'd' not in n:
+                            new_val += n
+                        else:
+                            di = n.split("d")
+                            num = int(di[0])
+                            size_string = ""
+                            for digit in di[1]:
+                                if digit.isdigit():
+                                    size_string += digit
+                                else:
+                                    break
+                            size = int(size_string)
+                            if num < 0:
+                                size = 1
+                            roll_max += num * size
+
+                total_val = d20.roll(d20.parse(new_val)).total
+
+                merge = False
+                for dn in dn_list:
+                    if dn.d_type == current_type:
+                        dn.add_val(total_val)
+                        merge = True
+                if not merge:
+                    dn_list.append(DNode(current_type, total_val))
+                current_type = ""
+                current_val = ""
+                reading_type = False
+            elif reading_type:
+                current_type += c
+            else:
+                current_val += c
+
+        # takes collapsed damage tree
+        expr = ""
+        for dn in dn_list:
+            expr += " + " + str(dn.val) + " [" + dn.d_type + "]"
+        expr = expr[3:]
+        dmgroll = d20.roll(d20.parse(expr))
+
+        luck_ratio = float(roll_actual) / float(roll_max)
 
         # magic arg (#853), magical effect (#1063)
         # silvered arg (#1544)
@@ -197,7 +296,19 @@ class Damage(Effect):
         if dmgroll.total < 0 and "heal" in result:
             roll_for = "Healing"
         else:
-            roll_for = "Damage"
+            luck_string = ""
+            if roll_max == roll_actual:
+                luck_string = "Perfect Hit!"
+            elif luck_ratio > 0.7:
+                luck_string = "Amazing Hit!"
+            elif luck_ratio > 0.5:
+                luck_string = "Solid Hit!"
+            elif luck_ratio > 0.3:
+                luck_string = "Weak Hit!"
+            else:
+                luck_string = "Grazing Hit!"
+
+            roll_for = "Damage (" + luck_string +")"
 
         # output
         roll_for = roll_for if not in_crit else f"{roll_for} (CRIT!)"
