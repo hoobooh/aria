@@ -50,17 +50,21 @@ async def run_attack(
         attack_name = a_or_an(attack.name)
     else:
         attack_name = attack.name
-
     for e in attack.automation.effects:
         if isinstance(e, Text):
             if "Action Delay" in str(e.text):
+                rr = args.last("rr", 1, type_=int)
+                if args.last("multi", type_=bool):
+                    rr = 1
                 line = str(e.text)
                 line = line[line.index("Action Delay"):]
                 lines = line.replace("Action Delay", "").replace(",", "").replace("(","").replace(")","").split(" ")
                 try:
-                    caster.init += int(lines[1])
+                    caster.init += int(lines[1]) * rr
                 except Exception:
                     pass
+
+
 
     verb = attack.verb or "attacks with"
 

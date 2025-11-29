@@ -211,17 +211,41 @@ class Damage(Effect):
                 new_val = ""
                 prev_node = None
                 prevprev_node = None
+                between_brackets = False
+
+                roll_cleaned = ""
                 for n in nodes:
                     if n:
+                        if '[' in n:
+                            between_brackets=True
+                            continue
+                        if ']' in n:
+                            between_brackets=False
+                            continue
+                        if not between_brackets:
+                            roll_cleaned += n + " "
+
+                for n in roll_cleaned.split(" "):
+                    if n:
                         if prevprev_node:
-                            if prevprev_node[0] != '[' and 'd' in prevprev_node:
+                            if 'd' in prevprev_node:
                                 roll_actual += int(n)
                         prevprev_node = prev_node
                         prev_node = n
 
-                        if n[0] == '[' or 'd' not in n:
+                between_brackets = False
+
+                for n in nodes:
+                    if n:
+                        if '[' in n:
+                            between_brackets=True
+                            continue
+                        if ']' in n:
+                            between_brackets=False
+                            continue
+                        if not between_brackets and 'd' not in n:
                             new_val += n
-                        else:
+                        elif not between_brackets:
                             di = n.split("d")
                             num = int(di[0])
                             size_string = ""
