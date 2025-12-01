@@ -54,13 +54,15 @@ async def run_attack(
         if isinstance(e, Text):
             if "Action Delay" in str(e.text):
                 rr = args.last("rr", 1, type_=int)
+                tc = targets.__len__()
                 if args.last("multi", type_=bool):
                     rr = 1
+                    tc = 1
                 line = str(e.text)
                 line = line[line.index("Action Delay"):]
                 lines = line.replace("Action Delay", "").replace(",", "").replace("(","").replace(")","").split(" ")
                 try:
-                    caster.init += int(lines[1]) * rr
+                    caster.init += int(lines[1]) * rr * tc
                 except Exception:
                     pass
 
