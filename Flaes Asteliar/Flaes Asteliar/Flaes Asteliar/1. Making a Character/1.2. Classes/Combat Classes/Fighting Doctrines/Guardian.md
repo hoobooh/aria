@@ -1,0 +1,1 @@
+The old reliable. Simple, straightforward, yet effective. Guardians are martials who make up for their lack of extra options with a sturdy foundation.
