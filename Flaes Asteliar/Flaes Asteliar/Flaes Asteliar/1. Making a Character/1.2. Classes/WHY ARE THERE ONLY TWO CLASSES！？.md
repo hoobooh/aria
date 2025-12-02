@@ -1,0 +1,9 @@
+Aria5e takes a branching approach to mechanical development. It's a bit inaccurate to compare these to standard 5e classes. As you build them out, they'll get more and more diverse and you should have a comparable if not better level of customization and control over how you want your character to develop.
+
+Spellcasters are a general class meant to cover the capabilities of all spell-oriented activities, while martials are a general class meant to cover the capabilities of all physical activities. Unlike in 5e, each have their own unique place in Aria5e.
+
+Martials are quick, durable, and able to use magical equipment much more effectively than spellcasters. They're able to react to things on the fly and are certainly the harder of the two classes to try and pressure. Their drawback, if one were to name one, their lack of versatility when it comes to their equipment. Martials should be prepared to get creative with their limited tools and manage equipment prudently.
+
+Spellcasters, on the other hand, have a vast assortment of magical spells to their disposal. They hit extremely hard, have a giant toolkit full of all sorts of goodies, and can generally oppress much more ground with a single move compared to a martial. Their drawback is in their casting times and their longevity. High-impact spells require time to cast— time that they need to be protected for, and after which they lose quite a bit of energy. Spellcasters should be prepared to read the situation and make efficient choices that maximize their high-value spells.
+
+These are, of course, only the *intended* ways to play the class. The whole point of a branching approach is that you can shape the classes however you please. Whether that be a quick caster who maximizes their versatility to heighten their frontline capabilities, or a martial who utilizes their physical strength to bring out the heaviest strikes in history, there are plenty of ways you can be building your character.
