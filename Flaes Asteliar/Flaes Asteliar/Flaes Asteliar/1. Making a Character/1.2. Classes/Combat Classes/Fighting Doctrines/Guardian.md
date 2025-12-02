@@ -1,4 +1,4 @@
-The old faithful. Simple, straightforward, yet effective. Guardians are martials who make up for their lack of extra options with a sturdy foundation. Guardians excel at extended combat, protection, and are hard pressed to find a situation where they aren't impactful.
+The old faithful. Simple, straightforward, yet effective. Guardians are martials who make up for their lack of extra options with a sturdy foundation. Guardians excel at extended combat, protection, and are hard pressed to find a situation where they aren't impactful. They function best in parties, where they can utilize their defensive capabilities to the fullest.
 
 | Level | Features               | Martial Art Points |
 | ----- | ---------------------- | :----------------: |
@@ -29,11 +29,11 @@ At 10th level, you gain access to unique Guardian martial arts. Choose martial a
 
 | Martial Art       | Description | Martial Arts Points Required |
 | ----------------- | ----------- | :--------------------------: |
-| Riposte           |             |              1               |
-| Interception      |             |              1               |
 | Cleave            |             |              1               |
 | Disarming Strike  |             |              1               |
+| Interception      |             |              1               |
 | Maiming Shot      |             |              1               |
+| Riposte           |             |              1               |
 | Staggering Strike |             |              1               |
 
 ## Deft Strike
@@ -43,16 +43,26 @@ At 30th level, your attacks land swift and true. Increase your critical range by
 
 At 40th level, you gain access to an additional set of martial arts. You can change/remove your existing martial arts when you learn new martial arts here.
 
-| Martial Art | Description | Martial Arts Points Required |
-| ----------- | ----------- | :--------------------------: |
-|             |             |              2               |
-|             |             |              2               |
-|             |             |              2               |
-|             |             |              2               |
+| Martial Art     | Description | Martial Arts Points Required |
+| --------------- | ----------- | :--------------------------: |
+| Charge Overload |             |              2               |
+| Pushing Strike  |             |              1               |
+| Greater Parry   |             |              2               |
+| Charge          |             |              1               |
 
 ## Masterful Strike
 
 At 60th level, your attacks are masterfully accurate and strike your enemies' weak points effectively. Further increase your critical range by 3. Whenever you perform a critical attack, decrease your Action Time by 20.
+## Exalted Martial Arts
+
+At 70th level, you gain access to a final set of martial arts. You can change/remove your existing martial arts when you learn new martial arts here.
+
+| Martial Art        | Description                                                                               | Martial Arts Points Required |
+| ------------------ | ----------------------------------------------------------------------------------------- | :--------------------------: |
+| Inspiring Presence | Friendly creatures within 15 ft. of you gain a +5 bonus to all saving throws.             |              2               |
+|                    |                                                                                           |              2               |
+| Tough Heart        | If you are bloodied or worse at the start of your turn, immediately heal 2d10 hit points. |              4               |
+
 ## Stellar Conditioning
 
 At 90th level, your body is conditioned to an insurmountable level. Apply the following effects:
