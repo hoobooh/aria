@@ -1,4 +1,4 @@
-Unreachable from just a few steps away. Desperados engage in high intensity ranged frontlining, constantly treading the line between risk-chasing and sheer insanity. With their blinding arrows and bullets, Desperados are frequently some of the most aggressive fighters on the battlefield.
+Those who laugh in the face of imminent danger. Desperados engage in high intensity ranged frontlining, constantly treading the line between risk-chasing and sheer insanity. With their blinding arrows and bullets, Desperados are frequently some of the most aggressive fighters on the battlefield.
 
 | Level | Features              | Martial Art Points |
 | ----- | --------------------- | :----------------: |

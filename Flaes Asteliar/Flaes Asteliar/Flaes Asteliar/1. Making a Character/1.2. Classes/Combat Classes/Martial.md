@@ -67,7 +67,7 @@ At 5th level, your martial arts have started to develop more potently. Choose a 
 | Blitz Blader      |      Melee       |
 | Desperado         |      Ranged      |
 | Element Channeler | Melee or Ranged  |
-| Guardian          |      Melee       |
+| Guardian          | Melee or Ranged  |
 | Ki Spirit         |      Melee       |
 | Thousand Bearer   |       All        |
 ## Martial Surge
