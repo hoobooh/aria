@@ -740,12 +740,15 @@ class InitTracker(commands.Cog):
         @option(pass_group=True)
         async def p(combatant):
             if combatant is combat.current_combatant:
-                return "\u274c You cannot change a combatant's initiative on their own turn."
+                return "\u274c You cannot change a combatant's Action Time on their own turn."
             try:
                 new_init, old_init = mod_or_set("p", combatant.init)
-                combatant.init = new_init
-                combat.sort_combatants()
-                return f"\u2705 {combatant.name}'s initiative set to {combatant.init} (was {old_init})."
+                combatant.init = max(0, new_init)
+                if combat.current_combatant:
+                    combat.sort_combatants_exclude_first()
+                else:
+                    combat.sort_combatants()
+                return f"\u2705 {combatant.name}'s Action Time set to {combatant.init} (was {old_init})."
             except InvalidArgument as e:
                 return f"\u274c {str(e)}"
 
