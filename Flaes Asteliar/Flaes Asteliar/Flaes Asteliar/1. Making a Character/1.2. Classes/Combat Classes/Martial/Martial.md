@@ -1,4 +1,4 @@
-Martials are those who pursue the path of physical arts. They're experts at using weapons and armor to their advantage. Energy circulates through them, manifesting in all sorts of frightening ways.
+Martials pursue the path of physical arts. They're experts at using weapons and armor to their advantage. Energy circulates through them, manifesting in all sorts of frightening ways.
 
 | Level | Proficiency Bonus | Features                         | Martial Surge Charges |
 | :---: | :---------------: | :------------------------------- | :-------------------: |
@@ -6,7 +6,7 @@ Martials are those who pursue the path of physical arts. They're experts at usin
 |   5   |        +1         | Fighting Doctrine, Martial Surge |           1           |
 |  10   |        +1         | Superior Health, Martial Arts    |           1           |
 |  15   |        +1         | Ability Score Improvement        |           2           |
-|  20   |        +2         | Overwhelming Attack              |           2           |
+|  20   |        +1         | Overwhelming Attack              |           2           |
 |  25   |        +2         | Improved Block                   |           2           |
 |  30   |        +2         | Forceful Purge                   |           3           |
 |  35   |        +2         | Ability Score Improvement        |           3           |
@@ -15,14 +15,14 @@ Martials are those who pursue the path of physical arts. They're experts at usin
 |  50   |        +3         | Improved Defensive Stance        |           4           |
 |  55   |        +3         | Ability Score Improvement        |           4           |
 |  60   |        +3         | Gatekeeper                       |           4           |
-|  65   |        +3         | Breath of Fresh Air              |           4           |
-|  70   |        +3         | Exalted Martial Arts             |           4           |
+|  65   |        +4         | Breath of Fresh Air              |           4           |
+|  70   |        +4         | Exalted Martial Arts             |           4           |
 |  75   |        +4         | Ability Score Improvement        |           5           |
 |  80   |        +4         | Last Stand                       |           5           |
-|  85   |        +4         | Unparalleled Health              |           5           |
-|  90   |        +4         | Weapon Grandmaster               |           5           |
-|  95   |        +4         | Ability Score Improvement        |           5           |
-|  100  |        +4         | **Exceed Arts**                  |           6           |
+|  85   |        +5         | Unparalleled Health              |           5           |
+|  90   |        +5         | Weapon Grandmaster               |           5           |
+|  95   |        +5         | Ability Score Improvement        |           5           |
+|  100  |        +5         | **Exceed Art**                   |           6           |
 
 
 # Class Features
@@ -90,7 +90,7 @@ At 15th level , and again at 35th, 55th, 75th, and 95th level, you can increase 
 At 20th level, your movements have become strong enough to overwhelm an enemy. Once per turn, on your turn when you take an attack action, you can attack one more time that turn.
 ## Improved Block
 
-At 25th level, your ability to block attacks has improved. When you take a block reaction, you can further reduce your incoming damage by either your STR or your DEX modifier.
+At 25th level, your ability to block attacks has improved. When you take a block reaction, you can further reduce your incoming damage by either your STR or your DEX modifier. Your block reactions only increase your Action Time by 15.
 
 ## Forceful Purge
 
@@ -124,9 +124,8 @@ At 80th level, your body can break through the grips of death. Once per long res
 
 At 85th level, your body has attained truly unparalleled resilience. You gain the following effects:
 - You are immune to common diseases and poisons.
-- You auto-succeed all death saving throws.
+- Increase the amount of death saving throw failures that you can have to 5.
 - You are resistant to any effects that would speed up your aging.
-- You have advantage on all CON saves.
 ## Weapon Grandmaster
 
 At 90th level, you have truly become one with your weapon. When you are wielding a weapon that you are adept with, gain the following effects:
@@ -134,6 +133,6 @@ At 90th level, you have truly become one with your weapon. When you are wielding
 - Reduce that weapon's Action Delay by an additional 20%, rounded down.
 - You auto-succeed any checks against getting that weapon disarmed.
 - You can make an additional attack using that weapon by consuming your bonus action.
-## **Exceed Arts**
+## **Exceed Art**
 
 At 100th level, you have broken past the limits of mortality. Grasping onto the straws of what lies beyond, you attain a peerless martial art called an **Exceed Art**. Your **Exceed Art** is decided by your fighting doctrine.

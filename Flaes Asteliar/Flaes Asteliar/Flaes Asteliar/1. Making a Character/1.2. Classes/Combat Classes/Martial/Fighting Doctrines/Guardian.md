@@ -27,14 +27,14 @@ At 5th level, your body has undergone great conditioning to become stronger. App
 
 At 10th level, you gain access to unique Guardian martial arts. Choose martial arts up to the amount of points you have. You can change your martial arts when you take an Ability Score Improvement.
 
-| Martial Art       | Description                                                                                                                                                                                        | Martial Arts Points Required |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------: |
-| Cleave            | As an attack action, you can increase your Action Time by 45 then apply the same melee attack on all creatures that are in range. When you do, you only incur the Action Delay of a single attack. |              1               |
-| Disarming Strike  | As an attack action, you can increase your Action Time by 35 then perform an attack on a target. If that target is carrying a weapon, immediately attempt to disarm them.                          |              1               |
-| Interception      |                                                                                                                                                                                                    |              1               |
-| Maiming Shot      |                                                                                                                                                                                                    |              1               |
-| Riposte           | When you take a block reaction and reduce your incoming damage to 0, you can immediately perform a reactive melee attack on your attacker.                                                         |              1               |
-| Staggering Strike | As an attack action, you can increase your Action Time by 35 then perform an attack on a target. If your attack inflicts physical damage, the next attack on that target gains advantage.          |              1               |
+| Martial Art       | Description                                                                                                                                                                                                                                    | Martial Arts Points Required |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------: |
+| Cleave            | As an attack action, you can increase your Action Time by 45 then apply the same melee attack on all creatures that are in range. When you do, you only incur the Action Delay of a single attack.                                             |              1               |
+| Disarming Strike  | As an attack action, you can increase your Action Time by 35 then perform an attack on a target. If that target is carrying a weapon, immediately attempt to disarm them.                                                                      |              1               |
+| Interception      | When a creature within melee range would be attacked or a projectile from an attack would enter your melee range, you can attempt to reduce the damage of that attack/projectile by your blocking power, then increase your Action Time by 40. |              1               |
+|                   |                                                                                                                                                                                                                                                |              1               |
+| Riposte           | When you take a block reaction and reduce your incoming damage to 0, you can immediately perform a reactive melee attack on your attacker.                                                                                                     |              1               |
+| Staggering Strike | As an attack action, you can increase your Action Time by 35 then perform an attack on a target. If your attack inflicts physical damage, the next attack on that target gains advantage.                                                      |              1               |
 
 ## Deft Strike
 
@@ -47,8 +47,8 @@ At 40th level, you gain access to an additional set of martial arts. You can cha
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------------------: |
 | Punishment     | When a creature within melee range of you performs an attack on a creature other than yourself, you can immediately perform a reactive attack on them. |              2               |
 | Pushing Strike | When you successfully inflict damage on a target, you can increase your Action Time by 10 then attempt to push that target backwards 15 ft.            |              1               |
-| Greater Parry  |                                                                                                                                                        |              2               |
-| Charge         |                                                                                                                                                        |              1               |
+| Greater Parry  | When you perform a block reaction, you can add your level / 5 (rounded down) to your blocking power.                                                   |              2               |
+| Charge         | As an action, you can move to any location within your movement speed then immediately perform an attack. If you do, increase your Action Time by 35.  |              1               |
 
 ## Masterful Strike
 
@@ -73,7 +73,6 @@ At 90th level, your body is conditioned to an insurmountable level. Apply the fo
 - Immediately undergo an Ability Score Improvement.
 - Gain advantage on one more saving throw type of your choice.
 - Gain 1 feat.
-- You are immune to common diseases and curses
 - Gain resistance to 2 damage types of your choice.
 ## **Damocles**
 

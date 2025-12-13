@@ -1388,7 +1388,7 @@ class InitTracker(commands.Cog):
 
     @init.command()
     async def block(self, ctx, name: str = None, at: int = None):
-        await self.do_generic_action(ctx, name, at, 15, " blocks an attack!", "Reaction",
+        await self.do_generic_action(ctx, name, at, 40, " blocks an attack!", "Reaction",
                                      "If you are wielding a melee weapon or a shield, "
                                      "you can attempt to block an attack as a reaction. "
                                      "If you do, reduce your incoming damage roll by your PB.")
