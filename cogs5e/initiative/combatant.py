@@ -490,7 +490,7 @@ class Combatant(BaseCombatant, StatBlock):
     def _get_effects_and_notes(self) -> str:
         out = []
         if (self._ac is not None or self.ac) and not self.is_private:
-            out.append(f"AC {self.ac}")
+            out.append(f"AC {self.ac}, Deflect AC {self.deflect_ac}")
         for e in self.get_effects():
             out.append(e.get_short_str())
         if self.notes:
