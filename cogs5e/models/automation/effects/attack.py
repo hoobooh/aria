@@ -210,13 +210,12 @@ class Attack(Effect):
                 autoctx.queue(f"**To Hit**: {formatted_d20}... = `{to_hit_roll.total}`")
                 autoctx.add_pm(str(autoctx.ctx.author.id), f"{to_hit_message} {to_hit_roll.result}")
 
-            if not did_hit:
-                children = None
-                if target_has_ac and target_has_deflect_ac:
-                    if ac <= to_hit_roll.total < deflect_ac:
-                        children = self.on_deflect(autoctx)
-                else:
-                    children = self.on_miss(autoctx)
+            if not did_hit and (not target_has_ac or not target_has_deflect_ac):
+                children = self.on_miss(autoctx)
+            elif not did_hit and ac <= to_hit_roll.total < deflect_ac:
+                children = self.on_deflect(autoctx)
+            elif not did_hit:
+                children = self.on_miss(autoctx)
             elif did_crit:
                 children = self.on_crit(autoctx)
             else:
