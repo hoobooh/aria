@@ -281,6 +281,14 @@ class AutomationTarget:
             return self.combatant.base_ac
         return self.target.ac
 
+    @property
+    def deflect_ac(self):
+        if self.is_simple:
+            return None
+        if not self.autoctx.allow_target_ieffects and self.combatant is not None:
+            return self.combatant.base_ac
+        return self.target.deflect_ac
+
     def get_resists(self):
         if not self.autoctx.allow_target_ieffects and self.combatant is not None:
             return self.combatant.base_resistances

@@ -386,6 +386,7 @@ def _monster_factory_bestiary_builder(data, bestiary_name):
             name_duplications[atk.name] = 1
 
     attributes = Attributes([])
+    deflect_ac = data["ac"]
 
     for t in traits:
         if "(ATTRIBUTE)" in t.desc:
@@ -402,6 +403,9 @@ def _monster_factory_bestiary_builder(data, bestiary_name):
             attributes.attributes.append(
                 Attribute(name, category, power, dice_factor, dice_advantage, damage_types, damage_aversions,
                           damage_incompats))
+        if "Deflect AC: " in t.desc:
+            deflect_ac = int(t.desc.replace("Deflect AC: ", ""))
+
     spellcasting = parse_bestiary_builder_spellcasting(data["spellcasting"])
     return Monster(
         name=data["name"],
@@ -409,6 +413,7 @@ def _monster_factory_bestiary_builder(data, bestiary_name):
         race=data["race"],
         alignment=data["alignment"],
         ac=data["ac"],
+        deflect_ac=deflect_ac,
         armortype=data["armortype"],
         hp=data["hp"],
         hitdice=data["hitdice"],

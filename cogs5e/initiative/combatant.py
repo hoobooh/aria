@@ -56,6 +56,7 @@ class Combatant(BaseCombatant, StatBlock):
             attributes: Attributes = None,
             spellbook: Spellbook = None,
             ac: int = None,
+            deflect_ac: int = None,
             max_hp: int = None,
             hp: int = None,
             temp_hp: int = 0,
@@ -73,6 +74,7 @@ class Combatant(BaseCombatant, StatBlock):
             attributes=attributes,
             spellbook=spellbook,
             ac=ac,
+            deflect_ac=deflect_ac,
             max_hp=max_hp,
             hp=hp,
             temp_hp=temp_hp,
@@ -192,6 +194,7 @@ class Combatant(BaseCombatant, StatBlock):
 
     @ac.setter
     def ac(self, new_ac):
+        self._deflect_ac = self._deflect_ac + (new_ac - self._ac)
         self._ac = new_ac
 
     @property

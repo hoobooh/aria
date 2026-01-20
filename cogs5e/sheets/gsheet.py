@@ -392,6 +392,7 @@ class GoogleSheet(SheetLoaderABC):
         attributes = self.get_attributes()
 
         ac = self.get_ac()
+        deflect_ac = self.get_deflect_ac()
         max_hp = self.get_hp()
         hp = max_hp
         temp_hp = 0
@@ -424,6 +425,7 @@ class GoogleSheet(SheetLoaderABC):
             attributes,
             saves,
             ac,
+            deflect_ac,
             max_hp,
             hp,
             temp_hp,
@@ -686,6 +688,15 @@ class GoogleSheet(SheetLoaderABC):
             return int(self.character_data.value("R12"))
         except (TypeError, ValueError):
             raise MissingAttribute("AC", "R12", self.character_data.worksheet.title)
+
+    def get_deflect_ac(self):
+        try:
+            def_ac = self.character_data.value("R11").replace("Deflect AC: ", "")
+            if def_ac == '-':
+                return self.get_ac()
+            return int(def_ac)
+        except (TypeError, ValueError):
+            raise MissingAttribute("Deflect AC", "R11", self.character_data.worksheet.title)
 
     def get_hp(self):
         try:

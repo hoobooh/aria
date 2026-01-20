@@ -52,6 +52,7 @@ class Attack(Effect):
         reroll = args.last("reroll", 0, int)
         criton = args.last("criton", 39, int)
         ac = args.last("ac", None, int)
+        deflect_ac = args.last("target_ac", None, int)
         force_roll = args.last("attackroll", None, int, ephem=True)
         min_attack_roll = args.last("attackmin", 0, int)
 
@@ -167,9 +168,14 @@ class Attack(Effect):
 
             # -ac #
             target_ac = autoctx.target.ac
+            target_deflect_ac = autoctx.target.deflect_ac
             target_has_ac = target_ac is not None
+            target_has_deflect_ac = target_deflect_ac is not None
+
             if target_has_ac:
                 ac = ac or target_ac
+            if target_has_deflect_ac:
+                deflect_ac = deflect_ac or target_deflect_ac
 
             # assign hit values
 
@@ -195,6 +201,9 @@ class Attack(Effect):
             elif target_has_ac:  # hidden
                 if not did_hit:
                     hit_type = "MISS"
+                    if deflect_ac:
+                        if ac <= to_hit_roll.total < deflect_ac:
+                            hit_type = "DEFLECTED"
                 elif did_crit:
                     hit_type = "CRIT"
                 else:

@@ -40,6 +40,7 @@ class StatBlock:
         attributes: Attributes = None,
         spellbook: Spellbook = None,
         ac: int = None,
+        deflect_ac: int = None,
         max_hp: int = None,
         hp: int = None,
         temp_hp: int = 0,
@@ -85,6 +86,7 @@ class StatBlock:
         # ===== dynamic =====
         # hp/ac
         self._ac = ac
+        self._deflect_ac = deflect_ac
         self._max_hp = max_hp
         self._hp = hp
         self._temp_hp = temp_hp
@@ -127,6 +129,10 @@ class StatBlock:
     @property
     def ac(self):
         return self._ac
+
+    @property
+    def deflect_ac(self):
+        return self._deflect_ac
 
     @property
     def max_hp(self):
@@ -239,6 +245,7 @@ class StatBlock:
             "attributes": self._attributes.to_dict(),
             "saves": self._saves.to_dict(),
             "ac": self._ac,
+            "deflect_ac": self._deflect_ac,
             "max_hp": self._max_hp,
             "hp": self._hp,
             "temp_hp": self._temp_hp,
