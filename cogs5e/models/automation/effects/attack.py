@@ -83,14 +83,14 @@ class Attack(Effect):
         effect_advs = autoctx.caster_active_effects(mapper=lambda effect: effect.effects.attack_advantage, default=[])
         adv = reconcile_adv(
             adv=args.last("adv", type_=bool, ephem=True)
-            or any(eadv == AdvantageType.ADV for eadv in effect_advs)
-            or explicit_adv == AdvantageType.ADV,
+                or any(eadv == AdvantageType.ADV for eadv in effect_advs)
+                or explicit_adv == AdvantageType.ADV,
             dis=args.last("dis", type_=bool, ephem=True)
-            or any(eadv == AdvantageType.DIS for eadv in effect_advs)
-            or explicit_adv == AdvantageType.DIS,
+                or any(eadv == AdvantageType.DIS for eadv in effect_advs)
+                or explicit_adv == AdvantageType.DIS,
             eadv=args.last("eadv", type_=bool, ephem=True)
-            or any(eadv == AdvantageType.ELVEN for eadv in effect_advs)
-            or explicit_adv == AdvantageType.ELVEN,
+                 or any(eadv == AdvantageType.ELVEN for eadv in effect_advs)
+                 or explicit_adv == AdvantageType.ELVEN,
         )
 
         # ==== target options ====
@@ -176,6 +176,8 @@ class Attack(Effect):
                 ac = ac or target_ac
             if target_has_deflect_ac:
                 deflect_ac = deflect_ac or target_deflect_ac
+                if args.last("blockbreacher", default=False, type_=bool, ephem=True):
+                    deflect_ac = ac
 
             # assign hit values
             if ac and to_hit_roll.total < deflect_ac:  # miss, crits no longer auto-hit
