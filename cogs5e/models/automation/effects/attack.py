@@ -177,7 +177,9 @@ class Attack(Effect):
             if target_has_deflect_ac:
                 deflect_ac = deflect_ac or target_deflect_ac
                 if args.last("blockbreacher", default=False, type_=bool, ephem=True):
-                    deflect_ac = ac
+                    deflect_ac -= 5
+                    if deflect_ac<ac:
+                        deflect_ac=ac
 
             # assign hit values
             if ac and to_hit_roll.total < deflect_ac:  # miss, crits no longer auto-hit
