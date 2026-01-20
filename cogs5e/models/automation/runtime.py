@@ -282,7 +282,7 @@ class AutomationTarget:
         return self.target.ac
 
     @property
-    def deflect_ac(self):
+    def deflect_ac(self) -> Optional[int]:
         if self.is_simple:
             return None
         if not self.autoctx.allow_target_ieffects and self.combatant is not None:

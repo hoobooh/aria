@@ -207,7 +207,7 @@ class Damage(Effect):
                 current_val = current_val.replace(")", " ) ")
                 current_val = current_val.replace("+", " + ")
 
-                nodes = current_val.split(" ")
+                nodes = current_val.split()
                 new_val = ""
                 prev_node = None
                 prevprev_node = None
@@ -228,8 +228,8 @@ class Damage(Effect):
                 for n in roll_cleaned.split(" "):
                     if n:
                         if prevprev_node:
-                            if 'd' in prevprev_node:
-                                roll_actual += int(n)
+                            if 'd' in prevprev_node or ',' in prev_node:
+                                roll_actual += int(n.replace(",",""))
                         prevprev_node = prev_node
                         prev_node = n
 

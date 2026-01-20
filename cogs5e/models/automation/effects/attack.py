@@ -52,7 +52,7 @@ class Attack(Effect):
         reroll = args.last("reroll", 0, int)
         criton = args.last("criton", 39, int)
         ac = args.last("ac", None, int)
-        deflect_ac = args.last("target_ac", None, int)
+        deflect_ac = args.last("deflect_ac", None, int)
         force_roll = args.last("attackroll", None, int, ephem=True)
         min_attack_roll = args.last("attackmin", 0, int)
 
@@ -166,7 +166,7 @@ class Attack(Effect):
             # leftmost roll value - -criton
             d20_value = d20.utils.leftmost(to_hit_roll.expr).total
 
-            # -ac #
+            # -ac and -deflect_ac#
             target_ac = autoctx.target.ac
             target_deflect_ac = autoctx.target.deflect_ac
             target_has_ac = target_ac is not None
@@ -178,8 +178,7 @@ class Attack(Effect):
                 deflect_ac = deflect_ac or target_deflect_ac
 
             # assign hit values
-
-            if ac and to_hit_roll.total < ac:  # miss, crits no longer auto-hit
+            if ac and to_hit_roll.total < deflect_ac:  # miss, crits no longer auto-hit
                 did_hit = False
 
             if d20_value >= criton or to_hit_roll.crit == d20.CritType.CRIT:  # natural crit
@@ -201,9 +200,6 @@ class Attack(Effect):
             elif target_has_ac:  # hidden
                 if not did_hit:
                     hit_type = "MISS"
-                    if deflect_ac:
-                        if ac <= to_hit_roll.total < deflect_ac:
-                            hit_type = "DEFLECTED"
                 elif did_crit:
                     hit_type = "CRIT"
                 else:
@@ -215,7 +211,12 @@ class Attack(Effect):
                 autoctx.add_pm(str(autoctx.ctx.author.id), f"{to_hit_message} {to_hit_roll.result}")
 
             if not did_hit:
-                children = self.on_miss(autoctx)
+                children = None
+                if target_has_ac and target_has_deflect_ac:
+                    if ac <= to_hit_roll.total < deflect_ac:
+                        children = self.on_deflect(autoctx)
+                else:
+                    children = self.on_miss(autoctx)
             elif did_crit:
                 children = self.on_crit(autoctx)
             else:
@@ -260,6 +261,10 @@ class Attack(Effect):
 
     def on_miss(self, autoctx):
         autoctx.queue("**Miss!**")
+        return self.run_children(self.miss, autoctx)
+
+    def on_deflect(self, autoctx):
+        autoctx.queue("**Deflected!**")
         return self.run_children(self.miss, autoctx)
 
     def build_str(self, caster, evaluator):

@@ -553,6 +553,7 @@ class MonsterCombatant(Combatant):
             attributes: Attributes = None,
             spellbook: Spellbook = None,
             ac: int = None,
+            deflect_ac: int = None,
             max_hp: int = None,
             hp: int = None,
             temp_hp: int = 0,
@@ -583,6 +584,7 @@ class MonsterCombatant(Combatant):
             attributes,
             spellbook,
             ac,
+            deflect_ac,
             max_hp,
             hp,
             temp_hp,
@@ -597,6 +599,7 @@ class MonsterCombatant(Combatant):
         creature_type = monster.creature_type
         hp = int(monster.hp) if not hp else int(hp)
         ac = int(monster.ac) if not ac else int(ac)
+        deflect_ac = int(monster.deflect_ac) if not ac else int(ac)
         id = create_combatant_id()
 
         # copy spellbook
@@ -626,6 +629,7 @@ class MonsterCombatant(Combatant):
             attributes=attributes,
             spellbook=spellbook,
             ac=ac,
+            deflect_ac=deflect_ac,
             max_hp=hp,
             # monster specific
             monster_name=monster_name,
@@ -678,6 +682,7 @@ class PlayerCombatant(Combatant):
             resistances: Resistances = None,
             attributes: Attributes = None,
             ac: int = None,
+            deflect_ac: int = None,
             max_hp: int = None,
             # character specific
             character_id: str = None,
@@ -702,6 +707,7 @@ class PlayerCombatant(Combatant):
             resistances=resistances,
             attributes=None,
             ac=ac,
+            deflect_ac=deflect_ac,
             max_hp=max_hp,
         )
         super().__init__(
@@ -720,6 +726,7 @@ class PlayerCombatant(Combatant):
             resistances=resistances,
             attributes=attributes,
             ac=ac,
+            deflect_ac=deflect_ac,
             max_hp=max_hp,
         )
         self.character_id = character_id
@@ -741,6 +748,7 @@ class PlayerCombatant(Combatant):
             # statblock copies
             resistances=character.resistances.copy(),
             attributes=character.attributes.copy(),
+            deflect_ac=character.deflect_ac,
             # character specific
             character_id=character.upstream,
             character_owner=character.owner,
@@ -833,6 +841,7 @@ class PlayerCombatant(Combatant):
         """
         :param int|None new_ac: The new AC
         """
+        self._deflect_ac = self._deflect_ac + (new_ac - self._ac)
         self._ac = new_ac
 
     @property
