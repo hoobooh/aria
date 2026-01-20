@@ -660,6 +660,7 @@ class InitTracker(commands.Cog):
         `-name <name>` - Changes the combatants' name.
         `-controller <controller>` - Pings a different person on turn.
         `-ac <ac>` - Modifies combatants' AC. Adds if starts with +/- or sets otherwise.
+        `-deflect_ac <ac>` - Modifies combatants' deflect AC. Adds if starts with +/- or sets otherwise.
         `-resist <damage type>` - Gives the combatant resistance to the given damage type.
         `-immune <damage type>` - Gives the combatant immunity to the given damage type.
         `-vuln <damage type>` - Gives the combatant vulnerability to the given damage type.
@@ -734,6 +735,22 @@ class InitTracker(commands.Cog):
                 new_ac, old_ac = mod_or_set("ac", combatant.ac)
                 combatant.ac = new_ac
                 return f"\u2705 {combatant.name}'s AC set to {combatant.ac} (was {old_ac})."
+            except InvalidArgument as e:
+                return f"\u274c {str(e)}"
+
+        @option()
+        async def deflect_ac(combatant):
+            try:
+                new_ac, old_ac = mod_or_set("deflect_ac", combatant.deflect_ac)
+                hit_floor = False
+                if new_ac<combatant.ac:
+                    new_ac=combatant.ac
+                    hit_floor=True
+                combatant.deflect_ac = new_ac
+                update_string = f"\u2705 {combatant.name}'s deflect AC set to {combatant.deflect_ac} (was {old_ac})."
+                if hit_floor:
+                    update_string = f"\u2705 {combatant.name}'s deflect AC set to {combatant.deflect_ac} (was {old_ac}). Excess penalty was discarded due to the AC floor."
+                return update_string
             except InvalidArgument as e:
                 return f"\u274c {str(e)}"
 

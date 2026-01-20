@@ -7,7 +7,7 @@ Martials pursue the path of physical arts. They're experts at using weapons and 
 |  10   |        +1         | Superior Health, Martial Arts    |           1           |
 |  15   |        +1         | Ability Score Improvement        |           2           |
 |  20   |        +1         | Overwhelming Attack              |           2           |
-|  25   |        +2         | Improved Block                   |           2           |
+|  25   |        +2         | Improved Deflect                 |           2           |
 |  30   |        +2         | Forceful Purge                   |           3           |
 |  35   |        +2         | Ability Score Improvement        |           3           |
 |  40   |        +2         | Greater Martial Arts             |           3           |
@@ -88,10 +88,9 @@ At 15th level , and again at 35th, 55th, 75th, and 95th level, you can increase 
 ## Overwhelming Attack
 
 At 20th level, your movements have become strong enough to overwhelm an enemy. Once per turn, on your turn when you take an attack action, you can attack one more time that turn.
-## Improved Block
+## Improved Deflect
 
-At 25th level, your ability to block attacks has improved. When you take a block reaction, you can further reduce your incoming damage by either your STR or your DEX modifier. Your block reactions only increase your Action Time by 15.
-
+At 25th level, your ability to deflect attacks has improved. Your deflect AC gains a bonus equal to your DEX bonus plus a mental bonus (INT, WIS, or CHA) of your choice.
 ## Forceful Purge
 
 At 30th level, you can expend an action to forcefully remove a common negative condition of your choice from you. This cannot be used to remove curses.
