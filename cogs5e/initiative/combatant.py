@@ -92,7 +92,6 @@ class Combatant(BaseCombatant, StatBlock):
         self.notes = notes
         self._effects = effects
         self._group_id = group_id
-
         self._cache = {}
 
     @classmethod
@@ -192,6 +191,18 @@ class Combatant(BaseCombatant, StatBlock):
         bonus_effect_ac = self.active_effects(mapper=lambda effect: effect.effects.ac_bonus, reducer=sum, default=0)
         return (base_effect_ac or base_ac) + bonus_effect_ac
 
+    @property
+    def deflect_ac(self) -> int:
+        def_bonus = max(self._deflect_ac - self.ac, 0)
+        base_ac = self._deflect_ac or 0
+        base_effect_ac = self.active_effects(mapper=lambda effect: effect.effects.ac_value, reducer=max,
+                                                         default=0)
+        if base_effect_ac:
+            base_effect_ac+=def_bonus
+        bonus_effect_ac = self.active_effects(mapper=lambda effect: effect.effects.deflect_bonus, reducer=sum,
+                                              default=0)
+        return (base_effect_ac or base_ac) + bonus_effect_ac
+
     @ac.setter
     def ac(self, new_ac):
         self._deflect_ac = self._deflect_ac + (new_ac - self._ac)
@@ -200,7 +211,7 @@ class Combatant(BaseCombatant, StatBlock):
     @property
     def base_ac(self) -> Optional[int]:
         """The base AC, unaffected by any passive effects."""
-        return self._ac
+        return self._deflect_ac
 
     @property
     def resistances(self) -> Resistances:
@@ -731,7 +742,6 @@ class PlayerCombatant(Combatant):
         )
         self.character_id = character_id
         self.character_owner = character_owner
-
         self._character = None  # cache
 
     @classmethod

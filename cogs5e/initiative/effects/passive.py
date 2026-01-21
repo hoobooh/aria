@@ -186,6 +186,7 @@ class InitPassiveEffect:
     )
     ac_value: int = _PassiveEffect(stringifier=_abstract_str_attr("AC"))
     ac_bonus: int = _PassiveEffect(stringifier=_abstract_str_attr("AC Bonus"))
+    deflect_bonus: int = _PassiveEffect(stringifier=_abstract_str_attr("Deflect Bonus"))
     max_hp_value: int = _PassiveEffect(stringifier=_abstract_str_attr("Max HP"))
     max_hp_bonus: int = _PassiveEffect(stringifier=_abstract_str_attr("Max HP Bonus"))
     save_bonus: str = _PassiveEffect(stringifier=_str_save_bonus)
@@ -252,6 +253,7 @@ class InitPassiveEffect:
     @classmethod
     def from_args(cls, args: ParsedArguments):
         ac_value, ac_bonus = resolve_value_or_bonus(args.get("ac"))
+        deflect_bonus = args.get("deflect_bonus")
         max_hp_value, max_hp_bonus = resolve_value_or_bonus(args.get("maxhp"))
         return cls(
             attack_advantage=AdvantageType(args.adv(eadv=True)),
@@ -265,6 +267,7 @@ class InitPassiveEffect:
             ignored_resistances=[Resistance.from_str(v) for v in args.get("neutral")],
             ac_value=ac_value,
             ac_bonus=ac_bonus,
+            deflect_bonus=deflect_bonus,
             max_hp_value=max_hp_value,
             max_hp_bonus=max_hp_bonus,
             save_bonus=args.join("sb", "+"),

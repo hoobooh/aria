@@ -6,6 +6,7 @@ from contextlib import suppress
 import d20
 import disnake
 from d20 import roll
+from disnake import ButtonStyle
 from disnake.ext import commands
 from disnake.ext.commands import NoPrivateMessage
 
@@ -743,9 +744,9 @@ class InitTracker(commands.Cog):
             try:
                 new_ac, old_ac = mod_or_set("deflect_ac", combatant.deflect_ac)
                 hit_floor = False
-                if new_ac<combatant.ac:
-                    new_ac=combatant.ac
-                    hit_floor=True
+                if new_ac < combatant.ac:
+                    new_ac = combatant.ac
+                    hit_floor = True
                 combatant.deflect_ac = new_ac
                 update_string = f"\u2705 {combatant.name}'s deflect/total AC set to {combatant.deflect_ac} (was {old_ac})."
                 if hit_floor:
@@ -1122,6 +1123,70 @@ class InitTracker(commands.Cog):
                     out += f"{to_remove.name} not removed from {combatant.name}.\n"
         await ctx.send(out)
         await combat.final(ctx)
+
+    @init.group(
+        aliases=["try"],
+        invoke_without_command=True,
+        help=f"""
+        Attempts an attack against another combatant.
+        __**Valid Arguments**__
+        {VALID_AUTOMATION_ARGS}
+        custom - Modifier to indicate that the (arbitrarily-named) attack is custom, with custom to hit and damage values. Use `-b` and `-d` like this: `!init attack "pizza" custom -b 3 -d 1`
+        """,
+    )
+    async def attempt(self, ctx, atk_name=None, *, args=""):
+        combat = await ctx.get_combat()
+        combatant = combat.current_combatant
+        if combatant is None:
+            return await ctx.send(f"You must start combat with `{ctx.prefix}init next` first.")
+        if atk_name is None:
+            return await self.attack_list(ctx, combatant)
+        targets = await targetutils.definitely_combat(ctx, combat, argparse(args), allow_groups=True)
+        attempt_str = f"{combatant.name} attempts to attack with {atk_name}!"
+        if targets:
+            if len(targets) == 1:
+                attempt_str = f"{combatant.name} attempts to attack {targets[0].name} with {atk_name}!"
+            else:
+                target_list = ""
+                for n in range(0, len(targets)):
+                    if n == len(targets) - 1:
+                        target_list += "and " + targets[n].name
+                    else:
+                        target_list += targets[n].name + ", "
+                attempt_str = f"{combatant.name} attempts to attack {target_list} with {atk_name}!"
+        self_shell = self
+        class Preserve:
+            preserve_contents = False
+
+        preserve = Preserve()
+
+        class View(disnake.ui.View):
+            @disnake.ui.button(label="Roll Attack", style=ButtonStyle.primary)
+            async def roll_attack(self, button, interaction):
+                await self_shell._attack(ctx, combatant, atk_name, args)
+                if not preserve.preserve_contents:
+                    await interaction.response.edit_message(delete_after=0)
+                else:
+                    self.stop()
+                await interaction.response.defer()
+
+            @disnake.ui.button(label="React", style=ButtonStyle.secondary)
+            async def react(self, button, interaction):
+                await ctx.send(f"{interaction.author.name} has a reaction!")
+                preserve.preserve_contents = True
+                await interaction.response.defer()
+                return
+
+            @disnake.ui.button(label="Cancel", style=ButtonStyle.danger)
+            async def cancel(self, button, interaction):
+                if not preserve.preserve_contents:
+                    await interaction.response.edit_message(delete_after=0)
+                else:
+                    await ctx.send(f"{combatant.name}\'s attack was cancelled!")
+                await interaction.response.defer()
+                return
+
+        return await ctx.send(attempt_str, view=View())
 
     @init.group(
         aliases=["a", "action"],
