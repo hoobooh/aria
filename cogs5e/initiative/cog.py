@@ -1188,6 +1188,12 @@ class InitTracker(commands.Cog):
 
         if atk_name[0] in ['a','e','u','i','o']:
             aoran = "an "
+
+        if isinstance(combatant, PlayerCombatant) or isinstance(combatant, MonsterCombatant):
+            attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks, actions=caster.actions)
+            if not isinstance(attack_or_action, Attack):
+                aoran = ""
+
         attempt_str = f"{combatant.name} attempts to activate/use {aoran}{atk_name}!"
         if targets:
             if len(targets) == 1:
@@ -1311,7 +1317,13 @@ class InitTracker(commands.Cog):
 
         if atk_name[0] in ['a','e','u','i','o']:
             aoran = "an "
-        attempt_str = f"{combatant.name} attempts to attack with {aoran}{atk_name}!"
+
+        if isinstance(combatant, PlayerCombatant) or isinstance(combatant, MonsterCombatant):
+            attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks, actions=caster.actions)
+            if not isinstance(attack_or_action, Attack):
+                aoran = ""
+
+        attempt_str = f"{combatant.name} attempts to activate/use {aoran}{atk_name}!"
         if targets:
             if len(targets) == 1:
                 attempt_str = f"{combatant.name} attempts to attack {targets[0].name} with {aoran}{atk_name}!"

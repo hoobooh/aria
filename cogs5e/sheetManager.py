@@ -106,7 +106,6 @@ class SheetManager(commands.Cog):
         argsparsed = argparse(args)
         char: Character = await ctx.get_character()
         caster, targets, combat = await targetutils.maybe_combat(ctx, char, argsparsed)
-        attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks, actions=char.actions)
         combatant = char
         if combatant is None:
             return await ctx.send(f"You must start combat with `{ctx.prefix}init next` first.")
@@ -159,7 +158,8 @@ class SheetManager(commands.Cog):
         if atk_name[0] in ['a', 'e', 'u', 'i', 'o']:
             aoran = "an "
 
-        if isinstance(attack_or_action, Attack):
+        attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks, actions=char.actions)
+        if not isinstance(attack_or_action, Attack):
             aoran = ""
         attempt_str = f"{combatant.name} attempts to activate/use {aoran}{atk_name}!"
         if targets:
