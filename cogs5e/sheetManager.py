@@ -15,16 +15,18 @@ import automation_common.validation
 import disnake
 import pydantic
 import yaml
+from disnake import ButtonStyle
 from disnake.ext import commands
 from disnake.ext.commands.cooldowns import BucketType
 
+from cogs5e.initiative import PlayerCombatant, CombatantGroup
 from gamedata.lookuputils import VALID_VERSIONS
 import ui
 from aliasing import helpers
 from cogs5e.models import embeds
 from cogs5e.models.character import Character
 from cogs5e.models.embeds import EmbedWithAuthor
-from cogs5e.models.errors import ExternalImportError, NoCharacter
+from cogs5e.models.errors import ExternalImportError, NoCharacter, SelectionException
 from cogs5e.models.sheet.attack import Attack, AttackList
 from cogs5e.sheets.beyond import BeyondSheetParser, DDB_URL_RE, DDB_PDF_URL_RE
 from cogs5e.sheets.dicecloud import DICECLOUD_URL_RE, DicecloudParser
@@ -60,7 +62,7 @@ class SheetManager(commands.Cog):
         return args
 
     @commands.group(
-        aliases=["a", "attack"],
+        aliases=["attack"],
         invoke_without_command=True,
         help=f"""
         Performs an action (attack or ability) for the current active character.
@@ -90,6 +92,131 @@ class SheetManager(commands.Cog):
         await try_delete(ctx.message)
         if (gamelog := self.bot.get_cog("GameLog")) and result is not None:
             await gamelog.send_automation(ctx, char, attack_or_action.name, result)
+
+    @commands.group(
+        aliases=["a"],
+        invoke_without_command=True,
+        help=f"""
+        Attempt an action (attack or ability) for the current active character.
+        __**Valid Arguments**__
+        {VALID_AUTOMATION_ARGS}
+        """,
+    )
+    async def attempt(self, ctx, atk_name=None, *, args=""):
+        argsparsed = argparse(args)
+        char: Character = await ctx.get_character()
+        caster, targets, combat = await targetutils.maybe_combat(ctx, char, argsparsed)
+        combatant = char
+        if combatant is None:
+            return await ctx.send(f"You must start combat with `{ctx.prefix}init next` first.")
+        if atk_name is None:
+            return await self.action_list(ctx, combatant)
+        targets = await targetutils.definitely_combat(ctx, combat, argsparsed, allow_groups=True)
+
+        # argument parsing
+        is_player = isinstance(combatant, PlayerCombatant)
+
+        attack = None
+        try:
+            if isinstance(combatant, CombatantGroup):
+                if "custom" in argsparsed:  # group, custom
+                    caster = combatant.get_combatants()[0]
+                    attack = Attack.new(name=atk_name, bonus_calc="0", damage_calc="0")
+                else:  # group, noncustom
+                    choices = []  # list of (name, caster, attack)
+                    for com in combatant.get_combatants():
+                        for atk in com.attacks:
+                            choices.append((f"{atk.name} ({com.name})", com, atk))
+
+                    _, caster, attack = await search_and_select(
+                        ctx, choices, atk_name, lambda choice: choice[0], message="Select your attack."
+                    )
+            else:
+                caster = combatant
+                if "custom" in argsparsed:  # single, custom
+                    attack = Attack.new(name=atk_name, bonus_calc="0", damage_calc="0")
+                elif is_player:  # single, noncustom, action?
+                    attack = await actionutils.select_action(
+                        ctx,
+                        atk_name,
+                        attacks=combatant.attacks,
+                        actions=combatant.character.actions,
+                        message="Select your action.",
+                    )
+                else:  # single, noncustom
+                    attack = await actionutils.select_action(
+                        ctx, atk_name, attacks=combatant.attacks, message="Select your attack."
+                    )
+            ctx.nlp_caster = caster
+        except SelectionException:
+            return await ctx.send("Attack not found.")
+
+        atk_name = attack.name
+
+        aoran = "a "
+
+        if atk_name[0] in ['a', 'e', 'u', 'i', 'o']:
+            aoran = "an "
+        attempt_str = f"{combatant.name} attempts to attack with {aoran}{atk_name}!"
+        if targets:
+            if len(targets) == 1:
+                attempt_str = f"{combatant.name} attempts to attack {targets[0].name} with {aoran}{atk_name}!"
+            else:
+                target_list = ""
+                for n in range(0, len(targets)):
+                    if n == len(targets) - 1:
+                        target_list += "and " + targets[n].name
+                    elif len(targets) != 2 or n != len(targets) - 2:
+                        target_list += targets[n].name + ", "
+                    else:
+                        target_list += targets[n].name + " "
+                attempt_str = f"{combatant.name} attempts to attack {target_list} with {aoran}{atk_name}!"
+        self_shell = self
+
+        class Preserve:
+            preserve_contents = False
+
+        preserve = Preserve()
+
+        hide = argsparsed.last("h", type_=bool)
+        embed = embeds.EmbedWithCharacter(char,
+                                          description="In the split second before an attack, reactions fly abound. Some defend themselves. Others lash out in retaliation. Others,"
+                                                      " still, may have something more up their sleeves...", name=False,
+                                          image=not hide)
+
+        class View(disnake.ui.View):
+            @disnake.ui.button(label="Roll Attack", style=ButtonStyle.primary)
+            async def roll_attack(self, button, interaction):
+                await self_shell.action(ctx, atk_name=atk_name, args=args)
+                if not preserve.preserve_contents:
+                    await interaction.response.edit_message(delete_after=0)
+                    await interaction.response.defer()
+                else:
+                    await interaction.response.edit_message(view=None)
+                return
+
+            @disnake.ui.button(label="React", style=ButtonStyle.secondary)
+            async def react(self, button, interaction):
+                embed.title = f"Someone has a reaction!"
+                await ctx.send(f"<@{interaction.author.id}>", embed=embed)
+                preserve.preserve_contents = True
+                await interaction.response.defer()
+                return
+
+            @disnake.ui.button(label="Cancel", style=ButtonStyle.danger)
+            async def cancel(self, button, interaction):
+                if not preserve.preserve_contents:
+                    await interaction.response.edit_message(delete_after=0)
+                    await interaction.response.defer()
+                else:
+                    embed.title = f"{combatant.name}\'s attack was cancelled!"
+                    embed.description = ""
+                    await ctx.send(embed=embed)
+                    await interaction.response.edit_message(view=None)
+                return
+
+        embed.title = attempt_str
+        return await ctx.send(view=View(), embed=embed)
 
     @action.command(name="list")
     async def action_list(self, ctx, *args):
@@ -212,9 +339,9 @@ class SheetManager(commands.Cog):
         conflicts = [a for a in character.overrides.attacks if a.name.lower() in [new.name.lower() for new in attacks]]
         if conflicts:
             if await confirm(
-                ctx,
-                f"This will overwrite {len(conflicts)} attacks with the same name "
-                f"({', '.join(c.name for c in conflicts)}). Continue? (Reply with yes/no)",
+                    ctx,
+                    f"This will overwrite {len(conflicts)} attacks with the same name "
+                    f"({', '.join(c.name for c in conflicts)}). Continue? (Reply with yes/no)",
             ):
                 for conflict in conflicts:
                     character.overrides.attacks.remove(conflict)
@@ -480,9 +607,9 @@ class SheetManager(commands.Cog):
 
         msg = ""
         if (
-            server_character is not None
-            and new_character_to_set.upstream == server_character.upstream
-            and server_character.is_active_server(ctx)
+                server_character is not None
+                and new_character_to_set.upstream == server_character.upstream
+                and server_character.is_active_server(ctx)
         ):
             message = (
                 f"'{server_character.name}' is already the server character. "
@@ -545,10 +672,10 @@ class SheetManager(commands.Cog):
 
         msg = ""
         if (
-            channel_character is not None
-            and new_character_to_set is not None
-            and new_character_to_set.upstream == channel_character.upstream
-            and channel_character.is_active_channel(ctx)
+                channel_character is not None
+                and new_character_to_set is not None
+                and new_character_to_set.upstream == channel_character.upstream
+                and channel_character.is_active_channel(ctx)
         ):
             message = (
                 f"'{channel_character.name}' is already the channel character. "
@@ -713,7 +840,7 @@ class SheetManager(commands.Cog):
         _id = url[:]
         for p in prefixes:
             if url.startswith(p):
-                _id = url[len(p) :]
+                _id = url[len(p):]
                 break
         sheet_type = old_character.sheet_type
         if sheet_type == "dicecloud":
@@ -782,7 +909,7 @@ class SheetManager(commands.Cog):
                 "message",
                 timeout=300,
                 check=lambda msg: (
-                    msg.author == user and msg.channel == ctx.channel and get_positivity(msg.content) is not None
+                        msg.author == user and msg.channel == ctx.channel and get_positivity(msg.content) is not None
                 ),
             )
         except asyncio.TimeoutError:
@@ -935,7 +1062,7 @@ class SheetManager(commands.Cog):
                 url = extract_gsheet_id_from_url(url)
             except ExternalImportError:
                 if re.match(r"https?://(?:www\.)?bestiarybuilder.com/bestiary-viewer/([0-9a-f]+)", url) or re.match(
-                    r"https?://(?:www\.)?critterdb.com(?::443|:80)?.*#/(published)?bestiary/view/([0-9a-f]+)", url
+                        r"https?://(?:www\.)?critterdb.com(?::443|:80)?.*#/(published)?bestiary/view/([0-9a-f]+)", url
                 ):
                     return await ctx.send("Bestiaries must be imported with the `!bestiary import` command instead.")
                 return await ctx.send("Sheet type did not match accepted formats.")
