@@ -1180,7 +1180,7 @@ class InitTracker(commands.Cog):
                     )
             ctx.nlp_caster = caster
         except SelectionException:
-            return await ctx.send("Attack not found.")
+            return await ctx.send("Attack/Action not found.")
 
         atk_name=attack.name
 
@@ -1188,7 +1188,7 @@ class InitTracker(commands.Cog):
 
         if atk_name[0] in ['a','e','u','i','o']:
             aoran = "an "
-        attempt_str = f"{combatant.name} attempts to attack with {aoran}{atk_name}!"
+        attempt_str = f"{combatant.name} attempts to activate/use {aoran}{atk_name}!"
         if targets:
             if len(targets) == 1:
                 attempt_str = f"{combatant.name} attempts to attack {targets[0].name} with {aoran}{atk_name}!"
@@ -1209,11 +1209,11 @@ class InitTracker(commands.Cog):
 
         preserve = Preserve()
         embed = disnake.Embed(
-            description="In the split second before an attack, reactions fly abound. Some defend themselves. Others lash out in retaliation. Others, still, may have something more up their sleeves...",
+            description="In the split second before an action, reactions fly abound. Some defend themselves. Others lash out in retaliation. Others, still, may have something more up their sleeves...",
             color=combatant.get_color())
 
         class View(disnake.ui.View):
-            @disnake.ui.button(label="Roll Attack", style=ButtonStyle.primary)
+            @disnake.ui.button(label="Roll Attack/Resolve Action", style=ButtonStyle.primary)
             async def roll_attack(self, button, interaction):
                 await self_shell._attack(ctx, combatant, atk_name, args)
                 if not preserve.preserve_contents:

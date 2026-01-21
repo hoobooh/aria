@@ -106,6 +106,7 @@ class SheetManager(commands.Cog):
         argsparsed = argparse(args)
         char: Character = await ctx.get_character()
         caster, targets, combat = await targetutils.maybe_combat(ctx, char, argsparsed)
+        attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks, actions=char.actions)
         combatant = char
         if combatant is None:
             return await ctx.send(f"You must start combat with `{ctx.prefix}init next` first.")
@@ -157,7 +158,10 @@ class SheetManager(commands.Cog):
 
         if atk_name[0] in ['a', 'e', 'u', 'i', 'o']:
             aoran = "an "
-        attempt_str = f"{combatant.name} attempts to attack with {aoran}{atk_name}!"
+
+        if isinstance(attack_or_action, Attack):
+            aoran = ""
+        attempt_str = f"{combatant.name} attempts to activate/use {aoran}{atk_name}!"
         if targets:
             if len(targets) == 1:
                 attempt_str = f"{combatant.name} attempts to attack {targets[0].name} with {aoran}{atk_name}!"
@@ -180,7 +184,7 @@ class SheetManager(commands.Cog):
 
         hide = argsparsed.last("h", type_=bool)
         embed = embeds.EmbedWithCharacter(char,
-                                          description="In the split second before an attack, reactions fly abound. Some defend themselves. Others lash out in retaliation. Others,"
+                                          description="In the split second before an action, reactions fly abound. Some defend themselves. Others lash out in retaliation. Others,"
                                                       " still, may have something more up their sleeves...", name=False,
                                           image=not hide)
 
