@@ -1,28 +1,28 @@
 Martials pursue the path of physical arts. They're experts at using weapons and armor to their advantage. Energy circulates through them, manifesting in all sorts of frightening ways.
 
-| Level | Proficiency Bonus | Features                         | Martial Surge Charges |
-| :---: | :---------------: | :------------------------------- | :-------------------: |
-|   1   |        +1         | Weapon Adept, Affinity Class     |           -           |
-|   5   |        +1         | Fighting Doctrine, Martial Surge |           1           |
-|  10   |        +1         | Superior Health, Martial Arts    |           1           |
-|  15   |        +1         | Ability Score Improvement        |           2           |
-|  20   |        +1         | Overwhelming Attack              |           2           |
-|  25   |        +2         | Improved Deflect                 |           2           |
-|  30   |        +2         | Forceful Purge                   |           3           |
-|  35   |        +2         | Ability Score Improvement        |           3           |
-|  40   |        +2         | Greater Martial Arts             |           3           |
-|  45   |        +3         | Weapon Expert                    |           3           |
-|  50   |        +3         | Improved Defensive Stance        |           4           |
-|  55   |        +3         | Ability Score Improvement        |           4           |
-|  60   |        +3         | Gatekeeper                       |           4           |
-|  65   |        +4         | Breath of Fresh Air              |           4           |
-|  70   |        +4         | Exalted Martial Arts             |           4           |
-|  75   |        +4         | Ability Score Improvement        |           5           |
-|  80   |        +4         | Last Stand                       |           5           |
-|  85   |        +5         | Unparalleled Health              |           5           |
-|  90   |        +5         | Weapon Grandmaster               |           5           |
-|  95   |        +5         | Ability Score Improvement        |           5           |
-|  100  |        +5         | **Exceed Art**                   |           6           |
+| Level | Proficiency Bonus | Features                          | Martial Surge Charges |
+| :---: | :---------------: | :-------------------------------- | :-------------------: |
+|   1   |        +1         | Weapon Adept, Affinity Class      |           -           |
+|   5   |        +1         | Fighting Doctrine, Martial Surge  |           1           |
+|  10   |        +1         | Physical Attunement, Martial Arts |           1           |
+|  15   |        +1         | Ability Score Improvement         |           2           |
+|  20   |        +1         | Overwhelming Attack               |           2           |
+|  25   |        +2         | Improved Deflect                  |           2           |
+|  30   |        +2         | Forceful Purge                    |           3           |
+|  35   |        +2         | Ability Score Improvement         |           3           |
+|  40   |        +2         | Greater Martial Arts              |           3           |
+|  45   |        +3         | Weapon Expert                     |           3           |
+|  50   |        +3         | Improved Defensive Stance         |           4           |
+|  55   |        +3         | Ability Score Improvement         |           4           |
+|  60   |        +3         | Gatekeeper                        |           4           |
+|  65   |        +4         | Breath of Fresh Air               |           4           |
+|  70   |        +4         | Exalted Martial Arts              |           4           |
+|  75   |        +4         | Ability Score Improvement         |           5           |
+|  80   |        +4         | Last Stand                        |           5           |
+|  85   |        +5         | Unparalleled Health               |           5           |
+|  90   |        +5         | Weapon Grandmaster                |           5           |
+|  95   |        +5         | Ability Score Improvement         |           5           |
+|  100  |        +5         | **Exceed Art**                    |           6           |
 
 
 # Class Features
@@ -76,9 +76,9 @@ At level 5, you can push your body past its limits for the briefest of moments. 
 - Gain advantage on all physical saving checks and throws.
 - You can jump up to half your speed.
 You regain all your Martial Surge charges at the end of a short or long rest.
-## Superior Health
+## Physical Attunement
 
-At 10th level, your body becomes more resilient to the outside elements. You gain advantage on saving throws against diseases and poisons. You do not suffer from the effects of 1st, 2nd, and 3rd level exhaustion.
+At 10th level, your body has become attuned to the physical world. Gain a +5 bonus on perception checks.
 ## Martial Arts
 
 At 10th level, your martial arts can now be consciously manifested into various forms. Your chosen fighting doctrine will determine which martial arts you have access to.
