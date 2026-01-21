@@ -691,7 +691,7 @@ class GoogleSheet(SheetLoaderABC):
 
     def get_deflect_ac(self):
         try:
-            def_ac = self.character_data.value("R11").replace("Deflect AC: ", "")
+            def_ac = self.character_data.value("R11").replace("Total AC: ", "")
             if def_ac == '-':
                 return self.get_ac()
             return int(def_ac)

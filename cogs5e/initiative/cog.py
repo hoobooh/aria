@@ -1125,7 +1125,7 @@ class InitTracker(commands.Cog):
         await combat.final(ctx)
 
     @init.group(
-        aliases=["try"],
+        aliases=["try", "a"],
         invoke_without_command=True,
         help=f"""
         Attempts an attack against another combatant.
@@ -1142,23 +1142,75 @@ class InitTracker(commands.Cog):
         if atk_name is None:
             return await self.attack_list(ctx, combatant)
         targets = await targetutils.definitely_combat(ctx, combat, argparse(args), allow_groups=True)
-        attempt_str = f"{combatant.name} attempts to attack with {atk_name}!"
+
+        # argument parsing
+        is_player = isinstance(combatant, PlayerCombatant)
+        argsparsed = argparse(args)
+
+        attack = None
+        try:
+            if isinstance(combatant, CombatantGroup):
+                if "custom" in argsparsed:  # group, custom
+                    caster = combatant.get_combatants()[0]
+                    attack = Attack.new(name=atk_name, bonus_calc="0", damage_calc="0")
+                else:  # group, noncustom
+                    choices = []  # list of (name, caster, attack)
+                    for com in combatant.get_combatants():
+                        for atk in com.attacks:
+                            choices.append((f"{atk.name} ({com.name})", com, atk))
+
+                    _, caster, attack = await search_and_select(
+                        ctx, choices, atk_name, lambda choice: choice[0], message="Select your attack."
+                    )
+            else:
+                caster = combatant
+                if "custom" in argsparsed:  # single, custom
+                    attack = Attack.new(name=atk_name, bonus_calc="0", damage_calc="0")
+                elif is_player:  # single, noncustom, action?
+                    attack = await actionutils.select_action(
+                        ctx,
+                        atk_name,
+                        attacks=combatant.attacks,
+                        actions=combatant.character.actions,
+                        message="Select your action.",
+                    )
+                else:  # single, noncustom
+                    attack = await actionutils.select_action(
+                        ctx, atk_name, attacks=combatant.attacks, message="Select your attack."
+                    )
+            ctx.nlp_caster = caster
+        except SelectionException:
+            return await ctx.send("Attack not found.")
+
+        atk_name=attack.name
+
+        aoran = "a "
+
+        if atk_name[0] in ['a','e','u','i','o']:
+            aoran = "an "
+        attempt_str = f"{combatant.name} attempts to attack with {aoran}{atk_name}!"
         if targets:
             if len(targets) == 1:
-                attempt_str = f"{combatant.name} attempts to attack {targets[0].name} with {atk_name}!"
+                attempt_str = f"{combatant.name} attempts to attack {targets[0].name} with {aoran}{atk_name}!"
             else:
                 target_list = ""
                 for n in range(0, len(targets)):
                     if n == len(targets) - 1:
                         target_list += "and " + targets[n].name
-                    else:
+                    elif len(targets) != 2 or n != len(targets) - 2:
                         target_list += targets[n].name + ", "
-                attempt_str = f"{combatant.name} attempts to attack {target_list} with {atk_name}!"
+                    else:
+                        target_list += targets[n].name + " "
+                attempt_str = f"{combatant.name} attempts to attack {target_list} with {aoran}{atk_name}!"
         self_shell = self
+
         class Preserve:
             preserve_contents = False
 
         preserve = Preserve()
+        embed = disnake.Embed(
+            description="In the split second before an attack, reactions fly abound. Some defend themselves. Others lash out in retaliation. Others, still, may have something more up their sleeves...",
+            color=combatant.get_color())
 
         class View(disnake.ui.View):
             @disnake.ui.button(label="Roll Attack", style=ButtonStyle.primary)
@@ -1166,13 +1218,15 @@ class InitTracker(commands.Cog):
                 await self_shell._attack(ctx, combatant, atk_name, args)
                 if not preserve.preserve_contents:
                     await interaction.response.edit_message(delete_after=0)
+                    await interaction.response.defer()
                 else:
-                    self.stop()
-                await interaction.response.defer()
+                    await interaction.response.edit_message(view=None)
+                return
 
             @disnake.ui.button(label="React", style=ButtonStyle.secondary)
             async def react(self, button, interaction):
-                await ctx.send(f"{interaction.author.name} has a reaction!")
+                embed.title=f"Someone has a reaction!"
+                await ctx.send(f"<@{interaction.author.id}>", embed=embed)
                 preserve.preserve_contents = True
                 await interaction.response.defer()
                 return
@@ -1181,15 +1235,140 @@ class InitTracker(commands.Cog):
             async def cancel(self, button, interaction):
                 if not preserve.preserve_contents:
                     await interaction.response.edit_message(delete_after=0)
+                    await interaction.response.defer()
                 else:
-                    await ctx.send(f"{combatant.name}\'s attack was cancelled!")
+                    embed.title=f"{combatant.name}\'s attack was cancelled!"
+                    embed.description=""
+                    await ctx.send(embed=embed)
+                    await interaction.response.edit_message(view=None)
+                return
+        embed.title=attempt_str
+        return await ctx.send(view=View(), embed=embed)
+    @init.group(
+        aliases=["offturntry", "oa"],
+        invoke_without_command=True,
+        help=f"""
+        Attempts an attack against another combatant using an off turn combatant.
+        __**Valid Arguments**__
+        {VALID_AUTOMATION_ARGS}
+        custom - Modifier to indicate that the (arbitrarily-named) attack is custom, with custom to hit and damage values. Use `-b` and `-d` like this: `!init attack "pizza" custom -b 3 -d 1`
+        """,
+    )
+    async def offturnattempt(self, ctx, combatant_name, atk_name=None, *, args=""):
+        combat = await ctx.get_combat()
+        try:
+            combatant = await combat.select_combatant(ctx, combatant_name, "Select the attacker.")
+        except SelectionException:
+            return await ctx.send("Combatant not found.")
+        if combatant is None:
+            return await ctx.send(f"You must start combat with `{ctx.prefix}init next` first.")
+        if atk_name is None:
+            return await self.attack_list(ctx, combatant)
+        targets = await targetutils.definitely_combat(ctx, combat, argparse(args), allow_groups=True)
+
+        # argument parsing
+        is_player = isinstance(combatant, PlayerCombatant)
+        argsparsed = argparse(args)
+
+        attack = None
+        try:
+            if isinstance(combatant, CombatantGroup):
+                if "custom" in argsparsed:  # group, custom
+                    caster = combatant.get_combatants()[0]
+                    attack = Attack.new(name=atk_name, bonus_calc="0", damage_calc="0")
+                else:  # group, noncustom
+                    choices = []  # list of (name, caster, attack)
+                    for com in combatant.get_combatants():
+                        for atk in com.attacks:
+                            choices.append((f"{atk.name} ({com.name})", com, atk))
+
+                    _, caster, attack = await search_and_select(
+                        ctx, choices, atk_name, lambda choice: choice[0], message="Select your attack."
+                    )
+            else:
+                caster = combatant
+                if "custom" in argsparsed:  # single, custom
+                    attack = Attack.new(name=atk_name, bonus_calc="0", damage_calc="0")
+                elif is_player:  # single, noncustom, action?
+                    attack = await actionutils.select_action(
+                        ctx,
+                        atk_name,
+                        attacks=combatant.attacks,
+                        actions=combatant.character.actions,
+                        message="Select your action.",
+                    )
+                else:  # single, noncustom
+                    attack = await actionutils.select_action(
+                        ctx, atk_name, attacks=combatant.attacks, message="Select your attack."
+                    )
+            ctx.nlp_caster = caster
+        except SelectionException:
+            return await ctx.send("Attack not found.")
+
+        atk_name=attack.name
+
+        aoran = "a "
+
+        if atk_name[0] in ['a','e','u','i','o']:
+            aoran = "an "
+        attempt_str = f"{combatant.name} attempts to attack with {aoran}{atk_name}!"
+        if targets:
+            if len(targets) == 1:
+                attempt_str = f"{combatant.name} attempts to attack {targets[0].name} with {aoran}{atk_name}!"
+            else:
+                target_list = ""
+                for n in range(0, len(targets)):
+                    if n == len(targets) - 1:
+                        target_list += "and " + targets[n].name
+                    elif len(targets) != 2 or n != len(targets) - 2:
+                        target_list += targets[n].name + ", "
+                    else:
+                        target_list += targets[n].name + " "
+                attempt_str = f"{combatant.name} attempts to attack {target_list} with {aoran}{atk_name}!"
+        self_shell = self
+
+        class Preserve:
+            preserve_contents = False
+
+        preserve = Preserve()
+        embed = disnake.Embed(
+            description="In the split second before an attack, reactions fly abound. Some defend themselves. Others lash out in retaliation. Others, still, may have something more up their sleeves...",
+            color=combatant.get_color())
+
+        class View(disnake.ui.View):
+            @disnake.ui.button(label="Roll Attack", style=ButtonStyle.primary)
+            async def roll_attack(self, button, interaction):
+                await self_shell._attack(ctx, combatant, atk_name, args)
+                if not preserve.preserve_contents:
+                    await interaction.response.edit_message(delete_after=0)
+                    await interaction.response.defer()
+                else:
+                    await interaction.response.edit_message(view=None)
+                return
+
+            @disnake.ui.button(label="React", style=ButtonStyle.secondary)
+            async def react(self, button, interaction):
+                embed.title=f"Someone has a reaction!"
+                await ctx.send(f"<@{interaction.author.id}>", embed=embed)
+                preserve.preserve_contents = True
                 await interaction.response.defer()
                 return
 
-        return await ctx.send(attempt_str, view=View())
-
+            @disnake.ui.button(label="Cancel", style=ButtonStyle.danger)
+            async def cancel(self, button, interaction):
+                if not preserve.preserve_contents:
+                    await interaction.response.edit_message(delete_after=0)
+                    await interaction.response.defer()
+                else:
+                    embed.title=f"{combatant.name}\'s attack was cancelled!"
+                    embed.description=""
+                    await ctx.send(embed=embed)
+                    await interaction.response.edit_message(view=None)
+                return
+        embed.title=attempt_str
+        return await ctx.send(view=View(), embed=embed)
     @init.group(
-        aliases=["a", "action"],
+        aliases=["action"],
         invoke_without_command=True,
         help=f"""
         Rolls an attack against another combatant.
@@ -1219,7 +1398,7 @@ class InitTracker(commands.Cog):
 
     @init.command(
         name="offturnattack",
-        aliases=["aoo", "offturnaction", "oa"],
+        aliases=["aoo", "offturnaction"],
         help=f"""
         Rolls an attack as another combatant.
         __**Valid Arguments**__
