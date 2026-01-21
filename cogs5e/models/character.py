@@ -815,8 +815,8 @@ class Character(StatBlock):
         desc_details.append(f"**Proficiency Bonus**: {self.stats.prof_bonus:+}")
 
         # combat details
-        desc_details.append(f"**Deflect AC**: {self.deflect_ac}")
-        desc_details.append(f"**AC**: {self.ac}")
+        desc_details.append(f"**Deflect/Total AC**: {self.deflect_ac}")
+        desc_details.append(f"**Base AC**: {self.ac}")
         desc_details.append(f"**HP**: {self.hp_str()}")
         desc_details.append(f"**Initiative**: {self.skills.initiative.value:+}")
 

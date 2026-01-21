@@ -1,18 +1,18 @@
 Those who laugh in the face of imminent danger. Desperados engage in high intensity ranged frontlining, constantly treading the line between risk-chasing and sheer insanity. With their blinding arrows and bullets, Desperados are frequently some of the most aggressive fighters on the battlefield.
 
-| Level | Features              | Martial Art Points |
-| ----- | --------------------- | :----------------: |
-| 5     | Thrillseeker          |         -          |
-| 10    | Martial Arts          |         1          |
-| 20    | -                     |         2          |
-| 30    | Showdown              |         2          |
-| 40    | Greater Martial Arts  |         3          |
-| 50    | -                     |         3          |
-| 60    | Pinpoint Interception |         4          |
-| 70    | Exalted Martial Arts  |         5          |
-| 80    | -                     |         6          |
-| 90    | Flashing Fire         |         7          |
-| 100   | **Daredevil**         |         8          |
+| Level | Features             | Martial Art Points |
+| ----- | -------------------- | :----------------: |
+| 5     | Thrillseeker         |         -          |
+| 10    | Martial Arts         |         1          |
+| 20    | -                    |         2          |
+| 30    | Showdown             |         2          |
+| 40    | Greater Martial Arts |         3          |
+| 50    | -                    |         3          |
+| 60    | Gambit               |         4          |
+| 70    | Exalted Martial Arts |         5          |
+| 80    | -                    |         6          |
+| 90    | Flashing Fire        |         7          |
+| 100   | **Daredevil**        |         8          |
 ## Thrillseeker
 
 At 5th level, your performance skyrockets when you're in high pressure situations. Apply the following effects:
@@ -46,9 +46,9 @@ At 40th level, you gain access to an additional set of martial arts. You can cha
 | Love Tap         | Your ranged attacks automatically do critical damage to creatures that are critical.                                       |              2               |
 | Zero In          | If you have hit the same target at least two times this turn, you can make one additional attack on that target this turn. |              2               |
 
-## Pinpoint Interception
+## Gambit
 
-At 60th level, when you would take a block reaction, you can make a ranged attack and use that damage roll as your blocking power instead if your attack roll was equal or higher than the incoming attack.
+At 60th level, you can kick your body into overdrive in a high-risk maneuver. When an attack is declared on you, you can activate this effect: choose a number between 1 and 40, and if that number is present within the dice output (as a digit or entire number) of that attack roll, increase your AC by that number just for that attack. If it isn't, that attack automatically does critical damage if your declared number is higher than the original attack roll and increase that attack roll by your declared number.
 ## Exalted Martial Arts
 
 At 70th level, you gain access to a final set of martial arts. You can change/remove your existing martial arts when you learn new martial arts here.

@@ -747,9 +747,9 @@ class InitTracker(commands.Cog):
                     new_ac=combatant.ac
                     hit_floor=True
                 combatant.deflect_ac = new_ac
-                update_string = f"\u2705 {combatant.name}'s deflect AC set to {combatant.deflect_ac} (was {old_ac})."
+                update_string = f"\u2705 {combatant.name}'s deflect/total AC set to {combatant.deflect_ac} (was {old_ac})."
                 if hit_floor:
-                    update_string = f"\u2705 {combatant.name}'s deflect AC set to {combatant.deflect_ac} (was {old_ac}). Excess penalty was discarded due to the AC floor."
+                    update_string = f"\u2705 {combatant.name}'s deflect/total AC set to {combatant.deflect_ac} (was {old_ac}). Excess penalty was discarded due to the AC floor."
                 return update_string
             except InvalidArgument as e:
                 return f"\u274c {str(e)}"
