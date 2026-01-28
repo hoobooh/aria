@@ -1,8 +1,8 @@
 Casters weave intricate spells into the world around them, exerting meticulous control over their realities.
 
 | Level | Proficiency Bonus | Features                             | Maximum Mana (WIS) | Arcana Points (INT) | Auleric Level |
-| :---: | :---------------: | :----------------------------------- | :----------------- | :------------------ | ------------- |
-|   1   |        +1         | Spellcasting, Affinity Class         | 10*WIS             | 1*INT               | 1             |
+| :---: | :---------------: | :----------------------------------- | -----------------: | ------------------: | ------------- |
+|   1   |        +1         | Spellcasting, Affinity Class         |             10*WIS |               1*INT | 1             |
 |   5   |        +1         | Arcanum, Mana Surge                  |                    |                     | 1             |
 |  10   |        +1         | Auleric Attunement, Auleric Language |                    |                     | 2             |
 |  15   |        +1         | Ability Score Improvement            |                    |                     | 2             |
@@ -22,7 +22,7 @@ Casters weave intricate spells into the world around them, exerting meticulous c
 |  85   |        +5         | Superior Casting                     |                    |                     | 9             |
 |  90   |        +5         | Improvised Spell Assembly            |                    |                     | 10            |
 |  95   |        +5         | Ability Score Improvement            |                    |                     | 10            |
-|  100  |        +5         | **Exceed Aulera**                    | 400                |                     | 11            |
+|  100  |        +5         | **Exceed Aulera**                    |                400 |                     | 11            |
 # Class Features
 
 As a caster, you gain the following class features.
@@ -36,12 +36,14 @@ As a caster, you gain the following class features.
 <big><big>Proficiencies</big></big>
 **Armor:** Light armor
 **Weapons:** Simple weapons
-**Tools:** None
-**Skills:** Athletics, Acrobatics
 
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:
 
-- (a) chain armor or (b) leather armor, longbow, and 24 arrows or (c) light crossbow and 12 bolts
-- (a) arming sword, shield or (b) longsword
-- Explorer's pack and 625 gp in any currency of your choice
+- (a) pistol (-4) or (b) leather armor, longbow, and 24 arrows or (c) light crossbow and 12 bolts
+- Explorer's pack and 1200 gp in any currency of your choice
+## Spellcasting
+
+At 1st level, you can cast spells that you know by consuming mana. You gain access to the Common spell table.
+
+You can learn or change spells when you level up, as well as when you first get this feature. Each spell incurs an arcana point cost, and you can only learn spells that would not make your total arcana point cost exceed your maximum arcana points. Multiple the mana cost of any spell that has a higher Auleric level than your Auleric level by the difference between the two.

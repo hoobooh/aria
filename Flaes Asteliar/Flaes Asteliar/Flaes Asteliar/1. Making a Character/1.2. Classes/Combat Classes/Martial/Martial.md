@@ -38,13 +38,11 @@ As a martial, you gain the following class features.
 <big><big>Proficiencies</big></big>
 **Armor:** Heavy armor, medium armor, light armor
 **Weapons:** Simple weapons, martial weapons
-**Tools:** None
-**Skills:** Athletics, Acrobatics
 
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:
 
-- (a) chain armor or (b) leather armor, longbow, and 24 arrows or (c) light crossbow and 12 bolts
+- (a) chain armor or (b) leather armor, longbow, and 24 arrows or (c) light crossbow and 12 bolts or (d) pistol (-4)
 - (a) arming sword, shield or (b) longsword
 - Explorer's pack and 625 gp in any currency of your choice
 ## Weapon Adept
