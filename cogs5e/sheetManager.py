@@ -265,6 +265,28 @@ class SheetManager(commands.Cog):
         await ctx.send(embed=embed)
         return
 
+    @commands.group(
+        aliases=["ctalk"],
+        invoke_without_command=True,
+        help=f"""
+        Say something as the specified character. 
+        """,
+    )
+    async def csay(self, ctx, name: str = None, *, args=""):
+        if not name:
+            await ctx.send("You must specify a character!")
+            return
+        char: Character = await self.get_character_by_name(ctx, name)
+        if not char:
+            await ctx.send("Character not found!")
+            return
+        embed = embeds.EmbedWithCharacter(char, name=False, image=True)
+        embed.title = char.name
+        embed.description = args
+        await try_delete(ctx.message)
+        await ctx.send(embed=embed)
+        return
+
     @action.command(name="list")
     async def action_list(self, ctx, *args):
         """
