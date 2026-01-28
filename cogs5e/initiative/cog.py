@@ -1189,7 +1189,7 @@ class InitTracker(commands.Cog):
         if atk_name[0] in ['a','e','u','i','o']:
             aoran = "an "
 
-        if isinstance(combatant, PlayerCombatant) or isinstance(combatant, MonsterCombatant):
+        if isinstance(combatant, Character) or isinstance(combatant, MonsterCombatant):
             attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks, actions=caster.actions)
             if not isinstance(attack_or_action, Attack):
                 aoran = ""
@@ -1229,12 +1229,36 @@ class InitTracker(commands.Cog):
                     await interaction.response.edit_message(view=None)
                 return
 
-            @disnake.ui.button(label="React", style=ButtonStyle.secondary)
+            @disnake.ui.button(label="React", style=ButtonStyle.success)
             async def react(self, button, interaction):
                 embed.title=f"Someone has a reaction!"
                 await ctx.send(f"<@{interaction.author.id}>", embed=embed)
+                if not preserve.preserve_contents:
+                    await interaction.response.defer()
                 preserve.preserve_contents = True
-                await interaction.response.defer()
+                return
+
+            # i just found out about nonlocal don't judge me
+            @disnake.ui.button(label="Give Adv", style=ButtonStyle.secondary)
+            async def adv(self, button, interaction):
+                nonlocal args
+                embed.title=f"The attack has gained advantage!"
+                await ctx.send(f"<@{interaction.author.id}>", embed=embed)
+                if not preserve.preserve_contents:
+                    await interaction.response.defer()
+                preserve.preserve_contents = True
+                args+=" -adv"
+                return
+
+            @disnake.ui.button(label="Give Dis", style=ButtonStyle.secondary)
+            async def dis(self, button, interaction):
+                nonlocal args
+                embed.title=f"The attack has gained disadvantage!"
+                await ctx.send(f"<@{interaction.author.id}>", embed=embed)
+                if not preserve.preserve_contents:
+                    await interaction.response.defer()
+                preserve.preserve_contents = True
+                args+=" -dis"
                 return
 
             @disnake.ui.button(label="Cancel", style=ButtonStyle.danger)
@@ -1248,6 +1272,7 @@ class InitTracker(commands.Cog):
                     await ctx.send(embed=embed)
                     await interaction.response.edit_message(view=None)
                 return
+
         embed.title=attempt_str
         return await ctx.send(view=View(), embed=embed)
     @init.group(
@@ -1318,7 +1343,7 @@ class InitTracker(commands.Cog):
         if atk_name[0] in ['a','e','u','i','o']:
             aoran = "an "
 
-        if isinstance(combatant, PlayerCombatant) or isinstance(combatant, MonsterCombatant):
+        if isinstance(combatant, Character) or isinstance(combatant, MonsterCombatant):
             attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks, actions=caster.actions)
             if not isinstance(attack_or_action, Attack):
                 aoran = ""
@@ -1358,12 +1383,36 @@ class InitTracker(commands.Cog):
                     await interaction.response.edit_message(view=None)
                 return
 
-            @disnake.ui.button(label="React", style=ButtonStyle.secondary)
+            @disnake.ui.button(label="React", style=ButtonStyle.success)
             async def react(self, button, interaction):
                 embed.title=f"Someone has a reaction!"
                 await ctx.send(f"<@{interaction.author.id}>", embed=embed)
+                if not preserve.preserve_contents:
+                    await interaction.response.defer()
                 preserve.preserve_contents = True
-                await interaction.response.defer()
+                return
+
+            # i just found out about nonlocal don't judge me
+            @disnake.ui.button(label="Give Adv", style=ButtonStyle.secondary)
+            async def adv(self, button, interaction):
+                nonlocal args
+                embed.title=f"The attack has gained advantage!"
+                await ctx.send(f"<@{interaction.author.id}>", embed=embed)
+                if not preserve.preserve_contents:
+                    await interaction.response.defer()
+                preserve.preserve_contents = True
+                args+=" -adv"
+                return
+
+            @disnake.ui.button(label="Give Dis", style=ButtonStyle.secondary)
+            async def dis(self, button, interaction):
+                nonlocal args
+                embed.title=f"The attack has gained disadvantage!"
+                await ctx.send(f"<@{interaction.author.id}>", embed=embed)
+                if not preserve.preserve_contents:
+                    await interaction.response.defer()
+                preserve.preserve_contents = True
+                args+=" -dis"
                 return
 
             @disnake.ui.button(label="Cancel", style=ButtonStyle.danger)

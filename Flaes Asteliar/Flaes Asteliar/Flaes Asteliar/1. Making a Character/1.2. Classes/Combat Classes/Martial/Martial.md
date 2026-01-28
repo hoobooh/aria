@@ -31,7 +31,7 @@ As a martial, you gain the following class features.
 
 <big><big>Hit Points</big></big>
 **Hit dice:** (1d29 / 10) per martial level
-**Hit Points at 1st Level:** 85 + your Constitution Modifier
+**Hit Points at 1st Level:** 84 + your Constitution Modifier
 **Hit Points at Higher Levels:** 1.5 (or 1d29 / 10) + your Constitution modifier \* 0.2 per martial level after 1st
 **Speed**: 40 ft.
 
@@ -39,7 +39,6 @@ As a martial, you gain the following class features.
 **Armor:** Heavy armor, medium armor, light armor
 **Weapons:** Simple weapons, martial weapons
 **Tools:** None
-**Saving Throws**: Choose two from Strength, Dexterity, and Constitution.
 **Skills:** Athletics, Acrobatics
 
 <big><big>Equipment Starter Pack</big></big>

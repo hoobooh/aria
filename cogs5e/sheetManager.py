@@ -199,12 +199,36 @@ class SheetManager(commands.Cog):
                     await interaction.response.edit_message(view=None)
                 return
 
-            @disnake.ui.button(label="React", style=ButtonStyle.secondary)
+            @disnake.ui.button(label="React", style=ButtonStyle.success)
             async def react(self, button, interaction):
                 embed.title = f"Someone has a reaction!"
                 await ctx.send(f"<@{interaction.author.id}>", embed=embed)
+                if not preserve.preserve_contents:
+                    await interaction.response.defer()
                 preserve.preserve_contents = True
-                await interaction.response.defer()
+                return
+
+            # i just found out about nonlocal don't judge me
+            @disnake.ui.button(label="Give Adv", style=ButtonStyle.secondary)
+            async def adv(self, button, interaction):
+                nonlocal args
+                embed.title = f"The attack has gained advantage!"
+                await ctx.send(f"<@{interaction.author.id}>", embed=embed)
+                if not preserve.preserve_contents:
+                    await interaction.response.defer()
+                preserve.preserve_contents = True
+                args += " -adv"
+                return
+
+            @disnake.ui.button(label="Give Dis", style=ButtonStyle.secondary)
+            async def dis(self, button, interaction):
+                nonlocal args
+                embed.title = f"The attack has gained disadvantage!"
+                await ctx.send(f"<@{interaction.author.id}>", embed=embed)
+                if not preserve.preserve_contents:
+                    await interaction.response.defer()
+                preserve.preserve_contents = True
+                args += " -dis"
                 return
 
             @disnake.ui.button(label="Cancel", style=ButtonStyle.danger)
@@ -221,6 +245,25 @@ class SheetManager(commands.Cog):
 
         embed.title = attempt_str
         return await ctx.send(view=View(), embed=embed)
+
+    @commands.group(
+        aliases=["talk"],
+        invoke_without_command=True,
+        help=f"""
+        Say something as the current character. 
+        """,
+    )
+    async def say(self, ctx, *, args=""):
+        char: Character = await ctx.get_character()
+        if not char:
+            await ctx.send("You must have an active character!")
+            return
+        embed = embeds.EmbedWithCharacter(char, name=False, image=True)
+        embed.title = char.name
+        embed.description = args
+        await try_delete(ctx.message)
+        await ctx.send(embed=embed)
+        return
 
     @action.command(name="list")
     async def action_list(self, ctx, *args):
