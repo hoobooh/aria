@@ -53,7 +53,7 @@ At 1st level, you become familiar with one particular weapon that feels natural 
 You can change the weapon that you are adept with when you take an Ability Score Improvement.
 ## Affinity Class
 
-At 1st level, you choose 1 affinity class from the affinity class list. Your affinity class's level will be the same as your combat class level.
+At 1st level, you choose 1 affinity class from the affinity class list. Your affinity class's level is the same as your main class level.
 ## Fighting Doctrine
 
 At 5th level, your martial arts have started to develop more potently. Choose a fighting doctrine from the fighting doctrine list. The doctrine you choose will grant additional benefits and effects as you level up.

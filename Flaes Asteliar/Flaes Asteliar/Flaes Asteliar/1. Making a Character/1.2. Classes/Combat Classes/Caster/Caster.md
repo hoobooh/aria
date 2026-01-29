@@ -50,3 +50,22 @@ You can learn or change spells when you take an Ability Score Improvement, as we
 
 Your maximum mana is equal to your WIS * 10 + your level. You can have an amount of arcana points up to your INT + your level / 5 (rounded down).
 You restore all your mana when you take a long rest.
+## Affinity Class
+
+At 1st level, you choose 1 affinity class from the affinity class list. Your affinity class's level is the same as your main class level.
+## Fighting Doctrine
+
+At 5th level, your spellweaving has evolved into a sophisticated specialization known as an Arcanum. Choose an Arcanum from the Arcana list. The Arcanum you choose will grant additional benefits and effects as you level up.
+
+| Arcanum      | Primary Role |
+| ------------ | :----------: |
+| Arch         |   Two-Way    |
+| Battle Mage  |    Combat    |
+| Druid        |   Two-Way    |
+| Flash Caster |    Combat    |
+| Illusionist  |   Support    |
+| Necromancer  |   Two-Way    |
+| Oracle       |   Support    |
+| Summoner     |    Combat    |
+| Witch Doctor |   Support    |
+
