@@ -15,7 +15,9 @@ Strength in numbers, and safety in even more numbers. Summoners, as their namesa
 | 100   | **Genesis**        |
 ## Familiar
 
-
+can summon small cr 0 weak creature as permanent familiar
+familiar requires no casting delay and respawns after long rest
+can communicate vocally with familiar but no telepathy
 ## Spellbook
 
 At 10th level, you gain access to the Summoner spell table.
@@ -24,10 +26,13 @@ At 10th level, you gain access to the Summoner spell table.
 can summon things up to aulera cap
 ## Soul Fusion
 
-
+can share senses both ways
+can telepathy
+can transfer half damage both ways
 ## Soul Migration
 
-
+can switch bodies with summon as action
+new body gains all class abilities along with current capabilities; preserve physical stats but keep mental ones
 ## **Genesis**
 
 can summon things at aulera cap quantity
