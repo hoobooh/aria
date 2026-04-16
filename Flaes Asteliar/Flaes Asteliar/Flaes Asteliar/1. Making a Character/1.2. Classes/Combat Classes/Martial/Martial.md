@@ -1,4 +1,4 @@
-Martials pursue the path of physical arts. They're experts at using weapons and armor to their advantage. Energy circulates through them, manifesting in all sorts of frightening ways.
+Martials pursue the path of physical arts. Energy circulates through them, manifesting in all sorts of frightening ways.
 
 | Level | Proficiency Bonus | Features                          | Martial Surge Charges |
 | :---: | :---------------: | :-------------------------------- | :-------------------: |
@@ -6,19 +6,19 @@ Martials pursue the path of physical arts. They're experts at using weapons and 
 |   5   |        +1         | Fighting Doctrine, Martial Surge  |           1           |
 |  10   |        +1         | Physical Attunement, Martial Arts |           1           |
 |  15   |        +1         | Ability Score Improvement         |           2           |
-|  20   |        +1         | Overwhelming Attack               |           2           |
-|  25   |        +2         | Improved Deflect                  |           2           |
-|  30   |        +2         | Forceful Purge                    |           3           |
+|  20   |        +1         | -                                 |           2           |
+|  25   |        +2         | Overwhelming Attack               |           2           |
+|  30   |        +2         | -                                 |           3           |
 |  35   |        +2         | Ability Score Improvement         |           3           |
-|  40   |        +2         | Greater Martial Arts              |           3           |
+|  40   |        +2         | -                                 |           3           |
 |  45   |        +3         | Weapon Expert                     |           3           |
 |  50   |        +3         | Improved Defensive Stance         |           4           |
 |  55   |        +3         | Ability Score Improvement         |           4           |
-|  60   |        +3         | Gatekeeper                        |           4           |
+|  60   |        +3         | -                                 |           4           |
 |  65   |        +4         | Breath of Fresh Air               |           4           |
-|  70   |        +4         | Exalted Martial Arts              |           4           |
+|  70   |        +4         | -                                 |           4           |
 |  75   |        +4         | Ability Score Improvement         |           5           |
-|  80   |        +4         | Last Stand                        |           5           |
+|  80   |        +4         | -                                 |           5           |
 |  85   |        +5         | Unparalleled Health               |           5           |
 |  90   |        +5         | Weapon Grandmaster                |           5           |
 |  95   |        +5         | Ability Score Improvement         |           5           |
@@ -84,16 +84,10 @@ At 10th level, your martial arts can now be consciously manifested into various 
 At 15th level , and again at 35th, 55th, 75th, and 95th level, you can increase one ability score of your choice by 2 and another of your choice that isn't the same ability by 1.
 ## Overwhelming Attack
 
-At 20th level, your movements have become strong enough to overwhelm an enemy. Once per turn, on your turn when you take an attack action, you can attack one more time that turn.
-## Improved Deflect
-
-At 25th level, your ability to deflect attacks has improved. Your deflect AC gains a bonus equal to your DEX bonus plus a mental bonus (INT, WIS, or CHA) of your choice.
+At 25th level, your movements have become strong enough to overwhelm an enemy. Once per turn, on your turn when you take an attack action, you can attack one more time that turn.
 ## Forceful Purge
 
 At 30th level, you can expend an action to forcefully remove a common negative condition of your choice from you. This cannot be used to remove curses.
-## Greater Martial Arts
-
-At 40th level, your martial arts grow stronger. Your fighting doctrine will dictate how your martial arts grow.
 ## Weapon Expert
 
 At 45th level, you become an expert in the weapon you are adept with. When you are wielding that weapon, apply the following effects:
@@ -104,18 +98,9 @@ At 45th level, you become an expert in the weapon you are adept with. When you a
 ## Improved Defensive Stance
 
 At 50th level, your defensive capabilities have significantly improved, letting you weather the storm with more reliably. While you are in a defensive stance, you gain 8 AC.
-## Gatekeeper
-
-At 60th level, you are capable of utilizing your stalwart stance to its fullest. While you are in a defensive stance, you can make a reactive attack against anyone that enters your melee range or starts their turn in it.
 ## Breath of Fresh Air
 
 At 65th level, you can force yourself out of high-intensity situations. Once per short rest, if your Action Time is above 150, you can reduce your Action Time by 100.
-## Exalted Martial Arts
-
-At 70th level, you have reached the pinnacle of your martial arts. Your fighting doctrine will determine how your martial arts change.
-## Last Stand
-
-At 80th level, your body can break through the grips of death. Once per long rest when your HP would reach 0, it instead reaches 1 then you gain THP equal to your Constitution \* 2. If you successfully do, then reduce your Action Time by 50.
 ## Unparalleled Health
 
 At 85th level, your body has attained truly unparalleled resilience. You gain the following effects:
