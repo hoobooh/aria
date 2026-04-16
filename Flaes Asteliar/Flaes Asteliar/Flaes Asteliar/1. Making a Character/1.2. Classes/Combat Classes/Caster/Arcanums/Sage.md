@@ -1,4 +1,4 @@
-A caster of a gentler nature that heals rather than harms. Sages specialize in direct healing and protection, possessing little in terms of self-reliant combat capability. Sages thrive in tightly knit groups where they can enhance the performance of their nearby allies.
+A caster of gentler nature that heals rather than harms. Sages specialize in direct healing and protection, possessing little in terms of self-reliant combat capability. Sages thrive in tightly knit groups where they can enhance the performance of their nearby allies.
 
 | Level | Features           |
 | ----- | ------------------ |

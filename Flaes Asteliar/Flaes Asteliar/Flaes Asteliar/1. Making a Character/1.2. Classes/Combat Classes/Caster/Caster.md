@@ -63,7 +63,6 @@ At 5th level, your spellweaving has evolved into a sophisticated specialization 
 | Druid        |   Two-Way    |
 | Flash Caster |    Combat    |
 | Illusionist  |   Support    |
-| Necromancer  |   Two-Way    |
 | Sage         |   Support    |
 | Summoner     |    Combat    |
 | Witch Doctor |   Support    |
