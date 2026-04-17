@@ -15,7 +15,9 @@ A versatile all-rounder that can find a way to contribute in any situation. Whil
 | 100   | **Eclipse**        |
 ## Magus
 
-At 5th level, you've become a magic savant who understands the truer basic form of Aulera, deepening your connection with your spells. Reduce the mana cost and casting delay of two spells you know by 25%. You can change those two spells when you take a long rest.
+At 5th level, you've become a magic savant who pursues the truer basic form of Aulera, deepening your connection with your spells. Reduce the mana cost and casting delay of two spells you know by 25% (rounded up). You can change those two spells when you take a long rest.
+
+You require a spell focus to cast class spells. Your spell focus must be carried in your hand for you to cast your class spells. You can create a spell focus by selecting any nonmagical item and channeling magic through it for an hour. You can only have one spell focus at a time.
 ## Spellbook
 
 At 10th level, you gain access to the Mage spell table.
