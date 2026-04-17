@@ -8,33 +8,30 @@ Strength in numbers, and safety in even more numbers. Summoners, as their namesa
 | 30    | Parallel Summoning |
 | 40    | -                  |
 | 50    | -                  |
-| 60    | Soul Fusion        |
+| 60    | Fusion             |
 | 70    | -                  |
 | 80    | -                  |
 | 90    | Soul Migration     |
 | 100   | **Genesis**        |
 ## Familiar
 
-can summon small cr 0 weak creature as permanent familiar
-familiar requires no casting delay and respawns after long rest
-can communicate vocally with familiar but no telepathy
+At 5th level, you gain access to a small familiar that lives within your soul and does your bidding. Your familiar takes the form of a mundane CR 0 creature that you choose when you first gain this feature. Your familiar retains its memories when it dies and can be resummoned after a long rest. It understands the same languages you do, but cannot speak to you any better than normal animal would be able to.
+
+You can summon your familiar as an action-speed spell that has an action delay of 60 and costs 5 mana. You can cast this spell again to recall your familiar, and if you do, it undergoes the effects of a long rest. You cannot summon your familiar if it has died this long rest.
 ## Spellbook
 
 At 10th level, you gain access to the Summoner spell table.
 ## Parallel Summoning
 
-can summon things up to aulera cap
-## Soul Fusion
+At 30th level, you can sustain multiple summons at the same time. Your spells that summon creatures no longer require concentration, but you can only have a total Auleric level of active summon spells no bigger than your Auleric level.
+## Fusion
 
-can share senses both ways
-can telepathy
-can transfer half damage both ways
+At 60th level, your connection with your summoned creatures has deepened. You can now share your senses with your summons, letting you perceive through them and them through you. You can now exchange information with your summons via telepathy. When you take damage, you can transfer half that damage to a random summon. When a summon takes damage, it can transfer half that damage to you.
 ## Soul Migration
 
-can switch bodies with summon as action
-new body gains all class abilities along with current capabilities; preserve physical stats but keep mental ones
+At 90th level, you can exchange bodies with your summons to gain their bodily advantages as well as possibly avoid a perilous death. As an action, you can implant your soul into a summon under your control that you are touching, and if you do, the original soul of that summon goes into your original body instead.
+
+Your original body loses its class capabilities and feats but your new body gains them instead. While in your new body, you have access to that body's original features and physical ability scores but you keep your original mental ability scores. Your new body is still treated as a summon, and must be renewed accordingly. If it is not, it will break apart and you will die.
 ## **Genesis**
 
-can summon things at aulera cap quantity, half cost
-immediately summon all too
-when one dies recover half mana back
+At 100th level, you can force an entire army of creatures into existence. Once per long rest, as a bonus action, you can cast any quantity of spells at half cost that summon creatures, but no more than your maximum arcana points / 2 (rounded down). When you do, treat all casting delays as 0 and only incur your highest action delay. These summons do not count towards your normal summon cap. When one of these summons dies, you recover half the mana you spent to summon it.
