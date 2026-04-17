@@ -1,40 +1,38 @@
-The only thing more suspicious than what an Illusionist hides is what an Illusionist shows. Illusionists rely on trickery and cunning to fool their opponents using their arsenal of illusions and deceptions. While lacking in direct confrontation, Illusionists make excellent support casters who can be tools of truth as much as they are of falsehood.
+ The only thing more suspicious than what an Illusionist hides is what an Illusionist shows. Illusionists rely on trickery and cunning to fool their opponents using their arsenal of illusions and deceptions. While lacking in direct confrontation, Illusionists make excellent support casters who can be tools of truth as much as they are of falsehood.
 
-| Level | Features             |
-| ----- | -------------------- |
-| 5     | Mirage               |
-| 10    | Spellbook            |
-| 20    | -                    |
-| 30    |                      |
-| 40    | -                    |
-| 50    | -                    |
-| 60    |                      |
-| 70    | -                    |
-| 80    | -                    |
-| 90    |                      |
-| 100   | **World of Mirrors** |
-## Familiar
+| Level | Features         |
+| ----- | ---------------- |
+| 5     | Trickster        |
+| 10    | Spellbook        |
+| 20    | -                |
+| 30    | Encore           |
+| 40    | -                |
+| 50    | -                |
+| 60    | Fool's Bluff     |
+| 70    | -                |
+| 80    | -                |
+| 90    | Phantom Thief    |
+| 100   | **Mirror Realm** |
+## Trickster
 
-can summon small cr 0 weak creature as permanent familiar
-familiar requires no casting delay and respawns after long rest
-can communicate vocally with familiar but no telepathy
+when resolve spell cast can immediately change target
 ## Spellbook
 
 At 10th level, you gain access to the Illusionist spell table.
-## Parallel Summoning
+## Encore
 
-can summon things up to aulera cap
-## Soul Fusion
+when illusion is broken, regain half of mana spent on it
+## Fool's Bluff
 
-can share senses both ways
-can telepathy
-can transfer half damage both ways
-## Soul Migration
+invisible while cast action
+## Phantom Thief
 
-can switch bodies with summon as action
-new body gains all class abilities along with current capabilities; preserve physical stats but keep mental ones
-## **Genesis**
+permanent +20 to perception
+automatically detect any magic you see
+cast action for class spell does not automatically end turn and does not lock movement
+## Mirror Realm
 
-can summon things at aulera cap quantity
-immediately summon all too
-when one dies recover half mana back
+for next minute
+as bonus action immediately cast class spells up to auleric level
+double spell dc
+every time an illusion destroyed, full mana refund and can immediately cast another class spell

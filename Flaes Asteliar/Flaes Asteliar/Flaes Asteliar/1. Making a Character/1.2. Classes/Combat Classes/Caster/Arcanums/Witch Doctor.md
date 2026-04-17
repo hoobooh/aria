@@ -46,7 +46,7 @@ At 30th level, your magic strikes out into genius new discoveries at rapid pace 
 At 60th level, your spells can no longer contain their chaotic breakdown of the world's self-perception. Creatures that have been directly hit by your spell attacks and healing must undergo a mental save of their choice against your spell DC the next time they attempt to perform an action. If they fail, consume but cancel that action.
 ## Fragment of Truth
 
-At 90th level, you've grown closer to the true potential of your own Aulera. Spontaneous Theory also activates on the digits 2 and 3 in addition to the existing digit 4. When you roll for a random effect in Spontaneous Theory, you can choose to consume 1d7 mana and reroll your effect.
+At 90th level, you've grown closer to the true potential of your own Aulera. Spontaneous Theory also activates on the digit 7 in addition to the existing digit 4. When you roll for a random effect in Spontaneous Theory, you can choose to consume 1d7 mana and reroll your effect.
 ## **Affront to Reality**
 
 At 100th level, you can twist the reality of the world to suit yourself. Once per long rest, as a bonus action, you can activate this effect for the next minute: Spontaneous Theory triggers on all digits. Rerolling random effects no longer costs any mana. Every time an instance of "Lingering Madness" successfully cancels an action, decrease your Action Time by 30 (min. 0), regain 1d30 mana, and heal 1d30 HP.

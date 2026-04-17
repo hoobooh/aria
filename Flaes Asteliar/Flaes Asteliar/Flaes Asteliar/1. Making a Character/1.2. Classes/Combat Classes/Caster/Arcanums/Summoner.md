@@ -35,6 +35,6 @@ can switch bodies with summon as action
 new body gains all class abilities along with current capabilities; preserve physical stats but keep mental ones
 ## **Genesis**
 
-can summon things at aulera cap quantity
+can summon things at aulera cap quantity, half cost
 immediately summon all too
 when one dies recover half mana back

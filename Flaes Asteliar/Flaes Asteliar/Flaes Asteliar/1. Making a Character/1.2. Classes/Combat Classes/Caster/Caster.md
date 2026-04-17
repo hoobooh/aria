@@ -83,7 +83,7 @@ At 30th level, your mana can reaccumulate at a much higher pace, even when you a
 At 45th level, you can forcefully cast beyond what your mana allows by letting your spells consume your physical form instead. When you would consume mana that you cannot provide, you can consume 2 hit points for every 1 missing mana instead. If you would reduce your hit points to 0 by doing this, you resolve your spell before proceeding with 0 hit point effects.
 ## Spell Conversion
 
-At 50th level, you can convert your Auleric script, letting you convert your spells into similar ones at the moment of casting. When you would cast a spell, you can change that spell to another spell you know with the same or less casting and action delay as your original spell. When you do, you cannot change any targets of the spell if they were preemptively declared.
+At 50th level, you can convert your Auleric script, letting you convert your spells into similar ones at the moment of casting. When you would resolve a spell, you can change that spell to another spell you know with the same or less casting and action delay as your original spell. When you do, you cannot change any targets of the spell if they were preemptively declared.
 ## Acceleration
 
 At 65th level, you can greatly improve the time it takes for your magic to recover after casting a spell. When you would incur action delay from resolving a spell cast, you can consume extra mana to reduce your action delay down to 0, consuming 1 mana for every 2 action time (rounded down) reduced by this effect. You cannot use this effect to reduce your action delay past what your spell cast would have added.
