@@ -15,24 +15,21 @@
 | 100   | **Mirror Realm** |
 ## Trickster
 
-when resolve spell cast can immediately change target
+At 5th level, your spells show no intent or outright display incorrect properties. When you resolve a spell cast you can, at the start of resolution before any reactions are taken, immediately change any targets/locations you declared when you cast it.
 ## Spellbook
 
 At 10th level, you gain access to the Illusionist spell table.
 ## Encore
 
-when illusion is broken, regain half of mana spent on it
+At 30th level, your illusions only necessitate that your show must go on. When an illusion created by your spells is destroyed, you regain half of the mana you consumed casting it.
 ## Fool's Bluff
 
-invisible while cast action
+At 60th level, your magic enwraps you in a deceptive shroud. When you are in the middle of a cast action, you become invisible with your spell DC. You stop being invisible when you enter spell resolution.
 ## Phantom Thief
 
-permanent +20 to perception
-automatically detect any magic you see
-cast action for class spell does not automatically end turn and does not lock movement
+At 90th level, your illusionist skills have skyrocketed your understanding of deception. You gain a permanent +10 to perception and you automatically attempt to detect any magic you see. Your cast action for your class spells does not automatically end your turn and does not lock your movement.
 ## Mirror Realm
 
-for next minute
-as bonus action immediately cast class spells up to auleric level
-double spell dc
-every time an illusion destroyed, full mana refund and can immediately cast another class spell
+At 100th level, you can construct a realm of illusion that only you can see through. Once per long rest, as a bonus action, you can immediately cast a number of class spells no higher than your Auleric level, then apply the following effect for the next minute:
+- Double your spell DC.
+- Every time your illusion is destroyed, you regain all the mana consumed by that illusion then immediately recast another class spell.
