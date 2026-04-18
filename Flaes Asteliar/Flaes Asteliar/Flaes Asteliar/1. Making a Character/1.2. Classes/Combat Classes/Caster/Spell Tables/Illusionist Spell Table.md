@@ -1,6 +1,7 @@
 
 | Name                  | Description | Range | Speed | Casting Delay (AT) | Action Delay | Mana Cost | Arcana Point Cost | Auleric Level |
 | --------------------- | ----------- | :---: | ----- | :----------------: | :----------- | --------- | ----------------- | ------------- |
+| Freedom of Movement   |             |       |       |                    |              |           |                   | 5             |
 | Illusory Script       |             |       |       |                    |              |           |                   | 1             |
 | Programmed Holo       |             |       |       |                    |              |           |                   | 1             |
 | Magic Lock            |             |       |       |                    |              |           |                   | 1             |

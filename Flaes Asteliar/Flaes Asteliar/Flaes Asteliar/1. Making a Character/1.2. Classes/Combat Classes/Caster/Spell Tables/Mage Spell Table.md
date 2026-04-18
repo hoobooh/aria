@@ -20,6 +20,7 @@
 | Levitate          |             |       |       |                    |              |           |                   | 3             |
 | Rune Trap         |             |       |       |                    |              |           |                   | 3             |
 | Ward              |             |       |       |                    |              |           |                   | 3             |
+| Heat Metal        |             |       |       |                    |              |           |                   | 3             |
 | Become Element    |             |       |       |                    |              |           |                   | 4             |
 | Catapult          |             |       |       |                    |              |           |                   | 4             |
 | Constrict         |             |       |       |                    |              |           |                   | 4             |
