@@ -41,7 +41,6 @@
 | Event Horizon     |             |       |       |                    |              |           |                   | 8             |
 | Inferno           |             |       |       |                    |              |           |                   | 8             |
 | Tornado           |             |       |       |                    |              |           |                   | 8             |
-| Dominate Creature |             |       |       |                    |              |           |                   | 9             |
 | Fly               |             |       |       |                    |              |           |                   | 9             |
 | Telekinesis       |             |       |       |                    |              |           |                   | 9             |
 | Crown of Life     |             |       |       |                    |              |           |                   | 10            |
