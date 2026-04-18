@@ -15,7 +15,7 @@ A rare variant of casters that can sling spells at astonishing speeds in exchang
 | 100   | **Unlimitation** |
 ## Flash Cast
 
-At 5th level, you can cast spells at a staggering speed. Reduce the casting delays of all your spells by your DEX score (min. 0). Reduce the action delay of all your spells by 35% rounded down. Choose 1 casting component (vocal or somatic); ignore it for all spells.
+At 5th level, you can cast spells at a staggering speed. Reduce the casting delays of all your spells by your DEX score (min. 0). Reduce the action delay of all your spells by 35% rounded down. Your spells do not trigger attacks of opportunity. Choose 1 casting component (vocal or somatic); ignore it for all spells.
 ## Spellbook
 
 At 10th level, you gain access to the Flash Caster spell table.
