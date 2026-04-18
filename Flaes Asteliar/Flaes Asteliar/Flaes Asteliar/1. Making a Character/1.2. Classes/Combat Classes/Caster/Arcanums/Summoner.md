@@ -23,7 +23,7 @@ You can summon your familiar as an action-speed spell that has an action delay o
 At 10th level, you gain access to the Summoner spell table.
 ## Parallel Summoning
 
-At 30th level, you can sustain multiple summons at the same time. Your spells that summon creatures no longer require concentration, but you can only have a total Auleric level of active summon spells no bigger than your Auleric level.
+At 30th level, you can sustain multiple summons at the same time. Your spells that summon creatures no longer require concentration, but you can only have a total arcana point cost of active summon spells no bigger than your maximum arcana points.
 ## Fusion
 
 At 60th level, your connection with your summoned creatures has deepened. When you take damage, you can transfer half that damage to a random summon. When a summon takes damage, it can transfer half that damage to you.
@@ -34,4 +34,4 @@ At 90th level, you can exchange bodies with your summons to gain their bodily ad
 Your original body loses its class capabilities and feats but your new body gains them instead. While in your new body, you have access to that body's original features and physical ability scores but you keep your original mental ability scores. Your new body is still treated as a summon, and must be renewed accordingly. If it is not, it will break apart and you will die.
 ## **Genesis**
 
-At 100th level, you can force an entire army of creatures into existence. Once per long rest, as a bonus action, you can cast any quantity of spells at half cost that summon creatures, but no more than your maximum arcana points / 2 (rounded down). When you do, treat all casting delays as 0 and only incur your highest action delay. These summons do not count towards your normal summon cap. When one of these summons dies, you recover half the mana you spent to summon it.
+At 100th level, you can force an entire army of creatures into existence. Once per long rest, as a bonus action, you can cast any quantity of spells at half cost that summon creatures, but that quantity cannot exceed your maximum arcana points / 2 (rounded down). When you do, treat all casting delays as 0 and only incur your highest action delay. These summons do not count towards your normal summon cap. When one of these summons dies, you recover half the mana you spent to summon it.
