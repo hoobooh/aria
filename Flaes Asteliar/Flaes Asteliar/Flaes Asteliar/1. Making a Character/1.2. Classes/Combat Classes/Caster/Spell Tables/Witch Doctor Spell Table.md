@@ -19,11 +19,13 @@
 | Warding Bond           |             |       |       |                    |              |           |                   | 4             |
 | Faulty Restoration     |             |       |       |                    |              |           |                   | 4             |
 | Arms of Hunger         |             |       |       |                    |              |           |                   | 4             |
+| Spider Climb           |             |       |       |                    |              |           |                   | 4             |
 | Heal                   |             |       |       |                    |              |           |                   | 5             |
 | Protection from Poison |             |       |       |                    |              |           |                   | 5             |
 | Amplify                |             |       |       |                    |              |           |                   | 5             |
 | Life Drain             |             |       |       |                    |              |           |                   | 5             |
 | Elemental Treatment    |             |       |       |                    |              |           |                   | 5             |
+| Silence                |             |       |       |                    |              |           |                   | 5             |
 | Restrict Creature      |             |       |       |                    |              |           |                   | 6             |
 | Chain Lightning        |             |       |       |                    |              |           |                   | 6             |
 | Replicate Curse        |             |       |       |                    |              |           |                   | 6             |

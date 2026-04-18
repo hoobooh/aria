@@ -21,7 +21,7 @@ At 5th level, your spells show no intent or outright display incorrect propertie
 At 10th level, you gain access to the Illusionist spell table.
 ## Encore
 
-At 30th level, your illusions only necessitate that your show must go on. When an illusion created by your spells is destroyed, you regain half of the mana you consumed casting it.
+At 30th level, your illusions only necessitate that your show must go on. When an illusion created by your spells is disturbed, you can destroy it and regain half of the mana you consumed casting it.
 ## Fool's Bluff
 
 At 60th level, your magic enwraps you in a deceptive shroud. When you are in the middle of a cast action, you become invisible with your spell DC. You stop being invisible when you enter spell resolution.
@@ -32,4 +32,4 @@ At 90th level, your illusionist skills have skyrocketed your understanding of de
 
 At 100th level, you can construct a realm of illusion that only you can see through. Once per long rest, as a bonus action, you can immediately cast a number of class spells no higher than your Auleric level, then apply the following effect for the next minute:
 - Double your spell DC.
-- Every time your illusion is destroyed, you regain all the mana consumed by that illusion then immediately recast another class spell.
+- Every time your illusion is destroyed, you regain all the mana consumed by that illusion (instead of half) then immediately cast another class spell.
