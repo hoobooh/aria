@@ -46,7 +46,7 @@ You can start with the following equipment, in addition to the equipment granted
 
 At 1st level, you can cast spells that you know by consuming mana. You gain access to the Common spell table.
 
-You can learn or change spells when you take an Ability Score Improvement, as well as when you first get this feature. Each spell incurs an arcana point cost, and you can only learn spells that would not make your total arcana point cost exceed your maximum arcana points. Multiple the mana cost of any spell that has a higher Auleric level than your Auleric level by the difference between the two.
+You can learn or change spells when you take an Ability Score Improvement, as well as when you first get this feature. Each spell incurs an arcana point cost, and you can only learn spells that would not make your total arcana point cost exceed your maximum arcana points. Multiple the mana cost of any spell that has a higher Auleric level than your Auleric level by the difference between the two + 1.
 
 Your maximum mana is equal to your WIS * 10 + your level. You can have an amount of arcana points up to your INT + your level / 5 (rounded down).
 You restore all your mana when you take a long rest.

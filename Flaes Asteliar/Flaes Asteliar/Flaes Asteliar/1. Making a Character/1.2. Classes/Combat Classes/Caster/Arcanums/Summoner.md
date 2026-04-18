@@ -26,7 +26,7 @@ At 10th level, you gain access to the Summoner spell table.
 At 30th level, you can sustain multiple summons at the same time. Your spells that summon creatures no longer require concentration, but you can only have a total Auleric level of active summon spells no bigger than your Auleric level.
 ## Fusion
 
-At 60th level, your connection with your summoned creatures has deepened. You can now share your senses with your summons, letting you perceive through them and them through you. You can now exchange information with your summons via telepathy. When you take damage, you can transfer half that damage to a random summon. When a summon takes damage, it can transfer half that damage to you.
+At 60th level, your connection with your summoned creatures has deepened. When you take damage, you can transfer half that damage to a random summon. When a summon takes damage, it can transfer half that damage to you.
 ## Soul Migration
 
 At 90th level, you can exchange bodies with your summons to gain their bodily advantages as well as possibly avoid a perilous death. As an action, you can implant your soul into a summon under your control that you are touching, and if you do, the original soul of that summon goes into your original body instead.
