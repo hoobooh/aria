@@ -2,18 +2,18 @@ Warriors have an innate talent for sports and fighting, letting them excel as at
 
 | Level |   Features    |
 | :---: | :-----------: |
-|   1   |  Athleticism  |
-|  18   |   Vigilance   |
-|  38   | Soldier's Eye |
-|  58   | Hasty Sleeper |
-|  78   |  Sixth Sense  |
-|  98   |   Dauntless   |
+|   1   |     Hardy     |
+|  18   | Unspecialized |
+|  38   |               |
+|  58   |               |
+|  78   |               |
+|  98   | Honest Heart  |
 # Class Bonuses
 
 <big><big>Proficiencies</big></big>
 **Armor:** Heavy armor, medium armor, light armor
-**Weapons:** Simple weapons, martial weapons
-**Saving Throws**: Strength, Constitution
+**Weapons:** Simple weapons
+**Saving Throws**: Constitution
 
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:

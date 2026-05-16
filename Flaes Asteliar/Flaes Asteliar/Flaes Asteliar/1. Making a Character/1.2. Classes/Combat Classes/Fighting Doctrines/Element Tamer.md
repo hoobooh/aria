@@ -1,4 +1,4 @@
-Frequently misconstrued as casters, Element Tamers manipulate various elements, imbuing their weaponry with otherworldly powers and commanding the world around them. They excel at area control and using their elements to exploit various weaknesses.
+Element Tamers manipulate various elements, imbuing their weaponry with otherworldly powers and commanding the world around them. They excel at area control and using their elements to exploit various weaknesses.
 
 | Level | Features             | Martial Art Points | Channeling Dice | Save DC |
 | ----- | -------------------- | :----------------: | :-------------: | :-----: |

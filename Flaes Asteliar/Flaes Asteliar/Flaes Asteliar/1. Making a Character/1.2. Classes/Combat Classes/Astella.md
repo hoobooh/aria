@@ -27,24 +27,13 @@ An Astella connects with their inner Aulera awaken to a common set of elevated a
 
 # Class Features
 
-As a martial, you gain the following class features.
+As an Astella, you gain the following class features.
 
 <big><big>Hit Points</big></big>
 **Hit dice:** (1d29 / 10) per martial level
 **Hit Points at 1st Level:** 84 + your Constitution Modifier
 **Hit Points at Higher Levels:** 1.5 (or 1d29 / 10) + your Constitution modifier \* 0.2 per martial level after 1st
 **Speed**: 40 ft.
-
-<big><big>Proficiencies</big></big>
-**Armor:** Heavy armor, medium armor, light armor
-**Weapons:** Simple weapons, martial weapons
-
-<big><big>Equipment Starter Pack</big></big>
-You can start with the following equipment, in addition to the equipment granted by your race and background:
-
-- (a) chain armor or (b) leather armor, longbow, and 24 arrows or (c) light crossbow and 12 bolts or (d) pistol (-4)
-- (a) arming sword, shield or (b) longsword
-- Explorer's pack and 625 gp in any currency of your choice
 ## Weapon Adept
 
 At 1st level, you become familiar with one particular weapon that feels natural to you. You choose 1 weapon from the basic weapons list. When you are wielding a variant of that weapon, you gain the following effects:
