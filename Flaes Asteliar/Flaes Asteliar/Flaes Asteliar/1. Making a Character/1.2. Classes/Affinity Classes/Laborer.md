@@ -21,13 +21,13 @@ You can start with the following equipment, in addition to the equipment granted
 - (a) chain armor and -350 gp or (b) leather armor
 - (a) 16 darts or (b) light crossbow and 12 bolts
 - (a) sledgehammer or (b) pickaxe or (c) sickle or (d) spear
-- Explorer's pack and 1225 gp in any currency of your choice
+- Dungeoneer's pack and 1170 gp in any currency of your choice
 
 # Class Features
 
 ## Hardy
 
-At 1st level, you are extremely durable. Gain double proficiency on all CON saves and gain Physical Defense 3.
+At 1st level, you are extremely durable. Gain double proficiency on all CON saves and gain Physical Defense 1.
 ## Menial
 
 At 18th level, you can perform menial tasks with ease. Gain advantage on checks to perform menial tasks.
