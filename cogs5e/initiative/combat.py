@@ -505,7 +505,7 @@ class Combat:
         for combatant in self._combatants:
             combatant.init = max(0, combatant.init - i)
 
-        # scuffed but working solution to fix an unintended action interaction where someone can theoretically have 400% the action economy of everyone else
+        # scuffed but working solution to fix an unintended AT interaction where someone can theoretically have 400% the action economy of everyone else
 
         com.init += 99999
 
@@ -520,6 +520,7 @@ class Combat:
         self._current_index = 0
 
         self._turn = self.current_combatant.init
+
         self.current_combatant.on_turn(1, True)
         com.on_turn(1, False)
         return changed_round, messages

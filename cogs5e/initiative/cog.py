@@ -757,8 +757,6 @@ class InitTracker(commands.Cog):
 
         @option(pass_group=True)
         async def p(combatant):
-            if combatant is combat.current_combatant:
-                return "\u274c You cannot change a combatant's Action Time on their own turn."
             try:
                 new_init, old_init = mod_or_set("p", combatant.init)
                 combatant.init = max(0, new_init)

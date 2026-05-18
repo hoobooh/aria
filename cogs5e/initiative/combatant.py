@@ -437,6 +437,7 @@ class Combatant(BaseCombatant, StatBlock):
         """
         if self.temp_hp > 0:
             self.temp_hp = self.temp_hp/2
+
         for e in self.get_effects().copy():
             e.on_turn(num_turns, start)
 

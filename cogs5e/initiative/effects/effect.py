@@ -368,6 +368,8 @@ class InitiativeEffect:
             return
         if self.duration==-1:
             return
+        if self.duration is None:
+            return
         # conditions to remove effect:
         # start/end of turn
         if self.end_on_turn_end and not start:
