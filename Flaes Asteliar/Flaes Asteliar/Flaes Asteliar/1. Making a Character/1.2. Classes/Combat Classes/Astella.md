@@ -4,7 +4,7 @@ An Astella connects with their inner Aulera awaken to a common set of elevated a
 | :---: | :---------------: | :------------------------------- | :-------------------: |
 |   1   |        +1         | Weapon Adept, Affinity Class     |           -           |
 |   5   |        +1         | Fighting Doctrine, Astella Surge |           1           |
-|  10   |        +1         | Physical Attunement              |           1           |
+|  10   |        +1         | -                                |           1           |
 |  15   |        +1         | Ability Score Improvement        |           2           |
 |  20   |        +2         | -                                |           2           |
 |  25   |        +2         | Overwhelming Attack              |           2           |
@@ -19,8 +19,8 @@ An Astella connects with their inner Aulera awaken to a common set of elevated a
 |  70   |        +4         | -                                |           4           |
 |  75   |        +4         | Ability Score Improvement        |           5           |
 |  80   |        +5         | -                                |           5           |
-|  85   |        +5         | Unparalleled Health              |           5           |
-|  90   |        +5         | Weapon Grandmaster               |           5           |
+|  85   |        +5         | Weapon Grandmaster               |           5           |
+|  90   |        +5         | -                                |           5           |
 |  95   |        +5         | Ability Score Improvement        |           5           |
 |  100  |        +6         | **Exceed Art**                   |           6           |
 
@@ -37,6 +37,7 @@ As an Astella, you gain the following class features.
 ## Weapon Adept
 
 At 1st level, you become familiar with one particular weapon that feels natural to you. You choose 1 weapon from the basic weapons list. When you are wielding a variant of that weapon, you gain the following effects:
+- You are proficient with that weapon.
 - Gain a +2 attack bonus when you make an attack with that weapon.
 - Attacks of Opportunity with that weapon automatically apply critical damage if they hit.
 You can change the weapon that you are adept with during a long rest.
@@ -52,7 +53,7 @@ At 5th level, your Astella arts have started to develop more potently. Choose a 
 | Berserker         |      Melee       |
 | Blitz Blader      |      Melee       |
 | Desperado         |      Ranged      |
-| Element Channeler | Melee or Ranged  |
+| Elemental         | Melee or Ranged  |
 | Guardian          | Melee or Ranged  |
 | Ki Spirit         |      Melee       |
 | Thousand Bearer   |       All        |
@@ -62,9 +63,6 @@ At level 5, you can push your body past its limits for the briefest of moments. 
 - Gain advantage on all physical saving checks and throws.
 - You can jump up to half your speed.
 You regain all your Astella Surge charges at the end of a short or long rest.
-## Physical Attunement
-
-At 10th level, your body has become attuned to the physical world. Gain a +5 bonus on perception checks.
 ## Ability Score Improvement
 
 At 15th level , and again at 35th, 55th, 75th, and 95th level, you can increase one ability score of your choice by 2 and another of your choice that isn't the same ability by 1.
@@ -87,15 +85,9 @@ At 50th level, your defensive capabilities have significantly improved, letting 
 ## Breath of Fresh Air
 
 At 65th level, you can force yourself out of high-intensity situations. Once per short rest, if your Action Time is above 150, you can reduce your Action Time by 100.
-## Unparalleled Health
-
-At 85th level, your body has attained truly unparalleled resilience. You gain the following effects:
-- You are immune to common diseases and poisons.
-- Increase the amount of death saving throw failures that you can have to 5.
-- You are resistant to any effects that would speed up your aging.
 ## Weapon Grandmaster
 
-At 90th level, you have truly become one with your weapon. When you are wielding a weapon that you are adept with, gain the following effects:
+At 85th level, you have truly become one with your weapon. When you are wielding a weapon that you are adept with, gain the following effects:
 - Gain an additional +4 attack bonus when you are attacking with that weapon.
 - Reduce that weapon's Action Delay by an additional 20%, rounded down.
 - You auto-succeed any checks against getting that weapon disarmed.
