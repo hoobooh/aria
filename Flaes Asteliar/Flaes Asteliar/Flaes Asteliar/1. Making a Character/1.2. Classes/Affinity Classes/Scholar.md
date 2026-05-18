@@ -14,6 +14,7 @@ Scholars have an innate talent for studying and learning. While they are better 
 **Armor:** Light armor
 **Weapons:** Simple weapons
 **Saving Throws**: Intelligence, Wisdom
+**Skills:** Choose any three skills.
 
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:

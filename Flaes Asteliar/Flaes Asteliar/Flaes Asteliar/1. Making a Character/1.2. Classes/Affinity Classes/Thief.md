@@ -14,6 +14,7 @@ Thieves have an innate talent for stealth and nimble foolery. They make excellen
 **Armor:** Light armor
 **Weapons:** Simple weapons, martial weapons
 **Saving Throws**: Dexterity, Wisdom
+**Skills:** Choose two skills from Acrobatics, Deception, Perception, Investigation, Sleight of Hand, and Stealth
 
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:

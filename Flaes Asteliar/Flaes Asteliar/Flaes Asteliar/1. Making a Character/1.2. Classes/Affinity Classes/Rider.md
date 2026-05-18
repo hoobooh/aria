@@ -14,6 +14,7 @@ Riders have an innate talent for piloting vehicles. They shine most when given a
 **Armor:** Light armor
 **Weapons:** Simple weapons, martial weapons
 **Saving Throws**: Dexterity, Intelligence
+**Skills:** Choose two skills from Athletics, Acrobatics, Animal Handling, Arcana, Medicine, and Nature
 
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:

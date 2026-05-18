@@ -31,9 +31,9 @@ As an Astella, you gain the following class features.
 
 <big><big>Hit Points</big></big>
 **Hit dice:** (1d29 / 10) per Astella level
-**Hit Points at 1st Level:** 84 + your Constitution modifier
+**Hit Points at 1st Level:** 54 + your Constitution modifier \* 2
 **Hit Points at Higher Levels:** 1.5 (or 1d29 / 10) + your Constitution modifier \* 0.2 per Astella level after 1st
-**Speed**: 40 ft.
+**Speed**: 30 ft.
 ## Weapon Adept
 
 At 1st level, you become familiar with one particular weapon that feels natural to you. You choose 1 weapon from the basic weapons list. When you are wielding a variant of that weapon, you gain the following effects:

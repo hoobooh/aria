@@ -14,7 +14,7 @@ Merchants have an innate talent for befriending people and persuading others. Th
 **Armor:** Light armor
 **Weapons:** Simple weapons
 **Saving Throws**: Intelligence, Charisma
-
+**Skills:** Choose two skills from Arcana, Deception, History, Insight, Religion, Persuasion, and Perception
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:
 

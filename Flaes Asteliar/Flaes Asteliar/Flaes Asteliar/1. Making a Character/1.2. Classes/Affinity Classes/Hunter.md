@@ -14,6 +14,7 @@ Hunters have an innate talent for tracking others and making the most of their e
 **Armor:** Medium armor, light armor
 **Weapons:** Simple weapons, martial weapons
 **Saving Throws**: Dexterity, Constitution
+**Skills:** Choose two skills from Animal Handling, Investigation, Medicine, Perception, Nature, Stealth, and Survival
 
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:
@@ -30,7 +31,7 @@ You can start with the following equipment, in addition to the equipment granted
 At 1st level, you are adept at hiding your presence and moving around without being caught. Gain a +10 bonus in Stealth or Sleight of Hand.
 ## Forager
 
-At 18th level, you are resourceful in the wilderness. Gain advantage on Nature checks and find double the food supplies you normally would.
+At 18th level, you are resourceful in the wilderness. Gain advantage on Nature checks and Survival checks. Find double the food supplies you normally would.
 ## Tracker
 
 At 38th level, you are particularly keen on traces of activity. Gain advantage on Investigation checks to track someone.

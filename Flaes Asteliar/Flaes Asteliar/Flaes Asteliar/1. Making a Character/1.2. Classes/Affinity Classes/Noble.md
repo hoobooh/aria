@@ -14,6 +14,7 @@ Nobles have an innate talent for leading and inspiring people. They excel in soc
 **Armor:** Medium armor, light armor
 **Weapons:** Simple weapons, martial weapons
 **Saving Throws**: Wisdom, Charisma
+**Skills:** Choose two skills from Athletics, Acrobatics, Insight, History, Performance, Religion, Persuasion, and Intimidation
 
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:

@@ -14,6 +14,7 @@ Artists have an innate talent for performing and enthralling people. Their perfo
 **Armor:** None
 **Weapons:** Simple weapons, martial weapons
 **Saving Throws**: Wisdom, Charisma
+**Skills:** Choose two skills from Religion, Deception, Persuasion, Perception, Performance, Sleight of Hand, and Insight
 
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:

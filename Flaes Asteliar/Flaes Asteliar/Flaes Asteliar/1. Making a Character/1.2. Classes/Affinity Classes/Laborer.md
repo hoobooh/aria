@@ -14,6 +14,7 @@ Laborers have an innate talent for hard work and endurance. While not particular
 **Armor:** None
 **Weapons:** Simple weapons
 **Saving Throws**: Constitution
+**Skills:** Choose two skills from Athletics, Animal Handling, Insight, Survival, and Religion
 
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:

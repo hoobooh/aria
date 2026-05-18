@@ -14,6 +14,7 @@ Warriors have an innate talent for sports and fighting, letting them excel as at
 **Armor:** Heavy armor, medium armor, light armor
 **Weapons:** Simple weapons, martial weapons
 **Saving Throws**: Strength, Constitution
+**Skills:** Choose two skills from Athletics, Acrobatics, Intimidation, Perception, Religion, Medicine, and Survival
 
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:
