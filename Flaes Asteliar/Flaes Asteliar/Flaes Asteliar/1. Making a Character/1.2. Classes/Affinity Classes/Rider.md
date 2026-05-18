@@ -1,4 +1,4 @@
-Drivers have an innate talent for piloting vehicles. They shine most when given a mount or when urgent driving becomes a necessity.
+Riders have an innate talent for piloting vehicles. They shine most when given a mount or when urgent driving becomes a necessity.
 
 | Level |      Features      |
 | :---: | :----------------: |

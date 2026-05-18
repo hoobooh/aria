@@ -31,7 +31,7 @@ As an Astella, you gain the following class features.
 
 <big><big>Hit Points</big></big>
 **Hit dice:** (1d29 / 10) per martial level
-**Hit Points at 1st Level:** 84 + your Constitution Modifier
+**Hit Points at 1st Level:** 84 + your Constitution modifier
 **Hit Points at Higher Levels:** 1.5 (or 1d29 / 10) + your Constitution modifier \* 0.2 per martial level after 1st
 **Speed**: 40 ft.
 ## Weapon Adept
@@ -39,7 +39,7 @@ As an Astella, you gain the following class features.
 At 1st level, you become familiar with one particular weapon that feels natural to you. You choose 1 weapon from the basic weapons list. When you are wielding a variant of that weapon, you gain the following effects:
 - Gain a +2 attack bonus when you make an attack with that weapon.
 - Attacks of Opportunity with that weapon automatically apply critical damage if they hit.
-You can change the weapon that you are adept with when you take an Ability Score Improvement.
+You can change the weapon that you are adept with during a long rest.
 ## Affinity Class
 
 At 1st level, you choose 1 affinity class from the affinity class list. Your affinity class's level is the same as your main class level.

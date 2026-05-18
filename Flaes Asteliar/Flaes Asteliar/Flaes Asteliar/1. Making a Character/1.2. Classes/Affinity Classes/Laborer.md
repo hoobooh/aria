@@ -11,14 +11,14 @@ Laborers have an innate talent for hard work and endurance. While not particular
 # Class Bonuses
 
 <big><big>Proficiencies</big></big>
-**Armor:** Heavy armor, medium armor, light armor
+**Armor:** None
 **Weapons:** Simple weapons
 **Saving Throws**: Constitution
 
 <big><big>Equipment Starter Pack</big></big>
 You can start with the following equipment, in addition to the equipment granted by your race and background:
 
-- (a) chain armor and -350 gp or (b) leather armor
+- (a) chain armor and -350 gp or (b) leather armor or (c) fur armor and dagger
 - (a) 16 darts or (b) light crossbow and 12 bolts
 - (a) sledgehammer or (b) pickaxe or (c) sickle or (d) spear
 - Dungeoneer's pack and 1170 gp in any currency of your choice
@@ -27,7 +27,7 @@ You can start with the following equipment, in addition to the equipment granted
 
 ## Hardy
 
-At 1st level, you are extremely durable. Gain double proficiency on all CON saves and gain Physical Defense 1.
+At 1st level, you are extremely durable. Gain double proficiency on all CON saves and gain Physical Defense 1d2.
 ## Menial
 
 At 18th level, you can perform menial tasks with ease. Gain advantage on checks to perform menial tasks.
