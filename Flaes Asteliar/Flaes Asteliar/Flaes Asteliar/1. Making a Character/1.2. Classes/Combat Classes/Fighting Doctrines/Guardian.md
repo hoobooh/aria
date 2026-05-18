@@ -21,7 +21,7 @@ At 5th level, your body has undergone great conditioning to become stronger. App
 - Gain a +2 attack bonus on all attacks.
 - Reduce the Action Delay and loading times of all your weapons/attacks by 10% (rounded up).
 - Immediately undergo an Ability Score Improvement.
-- Gain advantage on one saving throw type of your choice.
+- Gain proficiency in one saving throw type of your choice.
 - Gain 1 feat.
 ## Astella Arts
 
@@ -71,7 +71,7 @@ At 90th level, your body is conditioned to an insurmountable level. Apply the fo
 - Gain an additional +2 attack bonus on all attacks.
 - Reduce the Action Delay and loading times of all your weapons/attacks by an additional 10% (rounded up).
 - Immediately undergo an Ability Score Improvement.
-- Gain advantage on one more saving throw type of your choice.
+- Gain proficiency in one more saving throw type of your choice.
 - Gain 1 feat.
 - Gain resistance to 2 damage types of your choice.
 ## **Damocles**

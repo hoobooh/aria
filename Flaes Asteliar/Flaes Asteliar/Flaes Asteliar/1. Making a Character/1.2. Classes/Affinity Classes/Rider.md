@@ -11,7 +11,7 @@ Riders have an innate talent for piloting vehicles. They shine most when given a
 # Class Bonuses
 
 <big><big>Proficiencies</big></big>
-**Armor:** Light armor
+**Armor:** Light armor, shields
 **Weapons:** Simple weapons, martial weapons
 **Saving Throws**: Dexterity, Intelligence
 **Skills:** Choose two skills from Athletics, Acrobatics, Animal Handling, Arcana, Medicine, and Nature

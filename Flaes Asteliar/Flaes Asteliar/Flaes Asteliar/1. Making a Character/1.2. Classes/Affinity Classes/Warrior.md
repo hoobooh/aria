@@ -11,7 +11,7 @@ Warriors have an innate talent for sports and fighting, letting them excel as at
 # Class Bonuses
 
 <big><big>Proficiencies</big></big>
-**Armor:** Heavy armor, medium armor, light armor
+**Armor:** Heavy armor, medium armor, light armor, shields
 **Weapons:** Simple weapons, martial weapons
 **Saving Throws**: Strength, Constitution
 **Skills:** Choose two skills from Athletics, Acrobatics, Intimidation, Perception, Religion, Medicine, and Survival

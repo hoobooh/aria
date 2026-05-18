@@ -6,23 +6,23 @@ An Astella connects with their inner Aulera awaken to a common set of elevated a
 |   5   |        +1         | Fighting Doctrine, Astella Surge |           1           |
 |  10   |        +1         | Physical Attunement              |           1           |
 |  15   |        +1         | Ability Score Improvement        |           2           |
-|  20   |        +1         | -                                |           2           |
+|  20   |        +2         | -                                |           2           |
 |  25   |        +2         | Overwhelming Attack              |           2           |
 |  30   |        +2         | -                                |           3           |
 |  35   |        +2         | Ability Score Improvement        |           3           |
-|  40   |        +2         | -                                |           3           |
+|  40   |        +3         | -                                |           3           |
 |  45   |        +3         | Weapon Expert                    |           3           |
 |  50   |        +3         | Improved Defensive Stance        |           4           |
 |  55   |        +3         | Ability Score Improvement        |           4           |
-|  60   |        +3         | -                                |           4           |
+|  60   |        +4         | -                                |           4           |
 |  65   |        +4         | Breath of Fresh Air              |           4           |
 |  70   |        +4         | -                                |           4           |
 |  75   |        +4         | Ability Score Improvement        |           5           |
-|  80   |        +4         | -                                |           5           |
+|  80   |        +5         | -                                |           5           |
 |  85   |        +5         | Unparalleled Health              |           5           |
 |  90   |        +5         | Weapon Grandmaster               |           5           |
 |  95   |        +5         | Ability Score Improvement        |           5           |
-|  100  |        +5         | **Exceed Art**                   |           6           |
+|  100  |        +6         | **Exceed Art**                   |           6           |
 
 
 # Class Features
