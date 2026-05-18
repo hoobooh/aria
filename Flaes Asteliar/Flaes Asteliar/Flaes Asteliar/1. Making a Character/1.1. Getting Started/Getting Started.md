@@ -11,7 +11,7 @@ You might notice that this is an extended version of Derixyleth's v2.1 GSheet fo
 And a name, if you want. Some people prefer to save that for last. Go through the list on the left and find something that appeals to you, then fill in your GSheet accordingly.
 
 #### 3. Choose a background.
-And by background, that doesn't just mean the mechanical background (though you should choose that too). Make your character an actual character, not just a mechanical shell. Consider, of course, the bond/flaw system already inside your GSheet. Consider how your character would actually interact in the world; a character that is prone to conflict and uninterested in the plights of your campaign probably won't have a great time there. 
+And by background, that doesn't just mean a mechanical background like an affinity class (though you should choose that too). Make your character an actual character, not just a mechanical shell. Consider, of course, the bond/flaw system already inside your GSheet. Consider how your character would actually interact in the world; a character that is prone to conflict and uninterested in the plights of your campaign probably won't have a great time there. 
 
 Here are some basic questions to get you going; use them or don't.
 
@@ -25,7 +25,7 @@ How moral is your character? A radiant hero, a dashing rogue, or perhaps an aver
 #### 4. Assemble your gear.
 You're almost done! Your class, race, and background should have specified what gear you can bring. By default, Aria5e starts you off with 2000 gold pieces along with whatever is provided by your character selections, but you should discuss this with your DM to make sure that's the amount they intend for you to start off with.
 
-If you'd prefer not to dig through item lists, that's fine! Aria5e's classes has suggested starting packages that simplify the process for you. Keep note of your carry weight too. Your speed and DEX will go down with how overweight you get. Be careful! Make sure you record all your gear, equipped or not, in the Inventory tab of your GSheet.
+If you'd prefer not to dig through item lists, that's fine! Aria5e's classes have suggested starting packages that simplify the process for you. Keep note of your carry weight too. Your speed and DEX will go down with how overweight you get. Be careful! Make sure you record all your gear, equipped or not, in the Inventory tab of your GSheet.
 
 #### 5. Choose a name (If You Haven't Already).
 The title's pretty clear. Choose a name! Try to be mindful of your character's past: different cultures have different naming styles, after all.
