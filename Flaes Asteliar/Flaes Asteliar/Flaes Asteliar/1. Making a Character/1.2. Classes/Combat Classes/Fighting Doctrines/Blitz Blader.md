@@ -22,7 +22,7 @@ At 10th level, you gain access to unique Blitz Blader Astella arts. Choose Astel
 
 | Astella Art        | Description                                                                                                                                                    | Astella Art Points Required |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------: |
-| Finesse Adept      | When you are wielding a melee weapon with the finesse property, you can perform an attack with your bonus action using that weapon.                            |              1              |
+| Light Adept        | When you are wielding a melee weapon that does not have the Heavy property, you can perform an attack with your bonus action using that weapon.                |              1              |
 | Overwhelm          | When you start your turn and a creature is within melee range, you can immediately perform a melee attack on that creature.                                    |              1              |
 | Perfect Rhythm     | This turn, if you have successfully landed at least 3 melee attacks and you have not missed a single attack, you lose 30 Action Time after your turn ends.     |              1              |
 | Perfect Start      | When you perform a melee attack on your turn: if you have not moved and this is your first melee attack this turn, you can perform this attack with advantage. |              1              |
