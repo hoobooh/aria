@@ -32,7 +32,7 @@ At 10th level, you gain access to unique Guardian Astella arts. Choose Astella a
 | Cleave            | As an attack action, you can increase your Action Time by 45 then apply the same melee attack on all creatures that are in range. When you do, you only incur the Action Delay of a single attack.                                               |              1              |
 | Disarming Strike  | As an attack action, you can increase your Action Time by 35 then perform an attack on a target. Then, immediately attempt to disarm them.                                                                                                       |              1              |
 | Interception      | When a creature within melee range would be attacked or a projectile from an attack would enter your melee range, you can attempt to reduce the damage of that attack/projectile by your deflect AC bonus, then increase your Action Time by 40. |              1              |
-| Power Strike      | When you attack, you can increase your Action Time by 30 to gain a +7 damage bonus.                                                                                                                                                              |              1              |
+| Power Strike      | When you attack, you can increase your Action Time by 30 to gain a +10 damage bonus.                                                                                                                                                             |              1              |
 | Riposte           | When you deflect an attack, you can immediately perform a reactive melee attack on your attacker.                                                                                                                                                |              1              |
 | Staggering Strike | As an attack action, you can increase your Action Time by 35 then perform an attack on a target. If your attack inflicts physical damage, the next attack on that target gains advantage.                                                        |              1              |
 
@@ -68,7 +68,7 @@ At 70th level, you gain access to a final set of Astella arts. Choose Astella ar
 At 90th level, your body is conditioned to an insurmountable level. Apply the following effects:
 - Gain an additional Physical Defense 2d5.
 - Gain an additional Elemental Defense 2d5.
-- Gain an additional +2 attack bonus on all attacks.
+- Gain an additional +4 attack bonus on all attacks.
 - Reduce the Action Delay and loading times of all your weapons/attacks by an additional 10% (rounded up).
 - Immediately undergo an Ability Score Improvement.
 - Gain proficiency in one more saving throw type of your choice.
@@ -76,4 +76,4 @@ At 90th level, your body is conditioned to an insurmountable level. Apply the fo
 - Gain resistance to 2 damage types of your choice.
 ## **Damocles**
 
-At 100th level, you can unleash a powerful strike that cleaves into the world around you. As an action, you can halve your current hit points (rounded up) then activate the following effect: apply a melee attack of your choice with advantage to all creatures within 60 ft. in front of you, and if you do, apply 3d25 bonus force damage to those attacks and only incur the Action Delay of a single attack. You cannot use this effect if you have only 1 hit point remaining.
+At 100th level, you can unleash a powerful strike that cleaves into the world around you. As an action, you can halve your current hit points (rounded up) then activate the following effect: apply a melee attack of your choice with advantage to all creatures within 60 ft. in front of you, and if you do, apply 6d25 bonus force damage to those attacks and only incur the Action Delay of a single attack. You cannot use this effect if you have only 1 hit point remaining.

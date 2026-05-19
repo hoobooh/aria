@@ -3,16 +3,16 @@ Elementals manipulate various elements, imbuing their weaponry with otherworldly
 | Level | Features             | Astella Art Points | Channeling Dice | Save DC |
 | ----- | -------------------- | :----------------: | :-------------: | :-----: |
 | 5     | Channeling           |         -          |        -        |    -    |
-| 10    | Astella Arts         |         1          |       1d8       |    -    |
-| 20    | -                    |         2          |       1d8       |    -    |
-| 30    | Elemental Adept      |         2          |       2d8       |    -    |
-| 40    | Greater Astella Arts |         3          |       2d8       |   14    |
-| 50    | -                    |         3          |       2d8       |   15    |
-| 60    | Elemental Expertise  |         4          |       3d8       |   16    |
-| 70    | Exalted Astella Arts |         5          |       3d8       |   17    |
-| 80    | -                    |         6          |       3d8       |   18    |
-| 90    | Elemental Mastery    |         7          |       3d8       |   19    |
-| 100   | **Incarnation**      |         8          |       4d8       |   20    |
+| 10    | Astella Arts         |         1          |       4d8       |    -    |
+| 20    | -                    |         2          |       4d8       |    -    |
+| 30    | Elemental Adept      |         2          |       5d8       |    -    |
+| 40    | Greater Astella Arts |         3          |       5d8       |   14    |
+| 50    | -                    |         3          |       6d8       |   15    |
+| 60    | Elemental Expertise  |         4          |       6d8       |   16    |
+| 70    | Exalted Astella Arts |         5          |       7d8       |   17    |
+| 80    | -                    |         6          |       7d8       |   18    |
+| 90    | Elemental Mastery    |         7          |       7d8       |   19    |
+| 100   | **Incarnation**      |         8          |       9d8       |   20    |
 ## Channeling
 
 At 5th level, you can imbue your weapons with power, causing them to flare up with elemental energy. As a bonus action, you can declare one elemental damage type: the weapon you are currently holding deals extra damage of that type equal to your Channeling Dice. You can end this effect as a bonus action and you can have only one such effect active at a time.

@@ -4,7 +4,7 @@ Laborers have an innate talent for hard work and endurance. While not particular
 | :---: | :--------------: |
 |   1   |      Hardy       |
 |  18   |   Menial Labor   |
-|  38   |    Pack Mule     |
+|  38   |   Transporter    |
 |  58   |   Conditioned    |
 |  78   | Energy Efficient |
 |  98   |      Honest      |
@@ -32,7 +32,7 @@ At 1st level, you are extremely durable. Gain double proficiency on all CON save
 ## Menial
 
 At 18th level, you can perform menial tasks with ease. Gain advantage on checks to perform menial tasks.
-## Pack Mule
+## Transporter
 
 At 38th level, you can carry extreme amounts of weight without problem. Increase your maximum carrying weight by 75 lb.
 ## Conditioned

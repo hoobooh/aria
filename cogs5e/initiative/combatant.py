@@ -436,7 +436,7 @@ class Combatant(BaseCombatant, StatBlock):
         :return: None
         """
         if self.temp_hp > 0:
-            self.temp_hp = self.temp_hp/2
+            self.temp_hp = int(self.temp_hp / 2)
 
         for e in self.get_effects().copy():
             e.on_turn(num_turns, start)
