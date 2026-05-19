@@ -60,7 +60,7 @@ By consequence, the known world within Flaes Asteliar is fairly lacking in prope
 
 Flaes Asteliar is quite advanced in some aspects and quite behind in others. Wealthy cities have access to cutting edge artificer machinery that can fly, move as though they have their own minds, and perform complicated tasks.
 
-Other things, however, appear rather lacking. Factories as a concept aren't very sustainable due to the high maintenance costs of artificer technology. Medicine relies heavily on alchemy and, for those wealthy enough to seek it, magical healers. Political systems are largely structured around monarchies. Formal education is only plentiful for those with the coin to afford it. Farms are always under threat of magical beast attacks and natural disasters.
+Other things, however, appear rather lacking. Factories as a concept aren't very sustainable due to the high maintenance costs of artificer technology. Medicine relies heavily on traditional medicine and  and, for those wealthy enough to seek it, alchemists. Political systems are largely structured around monarchies. Formal education is only plentiful for those with the coin to afford it. Farms are always under threat of magical beast attacks and natural disasters.
 
 Much of the advancements and sophisticated technology the world of Asteliar has access to are actually derived from the Forgotten Era, which was substantially more advanced. Most academies depend on scavengers to dig through ancient ruins in search of more records or technology.
 ### Transportation / Airships
@@ -80,7 +80,7 @@ Each country possesses a military, though their policies and doctrines tend to d
 
 A war between countries would be both brutal and slow. Military air cruisers are substantially slower than smaller vehicles, making large scale offenses extremely vulnerable to defensive maneuvers no matter what approach is taken. Once two sides have engaged in a large-scale battle, the lack of special firepower will make the act of killing arduous and painful.
 
-As war is so difficult to even initiate, militaries mostly exist as a part of politics and to maintain internal order. They're only called to mobilize when a crisis such as a magical beast swarm or a growing cult occurs. Consequently, joining the military is surprisingly popular.
+As war is so difficult to even initiate, militaries mostly exist as politics and to maintain internal order. They're only called to mobilize when a crisis such as a magical beast swarm or a growing cult occurs. Consequently, joining the military is surprisingly popular.
 
 Aside from militaries, countries also employ guards to maintain public order as well as mercenaries. Mercenaries are a somewhat common sight in Asteliar— those with aptitude for fighting may find that it is beneficial to join a mercenary group and hunt for bounties or take on various combat jobs such as escorting. While not looked upon particularly favorably, most mercenary groups aren't particularly noteworthy in terms of morality.
 
