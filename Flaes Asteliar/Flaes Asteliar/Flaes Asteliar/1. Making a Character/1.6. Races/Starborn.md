@@ -1,0 +1,1 @@
+The Starborn are an ancient race from long before the Celeste Destia.
