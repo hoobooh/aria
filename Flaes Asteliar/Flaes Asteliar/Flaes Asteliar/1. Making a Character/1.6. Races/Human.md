@@ -1,0 +1,7 @@
+Humans— the most populous race in Flaes Asteliar. Humans possess no particular disposition, varying dramatically in specialization and habits. Physically, they appear to be of smooth skin and round ears and usually grow to a height of 5 to 6 feet in maturity. Their skin is typically of a brown shade. They live for around 80~100 years and display no particular resilience nor weakness to diseases or other dangers.
+
+Despite their seemingly basic and unapparent features, humans are not believed to be the progenitor race of the Ancients. Instead, it is believed that humans are a combination of all the other Peoples, having become distinctly indistinct from constant intermingling and cultural exchange. Despite their lack of any particular superiority, humankind continues to persist for this exact reason. As long as other races continue to interact with one another, humankind will continue to grow.
+
+Humans live in large quantities virtually everywhere but Judicia, which remains a somewhat isolationist empire comprised of the Starborn. The only human-dominant governments are in Arkadia and Forius, but it's also theorized that the royal family of Old Arkadia likely possessed similar traits to humans.
+
+As a human, you gain +1 to all ability scores. You have a speed of 30 ft. and you know Arkadian. You gain True Defense 2.

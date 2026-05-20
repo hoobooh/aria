@@ -65,7 +65,7 @@ At level 5, you can push your body past its limits for the briefest of moments. 
 You regain all your Astella Surge charges at the end of a short or long rest.
 ## Ability Score Improvement
 
-At 15th level , and again at 35th, 55th, 75th, and 95th level, you can increase one ability score of your choice by 2 and another of your choice that isn't the same ability by 1.
+At 15th level, and again at 35th, 55th, 75th, and 95th level, you can increase one ability score of your choice by 2 or gain 1 feat. Then increase another of your choice that isn't the same ability (or any if you took a feat instead) by 1.
 ## Overwhelming Attack
 
 At 25th level, your movements have become strong enough to overwhelm an enemy. Once per turn, on your turn when you take an attack action, you can attack one more time that turn.
