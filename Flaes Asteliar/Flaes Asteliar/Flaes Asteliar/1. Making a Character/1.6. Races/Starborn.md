@@ -1,1 +1,11 @@
-The Starborn are an ancient race from long before the Celeste Destia.
+The Starborn are an ancient race from long before the Celeste Destia. The Starborn are generally but not always heavily principled and stubborn, feeling a strong mystical connection with the world and people around them. Frequently described as dogmatic and detached, their overbearing natures often push them to isolate themselves from other races. Their connection to the world discourages them from eating meat, though some choose to do so anyway. Physically, they appear to have smooth skin with uniform Auleric lines coursing through various parts of their body. Their ears are somewhat sharp and point upwards. Their eyes are noticeably different from other races, bearing star-shaped glimmers inside them. They usually grow to be around 4 to 5 feet in maturity. They live for roughly 150 to 170 years and are noticeably resistant to magic despite their physical frailness.
+
+Starborn are believed to be, along with Remnants, descendants of an older primordial race before the Forgotten Era. Perhaps most notable of their traits is their memory inheritance, where a very small portion of their parents' memories are given to Starborn children at birth. While the memories are quickly forgotten by the infant, base instincts and emotions derived from those memories remain, resulting in similar values being conserved strongly throughout generations and a race that is averse to change. Ancient texts document an Ancient Justician Inquisition that possessed the power of foresight, but it's unclear where these powers have gone. Starborn live almost entirely in a small secluded population that maintains an isolationist nation on the giant megalith that is Judicia. The only Starborn-dominant government is the Judician Theocracy, which maintains a dogmatic code of principle and worships the concept of Fate.
+
+As a Starborn, gain the following effects:
+
+- You gain +2 to WIS, +4 to CHA, and -2 to CON.
+- You gain Radiant Defense 1d8, Psychic Defense 1d4, Necrotic Defense -1d8, Physical Defense -1d6.
+- You have a speed of 30 ft. 
+- You know Arkadian and Justician.
+- You gain 1 feat of your choice.

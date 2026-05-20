@@ -92,7 +92,7 @@ Ruins and deciphered records from the Forgotten Era indicate that divine interve
 
 Many believe that gods are what brought upon the downfall of a civilization that was observably much more advanced and capable than they were. Similar tales are passed down within cultures all around the world, though they're hardly more than folk tales told to children. Fairy tales warn of gods possessing people, gods deceiving people into giving their souls, and even gods wandering the untamed lands looking for people to devour. Strangely, very few gods from the Forgotten Era's records even have known names.
 
-Despite the stigma against gods and the aforementioned gods' absence, certain communities still choose to worship various deities and figures. The most commons ones include the World Spire itself, the Red Star, and the few gods whose names were deciphered from ancient texts. Some villages in Reis worship Renga, the founder of both Rue and Rakir that some believe ascended to godhood following his death.
+Despite the stigma against gods and the aforementioned gods' absence, certain communities still choose to worship various deities and figures. The most commons ones include the World Spire itself, the Red Star, and the few gods whose names were deciphered from ancient texts. Some villages in Reis worship Renga, the founder of both Rue and Rakir that some believe ascended to godhood following his death. Judicia worships the concept of Fate, though not quite as a deity.
 
 While religious worship isn't explicitly banned, it's looked upon unfavorably in almost every city outside of those in Reis, where it's merely tolerated.
 ### Astrology
