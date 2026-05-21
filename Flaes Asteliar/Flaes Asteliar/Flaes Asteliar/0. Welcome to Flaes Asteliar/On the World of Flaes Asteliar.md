@@ -48,7 +48,7 @@ Continents in Flaes Asteliar are noticeably small. Most only hold 1 country at m
 
 Each continent is also noticeably far apart. Combined with the need to travel through or above Abyss fog, inter-continent travel is rather rare and usually reserved for military or wealthy individuals. As an upside, however, wars between countries are extremely unlikely. Anthropologists of various countries have all noted that the level of peace currently being experienced in the world is unlike any other point in history that they've managed to uncover.
 
-It is fairly certain that the continents are not moving— a concern sometimes voiced by commoners upon observing the megaliths' tendency to slightly shift from time to time.
+It is fairly certain that the continents are not moving— a concern sometimes voiced by commoners upon observing the megaliths' tendency to slightly shift from time to time. However, it is also certain that the continents are slowly falling apart. Weathered by Abyss Storms and mysterious magical breakdowns, the outskirts of the continents and sea floors crumble away more every year.
 ### Magic
 
 Magic, despite the active Abysses which constantly spew it out, is quite weak when harnessed in the hands of creatures. Barring a few beasts and people, most who pursue the magical arts can barely manage to conjure a fireball by after copious training. Those without magical aptitude would be hard-pressed to manage so much as a single cantrip.
