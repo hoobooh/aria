@@ -4,7 +4,7 @@ Centurials are the most recognizable product of the Ancient war effort during th
 
 As a Centurial, gain the following effects:
 
-- You gain +10 to CON and -2 to DEX.
+- You gain +10 to CON, -2 to CHA, and -2 to DEX.
 - You gain Physical Defense 1d8, Slashing Defense 2d8, Piercing Damage 1d2, Fire Defense 1d8, and Lightning Defense -1d8.
 - You have resistance to healing and you gain Healing Penalty 1d8.
 - You only gain a quarter of your maximum hit points back during a short rest.

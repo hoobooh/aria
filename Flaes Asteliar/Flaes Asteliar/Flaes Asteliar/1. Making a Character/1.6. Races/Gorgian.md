@@ -1,0 +1,11 @@
+Gorgians are a poorly understood race of crystal fused beings of unknown origin. They are generally peaceful and quiet beings who enjoy solitude, rarely expressing strong emotions of any kind. Gorgians eat very infrequently, some going months without touching a single meal. Physically, they have rough discolored skin with crystal and rock-like patches all over their bodies. Their ears point downwards with a sharp tip. Large crystallized horns sprout from the top of their foreheads, varying in shape and size. Their hair is completely solid and shimmers in the light. They usually grow to be around 7 to 8 feet in maturity. They live for roughly 200 to 240 years and display physical strength but move sluggishly.
+
+Gorgians were first documented some time after the Forgotten Era ended. It is said they washed up on the shores of all major continents, where many fishermen mistook them for strange Abyssal eggs. Scholars theorize that they originated from the Abysses, but there is no significant evidence to prove or deny this theory. As they display no aptitude for water, the theory that they were from the oceans themselves is generally deemed unlikely. All Gorgians seem to be born with the language of the Ancients imprinted into them. Gorgians maintain a somewhat small population. While the first Gorgians arrived at shores as infants, they can reproduce naturally amongst themselves and with other races of the Peoples. Many people, despite the Gorgians' peaceful dispositions, regard them them with some amount of suspicious due to their possible connections to the Abysses. With their difficulty fitting into society and the disconnect caused by their unnaturally long lifespans, many opt to live nomadic lifestyles with fellow Gorgians in the plains of Primera and other continents. Coalitions of Gorgian miners are also well known in Forius, where they utilize their durable bodies and affinity for slow lifestyles in large mining operations extending for decades. There are no Gorgian-dominant governments other than small nomadic tribes around the world.
+
+As a Gorgian, gain the following effects:
+
+- You gain +4 to STR, -4 to DEX, WIS +1, and INT -1.
+- You gain Physical Defense 1d6, Slashing Defense 1d5, Mystical Defense 2d4.
+- You have a speed of 30 ft.
+- You know Arkadian and Ancient.
+- You gain 1 feat of your choice.
