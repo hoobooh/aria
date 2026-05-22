@@ -46,7 +46,7 @@ Despite its many dangers, the World Spire has garnered quite a gathering of wors
 
 Continents in Flaes Asteliar are noticeably small. Most only hold 1 country at most, aside from Primera and Reis which both hold two each. Asterliaran continents are defined by the Abyss(s) around them, which group off different landmasses together. Much of the land within each remains uninhabited due to a lack of easily accessible resources and roaming magical beasts that have slowly been increasing in number.
 
-Each continent is also noticeably far apart. Combined with the need to travel through or above Abyss fog, inter-continent travel is rather rare and usually reserved for military or wealthy individuals. As an upside, however, wars between countries are extremely unlikely. Anthropologists of various countries have all noted that the level of peace currently being experienced in the world is unlike any other point in history that they've managed to uncover.
+Each continent is also noticeably far apart. Combined with the need to travel through or above Abyss fog, inter-continent travel is rather rare and usually reserved for military or wealthy individuals.
 
 It is fairly certain that the continents are not moving— a concern sometimes voiced by commoners upon observing the megaliths' tendency to slightly shift from time to time. However, it is also certain that the continents are slowly falling apart. Weathered by Abyss Storms and mysterious magical breakdowns, the outskirts of the continents and sea floors crumble away more every year.
 ### Magic
@@ -80,7 +80,7 @@ Each country possesses a military, though their policies and doctrines tend to d
 
 A war between countries would be both brutal and slow. Military air cruisers are substantially slower than smaller vehicles, making large scale offenses extremely vulnerable to defensive maneuvers no matter what approach is taken. Once two sides have engaged in a large-scale battle, the lack of special firepower will make the act of killing arduous and painful.
 
-As war is so difficult to even initiate, militaries mostly exist as politics and to maintain internal order. They're only called to mobilize when a crisis such as a magical beast swarm or a growing cult occurs. Consequently, joining the military is surprisingly popular.
+While political tensions exist, wars are rare due to the cost and plentiful space in most parts of the world.
 
 Aside from militaries, countries also employ guards to maintain public order as well as mercenaries. Mercenaries are a somewhat common sight in Asteliar— those with aptitude for fighting may find that it is beneficial to join a mercenary group and hunt for bounties or take on various combat jobs such as escorting. While not looked upon particularly favorably, most mercenary groups aren't particularly noteworthy in terms of morality.
 
