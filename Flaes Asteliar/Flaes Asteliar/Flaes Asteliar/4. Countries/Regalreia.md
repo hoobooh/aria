@@ -1,1 +1,2 @@
-Fashion differs drastically, each person expected to define and maintain themselves completely on their own. Each child is given a simple name at birth referring to simple objects or creatures such as snakes or food. When a child comes of age, they are expected to choose their own name in a large ceremony known as the Regality Ceremony. There are no restrictions on the name, though others are free to express discontent if they find the name distasteful. 
+
+Regalreia, meaning "of excellence" in the language of the region's Ancients, refers to the 
