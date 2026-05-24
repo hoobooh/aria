@@ -3,7 +3,7 @@ The Galeo Islands are a loose term used to refer to the collection of warring is
 
 Due to how unstable the governments are in this region, names are usually not assigned on any maps or texts. In the past decade alone, 7 of the islands have overthrown their leaders and instated new governments with new names. The Galeo Islands are the only known place in Flaes Asteliar where conflicts intensify to the point of civil war— likely due to the lack of livable space and resources in Galeo.
 
-The Galeo Islands are surprisingly sophisticated despite their instability. They boast higher literacy rates than Arkadia and approach political matters with delicacy. The Islands, however, suffer from a constant depopulation of qualified people immigrating to stable countries such as Arkadia or Ardentia. Unable to further develop their countries without specialized workers, conflicts between similarly desperate islands over resources and land only continue to intensify.
+The Galeo Islands are surprisingly sophisticated despite their instability. They boast higher literacy rates than Arkadia. The Islands, however, suffer from a constant depopulation of qualified people immigrating to stable countries such as Arkadia or Ardentia. Unable to further develop their countries without specialized workers, conflicts between similarly desperate islands over resources and land only continue to intensify.
 
 ## Diplomacy
 
