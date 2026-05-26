@@ -16,4 +16,8 @@ Rue's main exports are sweet beads and Ruien beef. Sweet beads, also called soft
 
 ## Military
 
-Rue does not maintain a standing army, instead often relying on mercenary companies for any conflict that arises. Most notably, they are the only country to not adopt large-scale airship production as a means of air superiority— instead relying on their wyvern riders known as 
+Rue does not maintain a large standing army, instead often relying on mercenary companies for any conflict that arises. Most notably, they are the only country to not adopt large-scale airship production as a means of air superiority. Instead, they maintain a mounted royal guard called the Wings of Rue. Rue maintains a basic garrison primarily meant to patrol their seas and quell civil unrest. Ruien cities do not possess significant anti-invasion equipment but possess little unpredictability, having mostly been built atop empty areas rather than existing cities like many other nations. Judicia maintains a sizable embassy for their Inquisition in Rue, hosting its own armed force meant to help secure Rue.
+
+## Organizations
+
+The most prominent organization within Rue is the Ruien dynasty itself, said to have
