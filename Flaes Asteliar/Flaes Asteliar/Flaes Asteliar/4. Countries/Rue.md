@@ -20,4 +20,9 @@ Rue does not maintain a large standing army, instead often relying on mercenary 
 
 ## Organizations
 
-The most prominent organization within Rue is the Ruien dynasty itself, said to have
+The most prominent organization within Rue is the Ruien dynasty itself. The dynasty is said to have descended from Renga, the founder of both Rue and Rakir. The Ruien dynasty is matriarchal and prioritizes the second eldest daughter when choosing an heir to the throne. The dynasty is responsible for approving country-wide decisions and directly commands Rue's military. As Rue is heavily centralized, the dynasty has no real internal political rivals and largely suffers from corruption within its own ranks.
+
+Rue is also home to the Wings of Rue, which is a royal guard comprised of highly trained wyvern riders. They don white armor with the Ruien dynasty's regalia along with large ornate lances. Wyverns as transportation have fallen out of popularity even within the Ruien continent due to the rising popularity of airships and air defense. The Wings of Rue fiercely guard their secrets, passing down their knowledge for communicating with and taming wyverns through its own generations. The Wings of Rue maintain an extremely strict recruiting policy. The majority of its members are either distantly related to the royal family or from families with strong political ties to the royal family. Very rarely, the Wings also recruit directly from people with notable achievements, such as renowned commanders or warriors who have braved tremendous battles. All members of the Wings must be Ruien by descent.
+
+## History
+
