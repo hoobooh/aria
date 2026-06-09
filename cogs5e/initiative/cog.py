@@ -6,7 +6,7 @@ from contextlib import suppress
 import d20
 import disnake
 from d20 import roll
-from disnake import ButtonStyle
+from disnake import ButtonStyle, Color
 from disnake.ext import commands
 from disnake.ext.commands import NoPrivateMessage
 
@@ -843,6 +843,29 @@ class InitTracker(commands.Cog):
             await ctx.send("No valid options found.")
 
     @init.command()
+    async def at(self, ctx, name: str = None, at: int = None):
+        combat = await ctx.get_combat()
+        if name is None:
+            char = combat.current_combatant
+        else:
+            char = combat.get_combatant(name)
+        if not char:
+            return
+        name = char.name
+
+        char.init += at
+        combat.sort_combatants_exclude_first()
+        await combat.final(ctx)
+
+        factor = "Increased"
+        if at < 0:
+            factor = "Reduced"
+        if at == 0:
+            await ctx.send(name + "'s current Action Time is " + char.init + ".")
+        else:
+            await ctx.send(factor + " " + name + "'s Action Time by " + str(at) + ".")
+
+    @init.command()
     async def status(self, ctx, name: str = None, *args):
         """
         Gets the status of a combatant or group.
@@ -1180,15 +1203,16 @@ class InitTracker(commands.Cog):
         except SelectionException:
             return await ctx.send("Attack/Action not found.")
 
-        atk_name=attack.name
+        atk_name = attack.name
 
         aoran = "a "
 
-        if atk_name[0] in ['a','e','u','i','o']:
+        if atk_name[0] in ['a', 'e', 'u', 'i', 'o']:
             aoran = "an "
 
         if isinstance(combatant, Character) or isinstance(combatant, MonsterCombatant):
-            attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks, actions=caster.actions)
+            attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks,
+                                                               actions=caster.actions)
             if not isinstance(attack_or_action, Attack):
                 aoran = ""
 
@@ -1229,7 +1253,7 @@ class InitTracker(commands.Cog):
 
             @disnake.ui.button(label="React", style=ButtonStyle.success)
             async def react(self, button, interaction):
-                embed.title=f"Someone has a reaction!"
+                embed.title = f"Someone has a reaction!"
                 await ctx.send(f"<@{interaction.author.id}>", embed=embed)
                 if not preserve.preserve_contents:
                     await interaction.response.defer()
@@ -1240,23 +1264,23 @@ class InitTracker(commands.Cog):
             @disnake.ui.button(label="Give Adv", style=ButtonStyle.secondary)
             async def adv(self, button, interaction):
                 nonlocal args
-                embed.title=f"The attack has gained advantage!"
+                embed.title = f"The attack has gained advantage!"
                 await ctx.send(f"<@{interaction.author.id}>", embed=embed)
                 if not preserve.preserve_contents:
                     await interaction.response.defer()
                 preserve.preserve_contents = True
-                args+=" -adv"
+                args += " -adv"
                 return
 
             @disnake.ui.button(label="Give Dis", style=ButtonStyle.secondary)
             async def dis(self, button, interaction):
                 nonlocal args
-                embed.title=f"The attack has gained disadvantage!"
+                embed.title = f"The attack has gained disadvantage!"
                 await ctx.send(f"<@{interaction.author.id}>", embed=embed)
                 if not preserve.preserve_contents:
                     await interaction.response.defer()
                 preserve.preserve_contents = True
-                args+=" -dis"
+                args += " -dis"
                 return
 
             @disnake.ui.button(label="Cancel", style=ButtonStyle.danger)
@@ -1265,14 +1289,15 @@ class InitTracker(commands.Cog):
                     await interaction.response.edit_message(delete_after=0)
                     await interaction.response.defer()
                 else:
-                    embed.title=f"{combatant.name}\'s attack was cancelled!"
-                    embed.description=""
+                    embed.title = f"{combatant.name}\'s attack was cancelled!"
+                    embed.description = ""
                     await ctx.send(embed=embed)
                     await interaction.response.edit_message(view=None)
                 return
 
-        embed.title=attempt_str
+        embed.title = attempt_str
         return await ctx.send(view=View(), embed=embed)
+
     @init.group(
         aliases=["offturntry", "oa"],
         invoke_without_command=True,
@@ -1334,15 +1359,16 @@ class InitTracker(commands.Cog):
         except SelectionException:
             return await ctx.send("Attack not found.")
 
-        atk_name=attack.name
+        atk_name = attack.name
 
         aoran = "a "
 
-        if atk_name[0] in ['a','e','u','i','o']:
+        if atk_name[0] in ['a', 'e', 'u', 'i', 'o']:
             aoran = "an "
 
         if isinstance(combatant, Character) or isinstance(combatant, MonsterCombatant):
-            attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks, actions=caster.actions)
+            attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks,
+                                                               actions=caster.actions)
             if not isinstance(attack_or_action, Attack):
                 aoran = ""
 
@@ -1383,7 +1409,7 @@ class InitTracker(commands.Cog):
 
             @disnake.ui.button(label="React", style=ButtonStyle.success)
             async def react(self, button, interaction):
-                embed.title=f"Someone has a reaction!"
+                embed.title = f"Someone has a reaction!"
                 await ctx.send(f"<@{interaction.author.id}>", embed=embed)
                 if not preserve.preserve_contents:
                     await interaction.response.defer()
@@ -1394,23 +1420,23 @@ class InitTracker(commands.Cog):
             @disnake.ui.button(label="Give Adv", style=ButtonStyle.secondary)
             async def adv(self, button, interaction):
                 nonlocal args
-                embed.title=f"The attack has gained advantage!"
+                embed.title = f"The attack has gained advantage!"
                 await ctx.send(f"<@{interaction.author.id}>", embed=embed)
                 if not preserve.preserve_contents:
                     await interaction.response.defer()
                 preserve.preserve_contents = True
-                args+=" -adv"
+                args += " -adv"
                 return
 
             @disnake.ui.button(label="Give Dis", style=ButtonStyle.secondary)
             async def dis(self, button, interaction):
                 nonlocal args
-                embed.title=f"The attack has gained disadvantage!"
+                embed.title = f"The attack has gained disadvantage!"
                 await ctx.send(f"<@{interaction.author.id}>", embed=embed)
                 if not preserve.preserve_contents:
                     await interaction.response.defer()
                 preserve.preserve_contents = True
-                args+=" -dis"
+                args += " -dis"
                 return
 
             @disnake.ui.button(label="Cancel", style=ButtonStyle.danger)
@@ -1419,13 +1445,15 @@ class InitTracker(commands.Cog):
                     await interaction.response.edit_message(delete_after=0)
                     await interaction.response.defer()
                 else:
-                    embed.title=f"{combatant.name}\'s attack was cancelled!"
-                    embed.description=""
+                    embed.title = f"{combatant.name}\'s attack was cancelled!"
+                    embed.description = ""
                     await ctx.send(embed=embed)
                     await interaction.response.edit_message(view=None)
                 return
-        embed.title=attempt_str
+
+        embed.title = attempt_str
         return await ctx.send(view=View(), embed=embed)
+
     @init.group(
         aliases=["action"],
         invoke_without_command=True,
@@ -1778,6 +1806,132 @@ class InitTracker(commands.Cog):
             return
         await self.effect(ctx, name, 'Defensive Stance',
                           args='-desc "This creature is currently in a defensive stance, imposing disadvantage on incoming attacks." -dur 1 -ac +5')
+
+    @init.command()
+    async def drop_weapon(self, ctx, name: str = None, bonus_calc: str = None, damage_calc: str = None,
+                          *args):
+
+        args = argparse(args)
+
+        details = args.last("details", default="")
+        verb = args.last("verb", default=None)
+        proper = args.last("proper") is not None
+        criton = args.last("criton", default=39)
+        thumb = args.last("thumb", default="")
+        extra_crit_damage = args.last("extra_crit_damage", default=None)
+        list_display_override = args.last("list_display_override", default=None)
+        phrase = args.last("phrase", default=None)
+        hidden = args.last("hidden") is not None
+        ranged = args.last("ranged") is not None
+
+        embed = disnake.Embed(
+            description="To hit: " + str(bonus_calc) + "\nDamage: " + str(damage_calc) + "\nProperties: " + str(
+                details) + "\nCrit on: " + str(criton),
+            color=Color.lighter_gray())
+        if hidden:
+            embed.description = "No details available."
+        if thumb:
+            embed.set_thumbnail(thumb)
+        embed.title = name
+
+        class View(disnake.ui.View):
+            @disnake.ui.button(label="Equip", style=ButtonStyle.primary)
+            async def equip(self, button, interaction):
+                nonlocal ctx
+                char = await ctx.get_character()
+
+                dexMod = char.stats.get_mod("dex")
+                wisMod = char.stats.get_mod("wis")
+                strMod = char.stats.get_mod("str")
+                chaMod = char.stats.get_mod("cha")
+                intMod = char.stats.get_mod("int")
+
+                if not ranged:
+                    true_to_hit = str(int(dexMod + wisMod / 2 + char.stats.prof_bonus))+"+"+bonus_calc
+                else:
+                    true_to_hit = str(int(dexMod + wisMod / 2 + intMod/3 + char.stats.prof_bonus))+"+"+bonus_calc
+
+                true_damage = damage_calc + str(int(chaMod / 4 + intMod/2 + dexMod / 2))
+                if not ranged:
+                    if "heavy" in details:
+                        true_damage = str(int(dexMod + wisMod / 2 + strMod * 2))+"+"+damage_calc
+                    else:
+                        true_damage = str(int(dexMod + wisMod / 2 + strMod))+"+"+damage_calc
+                else:
+                    true_damage = str(int(dexMod + wisMod / 2))+"+"+damage_calc
+
+                attack = Attack.new(name, true_to_hit, true_damage, details, verb, proper, criton, phrase, thumb,
+                                    extra_crit_damage, list_display_override)
+
+                conflict = next((a for a in char.overrides.attacks if a.name.lower() == attack.name.lower()), None)
+                if conflict:
+                    if await confirm(ctx,
+                                     "This will overwrite an attack with the same name. Continue? (Reply with yes/no)"):
+                        char.overrides.attacks.remove(conflict)
+                    else:
+                        return await ctx.send("Okay, aborting.")
+                char.overrides.attacks.append(attack)
+                await char.commit(ctx)
+
+                out = f"{char.name} equipped {attack.name}!"
+                if conflict:
+                    out += " Removed a duplicate attack/weapon."
+                await ctx.send(out)
+
+                await interaction.response.edit_message(view=None)
+                return
+
+            @disnake.ui.button(label="Equip without proficiency", style=ButtonStyle.secondary)
+            async def equip_weak(self, button, interaction):
+                nonlocal ctx
+                char = await ctx.get_character()
+
+                dexMod = char.stats.get_mod("dex")
+                wisMod = char.stats.get_mod("wis")
+                strMod = char.stats.get_mod("str")
+                chaMod = char.stats.get_mod("cha")
+                intMod = char.stats.get_mod("int")
+
+                if not ranged:
+                    true_to_hit = str(int(dexMod + wisMod / 2))+"+"+bonus_calc
+                else:
+                    true_to_hit = str(int(dexMod + wisMod / 2 + intMod/3))+"+"+bonus_calc
+
+                true_damage = damage_calc + str(int(chaMod / 4 + intMod/2 + dexMod / 2))
+                if not ranged:
+                    if "heavy" in details:
+                        true_damage = str(int(dexMod + wisMod / 2 + strMod * 2))+"+"+damage_calc
+                    else:
+                        true_damage = str(int(dexMod + wisMod / 2 + strMod))+"+"+damage_calc
+                else:
+                    true_damage = str(int(dexMod + wisMod / 2))+"+"+damage_calc
+
+                attack = Attack.new(name, true_to_hit, true_damage, details, verb, proper, criton, phrase, thumb,
+                                    extra_crit_damage, list_display_override)
+
+                conflict = next((a for a in char.overrides.attacks if a.name.lower() == attack.name.lower()), None)
+                if conflict:
+                    if await confirm(ctx,
+                                     "This will overwrite an attack with the same name. Continue? (Reply with yes/no)"):
+                        char.overrides.attacks.remove(conflict)
+                    else:
+                        return await ctx.send("Okay, aborting.")
+                char.overrides.attacks.append(attack)
+                await char.commit(ctx)
+
+                out = f"{char.name} equipped {attack.name} without proficiency!"
+                if conflict:
+                    out += " Removed a duplicate attack/weapon."
+                await ctx.send(out)
+
+                await interaction.response.edit_message(view=None)
+                return
+
+            @disnake.ui.button(label="Cancel", style=ButtonStyle.danger)
+            async def cancel(self, button, interaction):
+                await interaction.response.edit_message(view=None)
+
+        return await ctx.send(view=View(), embed=embed)
 
     @init.command()
     async def ready(self, ctx, name: str = None, at: int = None):
