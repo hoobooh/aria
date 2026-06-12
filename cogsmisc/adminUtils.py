@@ -456,7 +456,7 @@ class AdminUtils(commands.Cog):
     async def _changepresence(self, status=None, msg=None):
         statuslevel = {"online": disnake.Status.online, "idle": disnake.Status.idle, "dnd": disnake.Status.dnd}
         status = statuslevel.get(status)
-        await self.bot.change_presence(status=status, activity=disnake.Game(msg or "D&D 5e | !help"))
+        await self.bot.change_presence(status=status, activity=disnake.Game(msg or "Aria5e | !help"))
         return "Changed presence."
 
     async def _reload_static(self):

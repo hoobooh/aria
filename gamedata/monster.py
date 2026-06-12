@@ -238,6 +238,7 @@ class Monster(StatBlock, Sourced):
             data["resistances"] = Resistances.from_dict(data["resistances"])
         if "attributes" in data:
             data["attributes"] = Attributes.from_dict(data["attributes"])
+
         if "display_resists" in data:
             data["display_resists"] = Resistances.from_dict(data["display_resists"], smart=False)
         else:

@@ -78,6 +78,8 @@ class Damage(Effect):
             attributes = autoctx.target.get_attributes().copy()
         resistances.update(Resistances.from_args(args, ephem=True))
 
+        tmpstring = ""
+
         # check if we actually need to run this damage roll (not in combat and roll is redundant)
         if autoctx.target.is_simple and self.is_meta(autoctx):
             return

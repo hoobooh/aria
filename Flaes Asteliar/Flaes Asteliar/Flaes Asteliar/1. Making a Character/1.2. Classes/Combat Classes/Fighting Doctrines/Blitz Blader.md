@@ -22,7 +22,7 @@ At 10th level, you gain access to unique Blitz Blader Astella arts. Choose Astel
 
 | Astella Art        | Description                                                                                                                                                    | Astella Art Points Required |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------: |
-| Light Adept        | When you are wielding a melee weapon that does not have the Heavy property, you can perform an attack with your bonus action using that weapon.                |              1              |
+| Feather Blade      | When you are wielding a melee weapon that does not have the Heavy property, you can perform an attack with your bonus action using that weapon.                |              1              |
 | Overwhelm          | When you start your turn and a creature is within melee range, you can immediately perform a melee attack on that creature.                                    |              1              |
 | Perfect Rhythm     | This turn, if you have successfully landed at least 3 melee attacks and you have not missed a single attack, you lose 30 Action Time after your turn ends.     |              1              |
 | Perfect Start      | When you perform a melee attack on your turn: if you have not moved and this is your first melee attack this turn, you can perform this attack with advantage. |              1              |
@@ -31,7 +31,7 @@ At 10th level, you gain access to unique Blitz Blader Astella arts. Choose Astel
 
 ## Feint
 
-At 30th level, you can convert your missed attacks into feints. You can perform one more melee attack any time you miss a melee attack. You cannot apply this effect on an attack caused by this effect.
+At 30th level, you can convert your missed attacks into feints. Once per turn, you can perform one more melee attack when you miss a melee attack.
 ## Greater Astella Arts
 
 At 40th level, you gain access to an additional set of Astella arts. Choose Astella arts up to the amount of points you have. You can change your Astella arts when you take an Ability Score Improvement.
@@ -52,7 +52,7 @@ At 70th level, you gain access to a final set of Astella arts. Choose Astella ar
 
 | Astella Art        | Description                                                                                                                                   | Astella Art Points Required |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------: |
-| Dismantling Strike | Gain a permanent Slashing Bonus 7.                                                                                                            |              3              |
+| Dismantling Strike | Gain a permanent Slashing Bonus 17.                                                                                                           |              3              |
 | Flashing Gale      | As an action, you can run to any point within 50 ft. When you pass a creature while in this movement, you can perform a melee attack on them. |              3              |
 | Speed Overload     | Once per short rest, immediately set your Action Time to 0 as a reaction.                                                                     |              3              |
 ## Speed Debt

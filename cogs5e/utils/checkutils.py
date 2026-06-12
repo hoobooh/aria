@@ -255,6 +255,9 @@ def _run_init(skill, args, embed, mod_override=None, rr_format="Check {}"):
         # roll bonus
         b = args.join("b", "+", ephem=True)
 
+        if adv is not None:
+            adv = not adv
+
         # set up dice
         roll_str = skill.double_d20(base_adv=adv, reroll=ro, min_val=mc, mod_override=mod_override)
         if b is not None:

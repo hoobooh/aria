@@ -114,6 +114,7 @@ class Bestiary(CommonHomebrewMixin):
             existing_bestiary = Bestiary.from_dict(existing_bestiary)
             return existing_bestiary
 
+
         parsed_creatures = [_monster_factory_bestiary_builder(c, name) for c in creatures]
         b = cls(None, sha256, url, False, "BESTIARY_BUILDER", name, parsed_creatures, desc)
         await b.write_to_db(ctx)
@@ -407,6 +408,8 @@ def _monster_factory_bestiary_builder(data, bestiary_name):
             deflect_ac = int(t.desc.replace("Deflect AC: ", ""))
 
     spellcasting = parse_bestiary_builder_spellcasting(data["spellcasting"])
+
+
     return Monster(
         name=data["name"],
         size=data["size"],

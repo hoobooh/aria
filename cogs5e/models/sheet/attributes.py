@@ -37,7 +37,7 @@ class Attribute:
 
         # checks for any incompatibilities. if any exist, don't modify the damage.
         for a in self.incompats:
-            if a in damage and a != "-":
+            if a in damage and a != "-" and a is not None:
                 return ""
         # checks for any aversions. if any exist, double the penalty.
         base_penalty = 1
@@ -47,35 +47,39 @@ class Attribute:
 
         # builds actual damage string. put into a parenthesis to avoid formatting issues
         dmgstring = ""
-        for t in self.damage_types:
-            if t in damage and t != "-":
-                net_power = self.power
-                if self.dice_factor == "NONE":
-                    div = net_power.split("+")
-                    net_power = ""
-                    for d in div:
-                        if "d" not in d:
-                            net_power += "+" + d
-                elif self.dice_factor == "AVERAGE":
-                    div = net_power.split("+")
-                    net_power = ""
-                    for d in div:
-                        if "d" not in d:
-                            net_power += "+" + d
-                        else:
-                            factors = d.split("d")
-                            mult = factors[0]
-                            by = int(int(factors[2]) / 2 + 1)
-                            net_power += "+" + str(mult * by)
-                net_power = "(" + net_power + ")"
-                if int(self.dice_advantage) > 0:
-                    net_power = "(" + self.dice_advantage + net_power + "kh1)"
-                elif int(self.dice_advantage) < 0:
-                    net_power = "(" + str(int(self.dice_advantage) * -1) + net_power + "kl1)"
-                if base_penalty != 1:
-                    net_power = net_power + "/" + str(base_penalty)
-                net_power += " [" + t + "] "
-                dmgstring += modifier + net_power
+
+        if self.power != "0":
+            for t in self.damage_types:
+                t=t.replace("Damage Types: ", "")
+                if t in damage and t != "-":
+                    net_power = self.power
+
+                    if self.dice_factor == "NONE":
+                        div = net_power.replace("-", "+-").split("+")
+                        net_power = ""
+                        for d in div:
+                            if "d" not in d:
+                                net_power += "+" + d
+                    elif self.dice_factor == "AVERAGE":
+                        div = net_power.split("+")
+                        net_power = ""
+                        for d in div:
+                            if "d" not in d:
+                                net_power += "+" + d
+                            else:
+                                factors = d.split("d")
+                                mult = factors[0]
+                                by = int(int(factors[2]) / 2 + 1)
+                                net_power += "+" + str(mult * by)
+                    net_power = "(" + net_power + ")"
+                    if int(self.dice_advantage) > 0:
+                        net_power = "(" + self.dice_advantage + net_power + "kh1)"
+                    elif int(self.dice_advantage) < 0:
+                        net_power = "(" + str(int(self.dice_advantage) * -1) + net_power + "kl1)"
+                    if base_penalty != 1:
+                        net_power = net_power + "/" + str(base_penalty)
+                    net_power += " [" + t + "] "
+                    dmgstring += modifier + net_power
 
         return self.clean_damage_string(dmgstring)
 
@@ -129,6 +133,7 @@ class Attributes(HasIntegrationMixin):
 
     def get_damage_with_defense(self, damage):
         temp_damage = ""
+
         for bon in self.attributes:
             if bon.category == "Defense":
                 temp_damage += bon.get_damage_mods(damage)

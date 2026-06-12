@@ -290,11 +290,13 @@ class InitTracker(commands.Cog):
                 break
 
             check_roll = None  # to make things happy
+            if adv is not None:
+                adv = not adv
             if p is None:
                 if b:
-                    check_roll = roll(f"{init_skill.d20(base_adv=adv)}+{b}")
+                    check_roll = roll(f"{init_skill.double_d20(base_adv=adv)}-{b}")
                 else:
-                    check_roll = roll(init_skill.d20(base_adv=adv))
+                    check_roll = roll(init_skill.double_d20(base_adv=adv))
                 init = check_roll.total
             else:
                 init = int(p)
@@ -1210,9 +1212,15 @@ class InitTracker(commands.Cog):
         if atk_name[0] in ['a', 'e', 'u', 'i', 'o']:
             aoran = "an "
 
-        if isinstance(combatant, Character) or isinstance(combatant, MonsterCombatant):
+        if isinstance(combatant, Character):
             attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks,
                                                                actions=caster.actions)
+            if not isinstance(attack_or_action, Attack):
+                aoran = ""
+
+        if isinstance(combatant, MonsterCombatant):
+            attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks,
+                                                               actions=None)
             if not isinstance(attack_or_action, Attack):
                 aoran = ""
 
@@ -1366,11 +1374,18 @@ class InitTracker(commands.Cog):
         if atk_name[0] in ['a', 'e', 'u', 'i', 'o']:
             aoran = "an "
 
-        if isinstance(combatant, Character) or isinstance(combatant, MonsterCombatant):
+        if isinstance(combatant, Character):
             attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks,
                                                                actions=caster.actions)
             if not isinstance(attack_or_action, Attack):
                 aoran = ""
+
+        if isinstance(combatant, MonsterCombatant):
+            attack_or_action = await actionutils.select_action(ctx, atk_name, attacks=caster.attacks,
+                                                               actions=None)
+            if not isinstance(attack_or_action, Attack):
+                aoran = ""
+
 
         attempt_str = f"{combatant.name} attempts to activate/use {aoran}{atk_name}!"
         if targets:
