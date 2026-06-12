@@ -149,7 +149,6 @@ class Damage(Effect):
         # max
         if max_arg:
             dice_ast = d20.utils.tree_map(utils.max_mapper, dice_ast)
-
         # apply defenses here to damage
         tempdmg = attributes.get_damage_with_defense(str(dice_ast.roll))
         if tempdmg != "":

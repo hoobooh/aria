@@ -613,7 +613,7 @@ class MonsterCombatant(Combatant):
         creature_type = monster.creature_type
         hp = int(monster.hp) if not hp else int(hp)
         ac = int(monster.ac) if not ac else int(ac)
-        deflect_ac = int(monster.deflect_ac) if not ac else int(ac)
+        deflect_ac = int(monster.deflect_ac) if monster.deflect_ac>ac else int(ac)
         id = create_combatant_id()
 
         # copy spellbook
